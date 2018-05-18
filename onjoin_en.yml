@@ -1,0 +1,32 @@
+Prefix: '&7[&eOnJoin&7] &7»&e '
+PrefixConsole: '&7[&eOnJoin&7]'
+Permissionfail: '&cYou don´t have the Permission'
+targetfalse: '&cThe Player is &enot Online &cor is &ewrote false'
+noplayer: '&cYou are not a Player'
+Title:
+  TitleOnJoin: true
+  Title1: '&bCC&3SW'
+  SubTitle1: '&eOnJoin'
+  SubTitle2: '&aTitle&8 - &7You can edit it on the &8onjoin.yml'
+WelcomeMessage:
+  WelcomeMessageOn: true
+  WelcomeMessageHeader: '&e------------------------------------'
+  WelcomeMessageLine1: '&eWelcome on our Server!'
+  WelcomeMessageLine2: '&eOnJoin &8- &7Your Join Plugin'
+  WelcomeMessageLine3: '&7Plugin by &bTigerpanzer &8| §3CC-SW'
+  WelcomeMessageLine4: '&7Your Network @CC-SW'
+  WelcomeMessageFooder: '&e------------------------------------'
+Join:
+  JoinMessageOn: true
+  JoinMessage: '&7 %player% has left the Server'
+  JoinSoundOn: true
+  JoinSound: FIREWORK_LAUNCH
+actionbar:
+  actionbaronjoin: true
+  actionbar1: '&7 %player%! Welcome'
+  actionbar2: '&7 CC-SW Network'
+Quit:
+  QuitMessageOn: true
+  QuitMessage: '&7 %player% has joined the Server'
+  QuitSoundOn: true
+  QuitSound: BAT_DEATH
