@@ -36,8 +36,8 @@ public class FileManager
       cfg.set("WelcomeMessage.WelcomeMessageHeader", "&e------------------------------------");
       cfg.set("WelcomeMessage.WelcomeMessageLine1", "&eWillkommen auf unseren Server!");
       cfg.set("WelcomeMessage.WelcomeMessageLine2", "&eOnJoin &8- &7Dein Join Plugin");
-      cfg.set("WelcomeMessage.WelcomeMessageLine3", "&7Plugin by &bTigerpanzer_02 &8| §3CC-SW");
-      cfg.set("WelcomeMessage.WelcomeMessageLine4", "&7Dein Netwerk @CC-SW");
+      cfg.set("WelcomeMessage.WelcomeMessageLine3", "&7Plugin by &bTigerpanzer_02/Tigerkatze");
+      cfg.set("WelcomeMessage.WelcomeMessageLine4", "&7Dein Netzwerk @CC-SW");
       cfg.set("WelcomeMessage.WelcomeMessageFooder", "&e------------------------------------");
       
       cfg.set("Join.JoinMessageOn", Boolean.valueOf(true));

@@ -19,7 +19,11 @@ public class cmd_onjoin implements CommandExecutor {
 			        {
 			          if (args.length == 0)
 			          {
-						player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + "Derzeit bewirkt dieser Command noch nichts!");
+						player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + "!!Derzeit bewirkt dieser Command noch nichts!!");
+			          }
+			          if (args[1].equalsIgnoreCase("cupdate"))
+			          {
+						player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + "!!Du hast deine Config geupdatet!!!");
 			          }
 			          else
 			          {
