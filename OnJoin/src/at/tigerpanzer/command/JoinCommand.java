@@ -20,7 +20,7 @@ public class JoinCommand implements CommandExecutor {
                     if(args[1].equalsIgnoreCase("cupdate")) {
                         player.sendMessage(Utils.color(FileManager.getString("Prefix") + "!!Du hast deine Config geupdatet!!!"));
                     } else {
-                        player.sendMessage(Utils.color(FileManager.getString("Prefix") + "�7Bitte benutze �e/onjoin!"));
+                        player.sendMessage(Utils.color(FileManager.getString("Prefix") + "&7Bitte benutze &e/onjoin!"));
                     }
                 } else {
                     player.sendMessage(Utils.color(FileManager.getString("Prefix") + (FileManager.getString("Permissionfail"))));

@@ -15,11 +15,11 @@ public class FileManager {
             cfg.set("Console.PrefixConsole", "&7[&eOnJoin&7]");
             cfg.set("Console.outconfigcreate", " Eine Config wurde im Plugin-Ordner erstellt!");
             cfg.set("Console.outconfigload", " Die Einstellungen aus der Config wurden erfolgreich geladen!");
-            cfg.set("Console.newupdatebconrl", " Neue Version verf�gbar! Downloade sie dir auf SpigotMC!");
+            cfg.set("Console.newupdatebconrl", " Neue Version verf&gbar! Downloade sie dir auf SpigotMC!");
 
-            cfg.set("Prefix", "&7[&eOnJoin&7] &7�&e ");
+            cfg.set("Prefix", "&7[&eOnJoin&7] &7&&e ");
 
-            cfg.set("Permissionfail", "&cDaf�r hast du keine Rechte");
+            cfg.set("Permissionfail", "&cDaf&r hast du keine Rechte");
 
             cfg.set("targetfalse", "&cDer Spieler ist momentan &enicht online &coder wurde &efalsch geschrieben");
 

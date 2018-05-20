@@ -71,7 +71,7 @@ public class SpigotPluginUpdater {
                     plugin.getLogger().log(Level.INFO, " New Version: {0}", version.replaceAll("[a-zA-z ]", ""));
                     /**plugin.getLogger().log(Level.INFO, main.prefix + " Download it here: {0}", downloadURL);*/
                     plugin.getLogger().log(Level.INFO, " Changelog: {0}", changeLog);
-                    plugin.getLogger().log(Level.INFO, FileManager.getString("Console.newupdatebconrl").replaceAll("&", "�"));
+                    Bukkit.getConsoleSender().sendMessage("[OnJoin] " + Utils.color(FileManager.getString("Console.newupdatebconrl")));
                     Bukkit.broadcastMessage(Utils.color(FileManager.getString("Console.PrefixConsole") + FileManager.getString("Console.newupdatebconrl")));
                 }
                 return true;
