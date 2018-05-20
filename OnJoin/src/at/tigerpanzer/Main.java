@@ -22,19 +22,26 @@ public class Main extends JavaPlugin implements Listener {
         return instance;
     }
 
+    @Override
     public void onEnable() {
         FileManager.createFile();
         Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cWird �aGESTARTET �7| �cis �aSTARTED");
-
         register();
         update();
-
         Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
         Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cPlugin version: �e" + getDescription().getVersion());
         Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cPlugin author: �e" + getDescription().getAuthors());
         Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cPlugin status: �aaktiviert �c| �aenabled");
         Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+    }
 
+    @Override
+    public void onDisable() {
+        Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cPlugin version: �e" + getDescription().getVersion());
+        Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cPlugin author: �e" + getDescription().getAuthors());
+        Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cPlugin status: �4deaktiviert �c| �4disabled");
+        Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     }
 
     private void update() {
@@ -48,13 +55,5 @@ public class Main extends JavaPlugin implements Listener {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new JoinQuitListener(), this);
 
-    }
-
-    public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-        Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cPlugin version: �e" + getDescription().getVersion());
-        Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cPlugin author: �e" + getDescription().getAuthors());
-        Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cPlugin status: �4deaktiviert �c| �4disabled");
-        Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     }
 }
