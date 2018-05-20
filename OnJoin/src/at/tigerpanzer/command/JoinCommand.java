@@ -1,6 +1,7 @@
 package at.tigerpanzer.command;
 
 import at.tigerpanzer.util.FileManager;
+import at.tigerpanzer.util.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,15 +15,15 @@ public class JoinCommand implements CommandExecutor {
             if(cmd.getName().equalsIgnoreCase("onjoin")) {
                 if((player.hasPermission("OnJoin.config")) || (player.hasPermission("OnJoin.*"))) {
                     if(args.length == 0) {
-                        player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "�") + "!!Derzeit bewirkt dieser Command noch nichts!!");
+                        player.sendMessage(Utils.color(FileManager.getString("Prefix") + "!!Derzeit bewirkt dieser Command noch nichts!!"));
                     }
                     if(args[1].equalsIgnoreCase("cupdate")) {
-                        player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "�") + "!!Du hast deine Config geupdatet!!!");
+                        player.sendMessage(Utils.color(FileManager.getString("Prefix") + "!!Du hast deine Config geupdatet!!!"));
                     } else {
-                        player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "�") + "�7Bitte benutze �e/onjoin!");
+                        player.sendMessage(Utils.color(FileManager.getString("Prefix") + "�7Bitte benutze �e/onjoin!"));
                     }
                 } else {
-                    player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "�") + (FileManager.getString("Permissionfail").replaceAll("&", "�")));
+                    player.sendMessage(Utils.color(FileManager.getString("Prefix") + (FileManager.getString("Permissionfail"))));
                 }
             }
         }

@@ -4,6 +4,7 @@ import at.tigerpanzer.Main;
 import at.tigerpanzer.util.FileManager;
 import at.tigerpanzer.util.ActionbarUtils;
 import at.tigerpanzer.util.TitleUtils;
+import at.tigerpanzer.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -22,7 +23,7 @@ public class JoinQuitListener implements Listener {
             p.playSound(p.getLocation(), Sound.valueOf(FileManager.getString("Join.JoinSound")), 3, 1);
         }
         if(FileManager.getString("Join.JoinMessageOn").contains("true")) {
-            e.setJoinMessage(FileManager.getString("Join.JoinMessage").replaceAll("%player%", p.getDisplayName()).replaceAll("&", "§"));
+            e.setJoinMessage(Utils.color(FileManager.getString("Join.JoinMessage").replaceAll("%player%", p.getDisplayName())));
         } else if(FileManager.getString("Join.JoinMessageOn").contains("false")) {
             e.setJoinMessage("");
         }
@@ -33,16 +34,16 @@ public class JoinQuitListener implements Listener {
                 if(FileManager.getString("Title.TitleOnJoin").contains("true")) {
                     TitleUtils.sendFullTitle(p, Integer.valueOf(25), Integer.valueOf(90), Integer.valueOf(0), FileManager.getString("Title.Title1").replaceAll("%player%", p.getDisplayName()), FileManager.getString("Title.SubTitle1").replaceAll("%player%", p.getDisplayName()));
                     if(FileManager.getString("actionbar.actionbaronjoin").contains("true")) {
-                        ActionbarUtils.sendActionBar(p, FileManager.getString("actionbar.actionbar1").replaceAll("%player%", p.getDisplayName()).replaceAll("&", "§"));
+                        ActionbarUtils.sendActionBar(p, Utils.color(FileManager.getString("actionbar.actionbar1").replaceAll("%player%", p.getDisplayName())));
                     }
                     if(FileManager.getString("WelcomeMessage.WelcomeMessageOn").contains("true")) {
                         Player p = e.getPlayer();
-                        p.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + FileManager.getString("WelcomeMessage.WelcomeMessageHeader").replaceAll("%player%", p.getDisplayName()).replaceAll("&", "§"));
-                        p.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + FileManager.getString("WelcomeMessage.WelcomeMessageLine1").replaceAll("%player%", p.getDisplayName()).replaceAll("&", "§"));
-                        p.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + FileManager.getString("WelcomeMessage.WelcomeMessageLine2").replaceAll("%player%", p.getDisplayName()).replaceAll("&", "§"));
-                        p.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + FileManager.getString("WelcomeMessage.WelcomeMessageLine3").replaceAll("%player%", p.getDisplayName()).replaceAll("&", "§"));
-                        p.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + FileManager.getString("WelcomeMessage.WelcomeMessageLine4").replaceAll("%player%", p.getDisplayName()).replaceAll("&", "§"));
-                        p.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + FileManager.getString("WelcomeMessage.WelcomeMessageFooder").replaceAll("%player%", p.getDisplayName()).replaceAll("&", "§"));
+                        p.sendMessage(Utils.color(FileManager.getString("Prefix") + FileManager.getString("WelcomeMessage.WelcomeMessageHeader").replaceAll("%player%", p.getDisplayName())));
+                        p.sendMessage(Utils.color(FileManager.getString("Prefix") + FileManager.getString("WelcomeMessage.WelcomeMessageLine1").replaceAll("%player%", p.getDisplayName())));
+                        p.sendMessage(Utils.color(FileManager.getString("Prefix") + FileManager.getString("WelcomeMessage.WelcomeMessageLine2").replaceAll("%player%", p.getDisplayName())));
+                        p.sendMessage(Utils.color(FileManager.getString("Prefix") + FileManager.getString("WelcomeMessage.WelcomeMessageLine3").replaceAll("%player%", p.getDisplayName())));
+                        p.sendMessage(Utils.color(FileManager.getString("Prefix") + FileManager.getString("WelcomeMessage.WelcomeMessageLine4").replaceAll("%player%", p.getDisplayName())));
+                        p.sendMessage(Utils.color(FileManager.getString("Prefix") + FileManager.getString("WelcomeMessage.WelcomeMessageFooder").replaceAll("%player%", p.getDisplayName())));
                     }
                 }
             }
@@ -55,7 +56,7 @@ public class JoinQuitListener implements Listener {
                     TitleUtils.sendSubtitle(p, Integer.valueOf(0), Integer.valueOf(90), Integer.valueOf(0), FileManager.getString("Title.SubTitle2").replaceAll("%player%", p.getDisplayName()));
                 }
                 if(FileManager.getString("actionbar.actionbaronjoin").contains("true")) {
-                    ActionbarUtils.sendActionBar(p, FileManager.getString("actionbar.actionbar2").replaceAll("%player%", p.getDisplayName()).replaceAll("&", "§"));
+                    ActionbarUtils.sendActionBar(p, Utils.color(FileManager.getString("actionbar.actionbar2").replaceAll("%player%", p.getDisplayName())));
 
                 }
             }
@@ -71,7 +72,7 @@ public class JoinQuitListener implements Listener {
             p.playSound(p.getLocation(), Sound.valueOf(FileManager.getString("Quit.QuitSound")), 3, 1);
         }
         if(FileManager.getString("Quit.QuitMessageOn").contains("true")) {
-            e.setQuitMessage(FileManager.getString("Quit.QuitMessage").replaceAll("%player%", p.getDisplayName()).replaceAll("&", "§"));
+            e.setQuitMessage(Utils.color(FileManager.getString("Quit.QuitMessage").replaceAll("%player%", p.getDisplayName())));
         } else if(FileManager.getString("Quit.QuitMessageOn").contains("false")) {
             e.setQuitMessage("");
         }

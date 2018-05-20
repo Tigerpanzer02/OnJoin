@@ -55,12 +55,12 @@ public class FileManager {
 
             try {
                 cfg.save(file);
-                Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + FileManager.getString("Console.outconfigcreate").replaceAll("&", "�"));
+                Bukkit.getConsoleSender().sendMessage(Utils.color(FileManager.getString("Console.PrefixConsole") + FileManager.getString("Console.outconfigcreate")));
             } catch(IOException e) {
                 e.printStackTrace();
             }
         } else {
-            Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + FileManager.getString("Console.outconfigload").replaceAll("&", "�"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(FileManager.getString("Console.PrefixConsole") + FileManager.getString("Console.outconfigload")));
             return;
         }
     }

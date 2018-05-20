@@ -1,6 +1,7 @@
 package at.tigerpanzer.util;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class Utils {
@@ -9,4 +10,9 @@ public class Utils {
             all.sendMessage(msg);
         }
     }
+
+    public static String color(String msg){
+        return ChatColor.translateAlternateColorCodes('&', msg);
+    }
+
 }

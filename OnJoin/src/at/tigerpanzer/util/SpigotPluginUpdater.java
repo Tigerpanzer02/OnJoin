@@ -71,7 +71,7 @@ public class SpigotPluginUpdater {
                     /**plugin.getLogger().log(Level.INFO, main.prefix + " Download it here: {0}", downloadURL);*/
                     plugin.getLogger().log(Level.INFO, " Changelog: {0}", changeLog);
                     plugin.getLogger().log(Level.INFO, FileManager.getString("Console.newupdatebconrl").replaceAll("&", "�"));
-                    Utils.broadcast(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + FileManager.getString("Console.newupdatebconrl").replaceAll("&", "�"));
+                    Utils.broadcast(Utils.color(FileManager.getString("Console.PrefixConsole") + FileManager.getString("Console.newupdatebconrl")));
                 }
                 return true;
             }
