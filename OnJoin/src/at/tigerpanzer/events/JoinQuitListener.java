@@ -29,7 +29,9 @@ public class JoinQuitListener implements Listener {
         }
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             if(FileManager.getString("Title.TitleOnJoin").contains("true")) {
-                TitleUtils.sendFullTitle(p, 25, 90, 0, FileManager.getString("Title.Title1").replaceAll("%player%", p.getDisplayName()), FileManager.getString("Title.SubTitle1").replaceAll("%player%", p.getDisplayName()));
+                TitleUtils.sendTitle(p, FileManager.getString("Title.Title1").replaceAll("%player%", p.getDisplayName()), 25, 90, 0);
+                TitleUtils.sendSubTitle(p, FileManager.getString("Title.SubTitle1").replaceAll("%player%", p.getDisplayName()), 25, 90, 0);
+
                 if(FileManager.getString("actionbar.actionbaronjoin").contains("true")) {
                     ActionbarUtils.sendActionBar(p, Utils.color(FileManager.getString("actionbar.actionbar1").replaceAll("%player%", p.getDisplayName())));
                 }
@@ -47,7 +49,7 @@ public class JoinQuitListener implements Listener {
 
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             if(FileManager.getString("Title.TitleOnJoin").contains("true")) {
-                TitleUtils.sendSubtitle(p, 0, 90, 0, FileManager.getString("Title.SubTitle2").replaceAll("%player%", p.getDisplayName()));
+                TitleUtils.sendSubTitle(p, FileManager.getString("Title.SubTitle2").replaceAll("%player%", p.getDisplayName()), 0, 90, 0);
             }
             if(FileManager.getString("actionbar.actionbaronjoin").contains("true")) {
                 ActionbarUtils.sendActionBar(p, Utils.color(FileManager.getString("actionbar.actionbar2").replaceAll("%player%", p.getDisplayName())));
