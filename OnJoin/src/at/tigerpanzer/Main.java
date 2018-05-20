@@ -1,7 +1,7 @@
 package at.tigerpanzer;
 
-import at.tigerpanzer.command.cmd_onjoin;
-import at.tigerpanzer.events.joinquitevent;
+import at.tigerpanzer.command.JoinCommand;
+import at.tigerpanzer.events.JoinQuitListener;
 import at.tigerpanzer.util.FileManager;
 import at.tigerpanzer.util.SpigotPluginUpdater;
 import org.bukkit.Bukkit;
@@ -44,9 +44,9 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     private void register() {
-        getCommand("onjoin").setExecutor(new cmd_onjoin());
+        getCommand("onjoin").setExecutor(new JoinCommand());
         PluginManager pm = Bukkit.getPluginManager();
-        pm.registerEvents(new joinquitevent(), this);
+        pm.registerEvents(new JoinQuitListener(), this);
 
     }
 
