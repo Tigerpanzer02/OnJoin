@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="OnJoin">
+    <output-path>$PROJECT_DIR$/out/artifacts/OnJoin</output-path>
+    <root id="archive" name="OnJoin.jar">
+      <element id="module-output" name="OnJoin" />
+    </root>
+  </artifact>
+</component>
