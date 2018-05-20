@@ -49,8 +49,6 @@ public class Main extends JavaPlugin implements Listener {
 
     private void register() {
         getCommand("onjoin").setExecutor(new JoinCommand());
-        PluginManager pm = Bukkit.getPluginManager();
-        pm.registerEvents(new JoinQuitListener(), this);
-
+        Bukkit.getPluginManager().registerEvents(new JoinQuitListener(), this);
     }
 }
