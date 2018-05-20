@@ -21,7 +21,7 @@ WelcomeMessage:
   WelcomeMessageHeader: '&e------------------------------------'
   WelcomeMessageLine1: '&eWelcome on our Server!'
   WelcomeMessageLine2: '&eOnJoin &8- &7Your Join Plugin'
-  WelcomeMessageLine3: '&7Plugin by &bTigerpanzer &8| §3CC-SW'
+  WelcomeMessageLine3: '&7Plugin by &bTigerpanzer_02/Tigerkatze'
   WelcomeMessageLine4: '&7Your Network @CC-SW'
   WelcomeMessageFooder: '&e------------------------------------'
 #Should there be a message to all players when a player enters the server
