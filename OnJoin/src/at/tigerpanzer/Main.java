@@ -11,12 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 
 public class Main extends JavaPlugin implements Listener {
-    public static Main instance;
 
-    public Main() {
-        instance = this;
-    }
-
+    private static Main instance;
 
     public static Main getInstance() {
         return instance;
@@ -24,6 +20,7 @@ public class Main extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        instance = this;
         FileManager.createFile();
         Bukkit.getConsoleSender().sendMessage(FileManager.getString("Console.PrefixConsole").replaceAll("&", "�") + " �cWird �aGESTARTET �7| �cis �aSTARTED");
         register();
