@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class JoinCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        if((sender instanceof Player)) {
+        if(sender instanceof Player) {
             Player player = (Player) sender;
             if(cmd.getName().equalsIgnoreCase("onjoin")) {
                 if((player.hasPermission("OnJoin.config")) || (player.hasPermission("OnJoin.*"))) {
@@ -26,6 +26,7 @@ public class JoinCommand implements CommandExecutor {
                     player.sendMessage(Utils.color(FileManager.getString("Prefix") + (FileManager.getString("Permissionfail"))));
                 }
             }
+            return true;
         }
         return false;
     }
