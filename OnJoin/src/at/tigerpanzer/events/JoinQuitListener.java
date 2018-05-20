@@ -49,16 +49,13 @@ public class JoinQuitListener implements Listener {
             }
         }, 2L);
 
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                if(FileManager.getString("Title.TitleOnJoin").contains("true")) {
-                    TitleUtils.sendSubtitle(p, 0, 90, 0, FileManager.getString("Title.SubTitle2").replaceAll("%player%", p.getDisplayName()));
-                }
-                if(FileManager.getString("actionbar.actionbaronjoin").contains("true")) {
-                    ActionbarUtils.sendActionBar(p, Utils.color(FileManager.getString("actionbar.actionbar2").replaceAll("%player%", p.getDisplayName())));
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            if(FileManager.getString("Title.TitleOnJoin").contains("true")) {
+                TitleUtils.sendSubtitle(p, 0, 90, 0, FileManager.getString("Title.SubTitle2").replaceAll("%player%", p.getDisplayName()));
+            }
+            if(FileManager.getString("actionbar.actionbaronjoin").contains("true")) {
+                ActionbarUtils.sendActionBar(p, Utils.color(FileManager.getString("actionbar.actionbar2").replaceAll("%player%", p.getDisplayName())));
 
-                }
             }
         }, 65L);
 

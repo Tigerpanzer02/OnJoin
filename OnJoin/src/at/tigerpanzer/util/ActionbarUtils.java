@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ActionbarUtils {
 
-    public void sendActionbar(Player player, String message) {
+    public static void sendActionBar(Player player, String message) {
         try {
             Constructor<?> constructor = ReflectionUtils.getNMSClass("PacketPlayOutChat").getConstructor(ReflectionUtils.getNMSClass("IChatBaseComponent"), byte.class);
 
