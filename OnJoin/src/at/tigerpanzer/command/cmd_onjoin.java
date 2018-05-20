@@ -5,7 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import at.tigerpanzer.main.OnJoin;
 import at.tigerpanzer.util.FileManager;
 
 public class cmd_onjoin implements CommandExecutor {
@@ -19,19 +18,19 @@ public class cmd_onjoin implements CommandExecutor {
 			        {
 			          if (args.length == 0)
 			          {
-						player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + "!!Derzeit bewirkt dieser Command noch nichts!!");
+						player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "ï¿½") + "!!Derzeit bewirkt dieser Command noch nichts!!");
 			          }
 			          if (args[1].equalsIgnoreCase("cupdate"))
 			          {
-						player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + "!!Du hast deine Config geupdatet!!!");
+						player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "ï¿½") + "!!Du hast deine Config geupdatet!!!");
 			          }
 			          else
 			          {
-			            player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + "§7Bitte benutze §e/onjoin!");
+			            player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "ï¿½") + "ï¿½7Bitte benutze ï¿½e/onjoin!");
 			          }
 			        }
 			        else {
-			          player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "§") + (FileManager.getString("Permissionfail").replaceAll("&", "§")));
+			          player.sendMessage(FileManager.getString("Prefix").replaceAll("&", "ï¿½") + (FileManager.getString("Permissionfail").replaceAll("&", "ï¿½")));
 			        }
 			      }
 			    }

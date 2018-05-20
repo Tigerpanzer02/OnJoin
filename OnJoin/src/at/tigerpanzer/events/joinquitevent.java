@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import at.tigerpanzer.main.OnJoin;
+import at.tigerpanzer.Main;
 import at.tigerpanzer.util.FileManager;
 import at.tigerpanzer.util.actionbar;
 import at.tigerpanzer.util.tabtitle;
@@ -28,7 +28,7 @@ public class joinquitevent implements Listener {
 	      } else if (FileManager.getString("Join.JoinMessageOn").contains("false")) {
 	        e.setJoinMessage("");
 	      }
-	    Bukkit.getScheduler().runTaskLater(OnJoin.getInstance(), new Runnable()
+	    Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable()
 	    {
 	    	@Override
 	      public void run()
@@ -52,7 +52,7 @@ public class joinquitevent implements Listener {
 	      }
 	    }, 2L);
 	    
-	    Bukkit.getScheduler().runTaskLater(OnJoin.getInstance(), new Runnable()
+	    Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable()
 	    {
 	    	@Override
 	      public void run()
