@@ -1,6 +1,7 @@
 package at.tigerpanzer.util;
 
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -71,7 +72,7 @@ public class SpigotPluginUpdater {
                     /**plugin.getLogger().log(Level.INFO, main.prefix + " Download it here: {0}", downloadURL);*/
                     plugin.getLogger().log(Level.INFO, " Changelog: {0}", changeLog);
                     plugin.getLogger().log(Level.INFO, FileManager.getString("Console.newupdatebconrl").replaceAll("&", "�"));
-                    Utils.broadcast(Utils.color(FileManager.getString("Console.PrefixConsole") + FileManager.getString("Console.newupdatebconrl")));
+                    Bukkit.broadcastMessage(Utils.color(FileManager.getString("Console.PrefixConsole") + FileManager.getString("Console.newupdatebconrl")));
                 }
                 return true;
             }
