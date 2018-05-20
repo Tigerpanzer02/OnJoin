@@ -1,0 +1,36 @@
+Console:
+  PrefixConsole: '&7[&eOnJoin&7]'
+  outconfigcreate: ' Eine Config wurde im Plugin-Ordner erstellt!'
+  outconfigload: ' Die Einstellungen aus der Config wurden erfolgreich geladen!'
+  newupdatebconrl: ' Neue Version verfügbar! Downloade sie dir auf SpigotMC!'
+Prefix: '&7[&eOnJoin&7] &7»&e '
+Permissionfail: '&cDafür hast du keine Rechte'
+targetfalse: '&cDer Spieler ist momentan &enicht online &coder wurde &efalsch geschrieben'
+noplayer: '&cDu bist kein Spieler'
+Title:
+  TitleOnJoin: true
+  Title1: '&bCC&3SW'
+  SubTitle1: '&eOnJoin'
+  SubTitle2: '&aTitle&8 - &7Kann in der &8onjoin.yml &7editiert werden'
+WelcomeMessage:
+  WelcomeMessageOn: true
+  WelcomeMessageHeader: '&e------------------------------------'
+  WelcomeMessageLine1: '&eWillkommen auf unseren Server!'
+  WelcomeMessageLine2: '&eOnJoin &8- &7Dein Join Plugin'
+  WelcomeMessageLine3: '&7Plugin by &bTigerpanzer_02/Tigerkatze'
+  WelcomeMessageLine4: '&7Dein Netzwerk @CC-SW'
+  WelcomeMessageFooder: '&e------------------------------------'
+Join:
+  JoinMessageOn: true
+  JoinMessage: '&7%player% hat den Server betreten'
+  JoinSoundOn: true
+  JoinSound: FIREWORK_LAUNCH
+actionbar:
+  actionbaronjoin: true
+  actionbar1: '&7%player%! Willkommen'
+  actionbar2: '&7 CC-SW Network'
+Quit:
+  QuitMessageOn: true
+  QuitMessage: '&7%player% hat den Server verlassen'
+  QuitSoundOn: true
+  QuitSound: BAT_DEATH
