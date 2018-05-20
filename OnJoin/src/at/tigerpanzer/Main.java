@@ -6,7 +6,6 @@ import at.tigerpanzer.util.SpigotPluginUpdater;
 import at.tigerpanzer.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
