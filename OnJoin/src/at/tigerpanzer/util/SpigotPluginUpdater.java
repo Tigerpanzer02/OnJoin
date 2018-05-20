@@ -1,6 +1,7 @@
 package at.tigerpanzer.util;
 
 
+import at.tigerpanzer.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.w3c.dom.Document;
@@ -71,8 +72,8 @@ public class SpigotPluginUpdater {
                     plugin.getLogger().log(Level.INFO, " New Version: {0}", version.replaceAll("[a-zA-z ]", ""));
                     /**plugin.getLogger().log(Level.INFO, main.prefix + " Download it here: {0}", downloadURL);*/
                     plugin.getLogger().log(Level.INFO, " Changelog: {0}", changeLog);
-                    Bukkit.getConsoleSender().sendMessage("[OnJoin] " + Utils.color(FileManager.getString("Console.newupdatebconrl")));
-                    Bukkit.broadcastMessage(Utils.color(FileManager.getString("Console.PrefixConsole") + FileManager.getString("Console.newupdatebconrl")));
+                    Bukkit.getConsoleSender().sendMessage("[OnJoin] " + Utils.color(Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
+                    Bukkit.broadcastMessage(Utils.color(Main.getInstance().getConfig().getString("Console.PrefixConsole") + Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
                 }
                 return true;
             }
