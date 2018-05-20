@@ -25,12 +25,12 @@ public class FileManager {
 
             cfg.set("noplayer", "&cDu bist kein Spieler");
 
-            cfg.set("Title.TitleOnJoin", Boolean.valueOf(true));
+            cfg.set("Title.TitleOnJoin", true);
             cfg.set("Title.Title1", "&bCC&3SW");
             cfg.set("Title.SubTitle1", "&eOnJoin");
             cfg.set("Title.SubTitle2", "&aTitle&8 - &7Kann in der &8onjoin.yml &7editiert werden");
 
-            cfg.set("WelcomeMessage.WelcomeMessageOn", Boolean.valueOf(true));
+            cfg.set("WelcomeMessage.WelcomeMessageOn", true);
             cfg.set("WelcomeMessage.WelcomeMessageHeader", "&e------------------------------------");
             cfg.set("WelcomeMessage.WelcomeMessageLine1", "&eWillkommen auf unseren Server!");
             cfg.set("WelcomeMessage.WelcomeMessageLine2", "&eOnJoin &8- &7Dein Join Plugin");
@@ -38,18 +38,18 @@ public class FileManager {
             cfg.set("WelcomeMessage.WelcomeMessageLine4", "&7Dein Netzwerk @CC-SW");
             cfg.set("WelcomeMessage.WelcomeMessageFooder", "&e------------------------------------");
 
-            cfg.set("Join.JoinMessageOn", Boolean.valueOf(true));
+            cfg.set("Join.JoinMessageOn", true);
             cfg.set("Join.JoinMessage", "&7%player% hat den Server betreten");
-            cfg.set("Join.JoinSoundOn", Boolean.valueOf(true));
+            cfg.set("Join.JoinSoundOn", true);
             cfg.set("Join.JoinSound", "FIREWORK_LAUNCH");
 
-            cfg.set("actionbar.actionbaronjoin", Boolean.valueOf(true));
+            cfg.set("actionbar.actionbaronjoin", true);
             cfg.set("actionbar.actionbar1", "&7%player%! Willkommen");
             cfg.set("actionbar.actionbar2", "&7 CC-SW Network");
 
-            cfg.set("Quit.QuitMessageOn", Boolean.valueOf(true));
+            cfg.set("Quit.QuitMessageOn", true);
             cfg.set("Quit.QuitMessage", "&7%player% hat den Server verlassen");
-            cfg.set("Quit.QuitSoundOn", Boolean.valueOf(true));
+            cfg.set("Quit.QuitSoundOn", true);
             cfg.set("Quit.QuitSound", "BAT_DEATH");
 
 
