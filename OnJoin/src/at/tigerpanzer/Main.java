@@ -45,7 +45,7 @@ public class Main extends JavaPlugin implements Listener {
     private void update() {
         SpigotPluginUpdater update = new SpigotPluginUpdater(this, "http://tigerpanzer02.bplaced.net/plugins/onjoin/");
         update.enableOut();
-        if(update.needsUpdate()) ;
+        update.needsUpdate();
     }
 
     private void register() {
