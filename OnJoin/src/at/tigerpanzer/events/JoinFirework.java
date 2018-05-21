@@ -32,7 +32,7 @@ public class JoinFirework implements Listener {
                 for (String l : lore2) {
                     fade.add(getColor(l));
                 }
-                final Firework f = (Firework)e.getPlayer().getWorld().spawn(
+                final Firework f = e.getPlayer().getWorld().spawn(
                         p.getLocation().add(0.5D, Main.getInstance().getConfig().getInt("Firework.height"), 0.5D),
                         Firework.class);
 
