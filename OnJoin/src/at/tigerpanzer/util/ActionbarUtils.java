@@ -11,7 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 public class ActionbarUtils {
 
     public static void sendActionBar(Player player, String message) {
-        if(Bukkit.getServer().getVersion().contains("v1_7") || Bukkit.getServer().getVersion().contains("v1_8")) {
+        if (Bukkit.getServer().getVersion().contains("v1_7") || Bukkit.getServer().getVersion().contains("v1_8")) {
             try {
                 Constructor<?> constructor = ReflectionUtils.getNMSClass("PacketPlayOutChat").getConstructor(ReflectionUtils.getNMSClass("IChatBaseComponent"), byte.class);
 
@@ -21,7 +21,7 @@ public class ActionbarUtils {
                 Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
 
                 playerConnection.getClass().getMethod("sendPacket", ReflectionUtils.getNMSClass("Packet")).invoke(playerConnection, packet);
-            } catch(NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException | InstantiationException e) {
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException | InstantiationException e) {
                 e.printStackTrace();
             }
         } else {
