@@ -46,13 +46,7 @@ public class JoinFirework implements Listener {
                 }
                 f.setFireworkMeta(fm);
                 if (Main.getInstance().getConfig().getBoolean("Firework.instant-explode")) {
-                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable()
-                    {
-                        public void run()
-                        {
-                            f.detonate();
-                        }
-                    }, 1L);
+                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), f::detonate, 1L);
                 }
             }
         }
