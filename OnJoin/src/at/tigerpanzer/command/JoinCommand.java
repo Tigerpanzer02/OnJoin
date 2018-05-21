@@ -17,8 +17,11 @@ public class JoinCommand implements CommandExecutor {
                     if(args.length == 0) {
                         player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "!!Derzeit bewirkt dieser Command noch nichts!!"));
                     }
-                    if(args[1].equalsIgnoreCase("cupdate")) {
-                        player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "!!Du hast deine Config geupdatet!!!"));
+                    if(args[1].equalsIgnoreCase("translation")) {
+                        if(args[2].equalsIgnoreCase("de"))
+                            player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("outconfigcreate")));
+                        if(args[2].equalsIgnoreCase("en"))
+                            player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("outconfigcreate")));
                     } else {
                         player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "&7Bitte benutze &e/onjoin!"));
                     }

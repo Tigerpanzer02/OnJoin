@@ -27,8 +27,8 @@ public class JoinQuitListener implements Listener {
         }
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             if(Main.getInstance().getConfig().getString("Title.TitleOnJoin").contains("true")) {
-                TitleUtils.sendTitle(p, Main.getInstance().getConfig().getString("Title.Title1").replaceAll("%player%", p.getDisplayName()), 25, 90, 0);
-                TitleUtils.sendSubTitle(p, Main.getInstance().getConfig().getString("Title.SubTitle1").replaceAll("%player%", p.getDisplayName()), 25, 90, 0);
+                TitleUtils.sendTitle(p, Utils.color(Main.getInstance().getConfig().getString("Title.Title1").replaceAll("%player%", p.getDisplayName())), 25, 90, 0);
+                TitleUtils.sendSubTitle(p, Utils.color(Main.getInstance().getConfig().getString("Title.SubTitle1").replaceAll("%player%", p.getDisplayName())), 25, 90, 0);
 
                 if(Main.getInstance().getConfig().getString("actionbar.actionbaronjoin").contains("true")) {
                     ActionbarUtils.sendActionBar(p, Utils.color(Main.getInstance().getConfig().getString("actionbar.actionbar1").replaceAll("%player%", p.getDisplayName())));
@@ -47,7 +47,7 @@ public class JoinQuitListener implements Listener {
 
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             if(Main.getInstance().getConfig().getString("Title.TitleOnJoin").contains("true")) {
-                TitleUtils.sendSubTitle(p, Main.getInstance().getConfig().getString("Title.SubTitle2").replaceAll("%player%", p.getDisplayName()), 0, 90, 0);
+                TitleUtils.sendSubTitle(p, Utils.color(Main.getInstance().getConfig().getString("Title.SubTitle2").replaceAll("%player%", p.getDisplayName())), 0, 90, 0);
             }
             if(Main.getInstance().getConfig().getString("actionbar.actionbaronjoin").contains("true")) {
                 ActionbarUtils.sendActionBar(p, Utils.color(Main.getInstance().getConfig().getString("actionbar.actionbar2").replaceAll("%player%", p.getDisplayName())));

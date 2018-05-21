@@ -1,0 +1,45 @@
+#All Consolen-Messages
+Console:
+  PrefixConsole: '&7[&eOnJoin&7] '
+  outconfigcreate: 'Config generated in plugins folder!'
+  outconfigload: 'All settings from configuration loaded successfully!'
+  newupdatebconrl: 'New version available! You can download the new version at SpigotMC!'
+#General Messages
+Prefix: '&7[&eOnJoin&7] &7»&e '
+Permissionfail: "&cYou don't have permission to do this!"
+targetfalse: "&cPlayer is not online or doesn't exist"
+noplayer: '&cOnly players can do that!'
+#Titel in the middle of the screen
+Title:
+  TitleOnJoin: true
+  Title1: '&bCC&3SW'
+  SubTitle1: '&eOnJoin'
+  SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
+#Welcome Message in the Chat
+WelcomeMessage:
+  WelcomeMessageOn: true
+  WelcomeMessageHeader: '&e------------------------------------'
+  WelcomeMessageLine1: '&eWelcome to our Server!'
+  WelcomeMessageLine2: '&eOnJoin &8- &7Your Join Plugin'
+  WelcomeMessageLine3: '&7Plugin by &bTigerpanzer_02/Tigerkatze'
+  WelcomeMessageLine4: '&7Your Network @CC-SW'
+  WelcomeMessageFooder: '&e------------------------------------'
+#Should there be a message to all players when a player enters the server
+Join:
+  JoinMessageOn: true
+  JoinMessage: '&7%player% has joined the Server'
+  #Should there be a sound
+  JoinSoundOn: true
+  JoinSound: FIREWORK_LAUNCH
+#Message on the actionbar
+actionbar:
+  actionbaronjoin: true
+  actionbar1: '&7Welcome %player%!'
+  actionbar2: '&7 CC-SW Network'
+#Should there be a message to all players when a player leaves the server
+Quit:
+  QuitMessageOn: true
+  QuitMessage: '&7%player% has left the Server'
+  #Should there be a sound
+  QuitSoundOn: true
+  QuitSound: BAT_DEATH
