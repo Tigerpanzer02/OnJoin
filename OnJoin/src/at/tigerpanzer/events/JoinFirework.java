@@ -22,8 +22,8 @@ public class JoinFirework implements Listener {
         if (p.hasPermission("OnJoin.firework") || (p.hasPermission("OnJoin.*"))) {
             for (int i = 1; i < Main.getInstance().getConfig().getInt("Firework.amount"); i++)
             {
-                ArrayList<Color> colors = new ArrayList();
-                ArrayList<Color> fade = new ArrayList();
+                List<Color> colors = new ArrayList<>();
+                List<Color> fade = new ArrayList<>();
                 List<String> lore = Main.getInstance().getConfig().getStringList("Firework.colors");
                 List<String> lore2 = Main.getInstance().getConfig().getStringList("Firework.fade");
                 for (String l : lore) {
