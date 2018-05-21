@@ -17,6 +17,11 @@ public class JoinQuitListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
+        if(Main.getInstance().getConfig().getString("Join.ChatClearOn").contains("true")) {
+            for (int i = 0; i < 200; i++) {
+                p.sendMessage(" ");
+            }
+        }
         if(Main.getInstance().getConfig().getString("Join.JoinSoundOn").contains("true")) {
             p.playSound(p.getLocation(), Sound.valueOf(Main.getInstance().getConfig().getString("Join.JoinSound")), 3, 1);
         }

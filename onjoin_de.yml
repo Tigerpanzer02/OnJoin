@@ -26,6 +26,8 @@ WelcomeMessage:
   WelcomeMessageFooder: '&e------------------------------------'
 #Soll es eine Nachricht an alle Spieler geben, wenn ein Spieler den Server betritt
 Join:
+  #Soll der Chat vom Spieler am Anfang bereinigt werden
+  ChatClearOn: true
   JoinMessageOn: true
   JoinMessage: '&7%player% hat den Server betreten'
   #Soll es einen Ton geben

@@ -26,6 +26,8 @@ WelcomeMessage:
   WelcomeMessageFooder: '&e------------------------------------'
 #Should there be a message to all players when a player enters the server
 Join:
+  #Should the chat be cleaned up by the player at the beginning?
+  ChatClearOn: true
   JoinMessageOn: true
   JoinMessage: '&7%player% has joined the Server'
   #Should there be a sound
