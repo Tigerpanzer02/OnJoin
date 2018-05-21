@@ -5,12 +5,16 @@ import at.tigerpanzer.util.ActionbarUtils;
 import at.tigerpanzer.util.TitleUtils;
 import at.tigerpanzer.util.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
 import org.bukkit.Sound;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.meta.FireworkMeta;
 
 public class JoinQuitListener implements Listener {
 

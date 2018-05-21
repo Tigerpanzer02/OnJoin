@@ -1,6 +1,7 @@
 package at.tigerpanzer;
 
 import at.tigerpanzer.command.JoinCommand;
+import at.tigerpanzer.events.JoinFirework;
 import at.tigerpanzer.events.JoinQuitListener;
 import at.tigerpanzer.util.SpigotPluginUpdater;
 import at.tigerpanzer.util.Utils;
@@ -49,5 +50,6 @@ public class Main extends JavaPlugin implements Listener {
     private void register() {
         getCommand("onjoin").setExecutor(new JoinCommand());
         Bukkit.getPluginManager().registerEvents(new JoinQuitListener(), this);
+        Bukkit.getPluginManager().registerEvents(new JoinFirework(), this);
     }
 }

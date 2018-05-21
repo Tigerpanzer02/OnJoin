@@ -28,6 +28,19 @@ WelcomeMessage:
 Join:
   #Should the chat be cleaned up by the player at the beginning?
   ChatClearOn: true
+  FireworkOn: true
+  Firework:
+    instant-explode: false
+    amount: 3
+    firework-height: 3
+    power: 1
+    type: BALL
+    flicker: false
+    trail: false
+    colors:
+    - YELLOW
+    fade:
+    - WHITE
   JoinMessageOn: true
   JoinMessage: '&7%player% has joined the Server'
   #Should there be a sound

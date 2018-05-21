@@ -22,6 +22,9 @@ public class JoinCommand implements CommandExecutor {
                             player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("outconfigcreate")));
                         if(args[2].equalsIgnoreCase("en"))
                             player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("outconfigcreate")));
+                    if(args[1].equalsIgnoreCase("reload")) {
+                        Main.getInstance().reloadConfig();
+                    }
                     } else {
                         player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "&7Bitte benutze &e/onjoin!"));
                     }
