@@ -1,9 +1,9 @@
 #Alle Consolen-Nachrichten
 Console:
   PrefixConsole: '&7[&eOnJoin&7]'
-  outconfigcreate: ' Eine Config wurde im Plugin-Ordner erstellt!'
-  outconfigload: ' Die Einstellungen aus der Config wurden erfolgreich geladen!'
-  newupdatebconrl: ' Neue Version verfügbar! Downloade sie dir auf SpigotMC!'
+  outconfigcreate: 'Eine Config wurde im Plugin-Ordner erstellt!'
+  outconfigload: 'Die Einstellungen aus der Config wurden erfolgreich geladen!'
+  newupdatebconrl: 'Neue Version verfügbar! Downloade sie dir auf SpigotMC!'
 #Allgemeine Nachrichten
 Prefix: '&7[&eOnJoin&7] &7»&e '
 Permissionfail: '&cDafür hast du keine Rechte'
@@ -26,6 +26,21 @@ WelcomeMessage:
   WelcomeMessageFooder: '&e------------------------------------'
 #Soll es eine Nachricht an alle Spieler geben, wenn ein Spieler den Server betritt
 Join:
+  #Soll der Chat vom Spieler am Anfang bereinigt werden
+  ChatClearOn: true
+  FireworkOn: true
+  Firework:
+    instant-explode: false
+    amount: 3
+    firework-height: 3
+    power: 1
+    type: BALL
+    flicker: false
+    trail: false
+    colors:
+    - YELLOW
+    fade:
+    - WHITE
   JoinMessageOn: true
   JoinMessage: '&7%player% hat den Server betreten'
   #Soll es einen Ton geben
