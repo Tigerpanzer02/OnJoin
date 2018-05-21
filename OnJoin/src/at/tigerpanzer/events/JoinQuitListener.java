@@ -20,7 +20,6 @@ public class JoinQuitListener implements Listener {
         if(Main.getInstance().getConfig().getString("Join.ChatClearOn").contains("true")) {
             for (int i = 0; i < 200; i++) {
                 p.sendMessage(" ");
-
             }
         }
         if(Main.getInstance().getConfig().getString("Join.JoinSoundOn").contains("true")) {
