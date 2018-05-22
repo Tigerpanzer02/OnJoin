@@ -13,7 +13,7 @@ public class ActionbarUtils {
     public static void sendActionBar(Player player, String message) {
         String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
         if(version.contains("v1_7") || version.contains("v1_8")) {
-                try {
+            try {
                 Constructor<?> constructor = ReflectionUtils.getNMSClass("PacketPlayOutChat").getConstructor(ReflectionUtils.getNMSClass("IChatBaseComponent"), byte.class);
 
                 Object icbc = ReflectionUtils.getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + message + "\"}");
