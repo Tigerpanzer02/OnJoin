@@ -28,6 +28,7 @@ WelcomeMessage:
 Join:
   #Should the chat be cleaned up by the player at the beginning?
   ChatClearOn: true
+  #Should the Player with Permission OnJoin.* or OnJoin.Firework have a Firework when he joins?
   Firework-On: true
   Firework:
     Instant-Explode: false

@@ -18,7 +18,7 @@ public class JoinFirework implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if(p.hasPermission("OnJoin.firework") || (p.hasPermission("OnJoin.*"))) {
+        if(p.hasPermission("OnJoin.Firework") || (p.hasPermission("OnJoin.*"))) {
             if(Main.getInstance().getConfig().getString("Join.Firework-On").contains("true")) {
                 for(int i = 1; i < Main.getInstance().getConfig().getInt("Join.Firework.Amount"); i++) {
                     List<Color> colors = new ArrayList<>();

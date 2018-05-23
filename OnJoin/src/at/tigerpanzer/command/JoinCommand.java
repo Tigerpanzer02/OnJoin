@@ -15,7 +15,8 @@ public class JoinCommand implements CommandExecutor {
             if(cmd.getName().equalsIgnoreCase("onjoin")) {
                 if((player.hasPermission("OnJoin.config")) || (player.hasPermission("OnJoin.*"))) {
                     if(args.length == 0) {
-                        player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix")));
+                        player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "- Maybe in next Update -"));
+
                         return true;
                     } else if(args.length == 2) {
                         if(args[0].equalsIgnoreCase("translate")) {

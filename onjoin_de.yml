@@ -28,6 +28,7 @@ WelcomeMessage:
 Join:
   #Soll der Chat vom Spieler am Anfang bereinigt werden
   ChatClearOn: true
+  #Soll wenn ein Spieler mit der Permission OnJoin.* oder OnJoin.Firework den Server betretet ein Feuerwerk beim Spieler erscheinen?
   Firework-On: true
   Firework:
     Instant-Explode: false
