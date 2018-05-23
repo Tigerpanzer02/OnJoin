@@ -32,7 +32,7 @@ public class JoinFirework implements Listener {
                         fade.add(getColor(l));
                     }
                     final Firework f = e.getPlayer().getWorld().spawn(
-                            p.getLocation().add(0.5D, Main.getInstance().getConfig().getInt("Join.Firework.Height"), 0.5D),
+                            p.getLocation().add(0.5D, Main.getInstance().getConfig().getInt("Join.Firework.Firework-Height"), 0.5D),
                             Firework.class);
 
                     FireworkMeta fm = f.getFireworkMeta();
