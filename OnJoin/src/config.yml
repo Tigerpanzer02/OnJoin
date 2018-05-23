@@ -1,9 +1,9 @@
 #Alle Consolen-Nachrichten
 Console:
   PrefixConsole: '&7[&eOnJoin&7]'
-  outconfigcreate: ' Eine Config wurde im Plugin-Ordner erstellt!'
-  outconfigload: ' Die Einstellungen aus der Config wurden erfolgreich geladen!'
-  newupdatebconrl: ' Neue Version verfügbar! Downloade sie dir auf SpigotMC!'
+  outconfigcreate: 'Eine Config wurde im Plugin-Ordner erstellt!'
+  outconfigload: 'Die Einstellungen aus der Config wurden erfolgreich geladen!'
+  newupdatebconrl: 'Neue Version verfügbar! Downloade sie dir auf SpigotMC!'
 #Allgemeine Nachrichten
 Prefix: '&7[&eOnJoin&7] &7»&e '
 Permissionfail: '&cDafür hast du keine Rechte'
