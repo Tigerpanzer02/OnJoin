@@ -15,19 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JoinFirework implements Listener {
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if (p.hasPermission("OnJoin.firework") || (p.hasPermission("OnJoin.*"))) {
-            for (int i = 1; i < Main.getInstance().getConfig().getInt("Firework.amount"); i++) {
+        if(p.hasPermission("OnJoin.firework") || (p.hasPermission("OnJoin.*"))) {
+            for(int i = 1; i < Main.getInstance().getConfig().getInt("Firework.amount"); i++) {
                 List<Color> colors = new ArrayList<>();
                 List<Color> fade = new ArrayList<>();
                 List<String> lore = Main.getInstance().getConfig().getStringList("Firework.colors");
                 List<String> lore2 = Main.getInstance().getConfig().getStringList("Firework.fade");
-                for (String l : lore) {
+                for(String l : lore) {
                     colors.add(getColor(l));
                 }
-                for (String l : lore2) {
+                for(String l : lore2) {
                     fade.add(getColor(l));
                 }
                 final Firework f = e.getPlayer().getWorld().spawn(
@@ -39,71 +40,56 @@ public class JoinFirework implements Listener {
                         .trail(Main.getInstance().getConfig().getBoolean("Firework.trail"))
                         .with(FireworkEffect.Type.valueOf(Main.getInstance().getConfig().getString("Firework.type"))).withColor(colors).withFade(fade)
                         .build());
-                if (!Main.getInstance().getConfig().getBoolean("Firework.instant-explode")) {
+                if(!Main.getInstance().getConfig().getBoolean("Firework.instant-explode")) {
                     fm.setPower(Main.getInstance().getConfig().getInt("Firework.power"));
                 }
                 f.setFireworkMeta(fm);
-                if (Main.getInstance().getConfig().getBoolean("Firework.instant-explode")) {
+                if(Main.getInstance().getConfig().getBoolean("Firework.instant-explode")) {
                     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), f::detonate, 1L);
                 }
             }
         }
     }
 
-    public Color getColor(String paramString) {
-        String temp = paramString;
-        if (temp.equalsIgnoreCase("AQUA")) {
-            return Color.AQUA;
+    public Color getColor(String color) {
+        switch(color.toUpperCase()){
+            case "AQUA":
+                return Color.AQUA;
+            case "BLACK":
+                return Color.BLACK;
+            case "BLUE":
+                return Color.BLUE;
+            case "FUCHSIA":
+                return Color.FUCHSIA;
+            case "GRAY":
+                return Color.GRAY;
+            case "GREEN":
+                return Color.GREEN;
+            case "LIME":
+                return Color.LIME;
+            case "MAROON":
+                return Color.MAROON;
+            case "NAVY":
+                return Color.NAVY;
+            case "OLIVE":
+                return Color.OLIVE;
+            case "ORANGE":
+                return Color.ORANGE;
+            case "PURPLE":
+                return Color.PURPLE;
+            case "RED":
+                return Color.RED;
+            case "SILVER":
+                return Color.SILVER;
+            case "TEAL":
+                return Color.TEAL;
+            case "WHITE":
+                return Color.WHITE;
+            case "YELLOW":
+                return Color.YELLOW;
+            default:
+                return Color.BLACK; //return anything instead of null
         }
-        if (temp.equalsIgnoreCase("BLACK")) {
-            return Color.BLACK;
-        }
-        if (temp.equalsIgnoreCase("BLUE")) {
-            return Color.BLUE;
-        }
-        if (temp.equalsIgnoreCase("FUCHSIA")) {
-            return Color.FUCHSIA;
-        }
-        if (temp.equalsIgnoreCase("GRAY")) {
-            return Color.GRAY;
-        }
-        if (temp.equalsIgnoreCase("GREEN")) {
-            return Color.GREEN;
-        }
-        if (temp.equalsIgnoreCase("LIME")) {
-            return Color.LIME;
-        }
-        if (temp.equalsIgnoreCase("MAROON")) {
-            return Color.MAROON;
-        }
-        if (temp.equalsIgnoreCase("NAVY")) {
-            return Color.NAVY;
-        }
-        if (temp.equalsIgnoreCase("OLIVE")) {
-            return Color.OLIVE;
-        }
-        if (temp.equalsIgnoreCase("ORANGE")) {
-            return Color.ORANGE;
-        }
-        if (temp.equalsIgnoreCase("PURPLE")) {
-            return Color.PURPLE;
-        }
-        if (temp.equalsIgnoreCase("RED")) {
-            return Color.RED;
-        }
-        if (temp.equalsIgnoreCase("SILVER")) {
-            return Color.SILVER;
-        }
-        if (temp.equalsIgnoreCase("TEAL")) {
-            return Color.TEAL;
-        }
-        if (temp.equalsIgnoreCase("WHITE")) {
-            return Color.WHITE;
-        }
-        if (temp.equalsIgnoreCase("YELLOW")) {
-            return Color.YELLOW;
-        }
-        return null;
     }
 }
 
