@@ -49,60 +49,44 @@ public class JoinFirework implements Listener {
         }
     }
 
-    public Color getColor(String paramString) {
-        String temp = paramString;
-        if(temp.equalsIgnoreCase("AQUA")) {
-            return Color.AQUA;
+    private Color getColor(String color) {
+        switch(color.toUpperCase()) {
+            case "AQUA":
+                return Color.AQUA;
+            case "BLACK":
+                return Color.BLACK;
+            case "BLUE":
+                return Color.BLUE;
+            case "FUCHSIA":
+                return Color.FUCHSIA;
+            case "GRAY":
+                return Color.GRAY;
+            case "GREEN":
+                return Color.GREEN;
+            case "LIME":
+                return Color.LIME;
+            case "MAROON":
+                return Color.MAROON;
+            case "NAVY":
+                return Color.NAVY;
+            case "OLIVE":
+                return Color.OLIVE;
+            case "ORANGE":
+                return Color.ORANGE;
+            case "PURPLE":
+                return Color.PURPLE;
+            case "RED":
+                return Color.RED;
+            case "SILVER":
+                return Color.SILVER;
+            case "TEAL":
+                return Color.TEAL;
+            case "WHITE":
+                return Color.WHITE;
+            case "YELLOW":
+                return Color.YELLOW;
+            default:
+                return Color.BLACK;
         }
-        if(temp.equalsIgnoreCase("BLACK")) {
-            return Color.BLACK;
-        }
-        if(temp.equalsIgnoreCase("BLUE")) {
-            return Color.BLUE;
-        }
-        if(temp.equalsIgnoreCase("FUCHSIA")) {
-            return Color.FUCHSIA;
-        }
-        if(temp.equalsIgnoreCase("GRAY")) {
-            return Color.GRAY;
-        }
-        if(temp.equalsIgnoreCase("GREEN")) {
-            return Color.GREEN;
-        }
-        if(temp.equalsIgnoreCase("LIME")) {
-            return Color.LIME;
-        }
-        if(temp.equalsIgnoreCase("MAROON")) {
-            return Color.MAROON;
-        }
-        if(temp.equalsIgnoreCase("NAVY")) {
-            return Color.NAVY;
-        }
-        if(temp.equalsIgnoreCase("OLIVE")) {
-            return Color.OLIVE;
-        }
-        if(temp.equalsIgnoreCase("ORANGE")) {
-            return Color.ORANGE;
-        }
-        if(temp.equalsIgnoreCase("PURPLE")) {
-            return Color.PURPLE;
-        }
-        if(temp.equalsIgnoreCase("RED")) {
-            return Color.RED;
-        }
-        if(temp.equalsIgnoreCase("SILVER")) {
-            return Color.SILVER;
-        }
-        if(temp.equalsIgnoreCase("TEAL")) {
-            return Color.TEAL;
-        }
-        if(temp.equalsIgnoreCase("WHITE")) {
-            return Color.WHITE;
-        }
-        if(temp.equalsIgnoreCase("YELLOW")) {
-            return Color.YELLOW;
-        }
-        return null;
     }
 }
-
