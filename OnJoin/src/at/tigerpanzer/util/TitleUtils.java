@@ -16,7 +16,7 @@ public class TitleUtils {
             Object handle = player.getClass().getMethod("getHandle").invoke(player);
             Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
             playerConnection.getClass().getMethod("sendPacket", ReflectionUtils.getNMSClass("Packet")).invoke(playerConnection, packet);
-        } catch (Exception ignored) {
+        } catch(Exception ignored) {
         }
     }
 
@@ -30,7 +30,7 @@ public class TitleUtils {
             Object handle = player.getClass().getMethod("getHandle").invoke(player);
             Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
             playerConnection.getClass().getMethod("sendPacket", ReflectionUtils.getNMSClass("Packet")).invoke(playerConnection, packet);
-        } catch (Exception ignored) {
+        } catch(Exception ignored) {
         }
     }
 

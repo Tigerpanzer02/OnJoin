@@ -28,18 +28,18 @@ WelcomeMessage:
 Join:
   #Soll der Chat vom Spieler am Anfang bereinigt werden
   ChatClearOn: true
-  FireworkOn: true
+  Firework-On: true
   Firework:
-    instant-explode: false
-    amount: 3
-    firework-height: 3
-    power: 1
-    type: BALL
-    flicker: false
-    trail: false
-    colors:
+    Instant-Explode: false
+    Amount: 3
+    Firework-Height: 3
+    Power: 1
+    Type: BALL
+    Flicker: false
+    Trail: false
+    Colors:
     - YELLOW
-    fade:
+    Fade:
     - WHITE
   JoinMessageOn: true
   JoinMessage: '&7%player% hat den Server betreten'
