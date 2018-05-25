@@ -20,11 +20,12 @@ public class JoinCommand implements CommandExecutor {
                         return true;
                     } else if(args.length == 2) {
                         if(args[0].equalsIgnoreCase("translate")) {
-                        } else if(args[1].equalsIgnoreCase("de")) {
-                            player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.outconfigcreate")));
-                        } else if(args[1].equalsIgnoreCase("en")) {
-                            player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.outconfigcreate")));
+                            if(args[1].equalsIgnoreCase("de")) {
+                                player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.outconfigcreate")));
+                            } else if(args[1].equalsIgnoreCase("en")) {
+                                player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.outconfigcreate")));
 
+                            }
                         }
                     } else {
                         player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "Bitte benutze /onjoin"));
@@ -34,12 +35,10 @@ public class JoinCommand implements CommandExecutor {
                     player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Permissionfail")));
                     return true;
                 }
-
             } else {
                 sender.sendMessage(Utils.color("Nur Spieler können diesen Befehl nutzen!"));
                 return true;
             }
-            return true;
         }
         return false;
     }
