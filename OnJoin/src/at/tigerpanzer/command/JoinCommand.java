@@ -7,7 +7,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+
 public class JoinCommand implements CommandExecutor {
+
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         if(sender instanceof Player) {
@@ -26,6 +28,13 @@ public class JoinCommand implements CommandExecutor {
                                 player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.outconfigcreate")));
 
                             }
+                        }
+                    } else if(args.length == 1) {
+
+                        if(args[0].equalsIgnoreCase("reload")) {
+                            Main.getInstance().saveConfig();
+                            Main.getInstance().reloadConfig();
+                            player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.outconfigcreate")));
                         }
                     } else {
                         player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "Bitte benutze /onjoin"));

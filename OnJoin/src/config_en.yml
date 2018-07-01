@@ -1,6 +1,6 @@
 #All Consolen-Messages
 Console:
-  PrefixConsole: '&7[&eOnJoin&7] '
+  PrefixConsole: '&7[&eOnJoin&7]'
   outconfigcreate: 'Config generated in plugins folder!'
   outconfigload: 'All settings from configuration loaded successfully!'
   newupdatebconrl: 'New version available! You can download the new version at SpigotMC!'
