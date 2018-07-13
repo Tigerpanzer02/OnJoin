@@ -32,7 +32,6 @@ public class JoinCommand implements CommandExecutor {
                     } else if(args.length == 1) {
 
                         if(args[0].equalsIgnoreCase("reload")) {
-                            Main.getInstance().saveConfig();
                             Main.getInstance().reloadConfig();
                             player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.outconfigcreate")));
                         }
