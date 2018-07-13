@@ -40,12 +40,9 @@ public class JoinQuitListener implements Listener {
                 }
                 if(Main.getInstance().getConfig().getString("WelcomeMessage.WelcomeMessageOn").contains("true")) {
                     Player p1 = e.getPlayer();
-                    p1.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("WelcomeMessage.WelcomeMessageHeader").replaceAll("%player%", p1.getDisplayName())));
-                    p1.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("WelcomeMessage.WelcomeMessageLine1").replaceAll("%player%", p1.getDisplayName())));
-                    p1.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("WelcomeMessage.WelcomeMessageLine2").replaceAll("%player%", p1.getDisplayName())));
-                    p1.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("WelcomeMessage.WelcomeMessageLine3").replaceAll("%player%", p1.getDisplayName())));
-                    p1.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("WelcomeMessage.WelcomeMessageLine4").replaceAll("%player%", p1.getDisplayName())));
-                    p1.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("WelcomeMessage.WelcomeMessageFooder").replaceAll("%player%", p1.getDisplayName())));
+                    for(String msg : Main.getInstance().getConfig().getStringList("WelcomeMessage.WelcomeMessageText")) {
+                        p.sendMessage(Utils.color(msg).replaceAll("%player%", p1.getDisplayName()).replaceAll("%prefix%", Main.getInstance().getConfig().getString("Prefix")));
+                    }
                 }
             }
         }, 2L);
