@@ -20,7 +20,7 @@ WelcomeMessage:
   WelcomeMessageOn: true
   #Du kannst beliebig viele Zeilen hinzufügen und entfernen! (Verfügbare Placeholder: %prefix% und %player%)
   WelcomeMessageText:
-    - '%prefix%&e------------------------------------'
+    - '&e------------------------------------'
     - '&e|  '
     - '&e|  Heey, &a%player%&7!'
     - '&e|  &eWillkommen auf unseren Server!'
@@ -28,7 +28,7 @@ WelcomeMessage:
     - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
     - '&e|  &7Dein Netzwerk @CC-SW'
     - '&e|  '
-    - '%prefix%&e------------------------------------'
+    - '&e------------------------------------'
 #Soll es eine Nachricht an alle Spieler geben, wenn ein Spieler den Server betritt
 Join:
   #Soll der Chat vom Spieler am Anfang bereinigt werden

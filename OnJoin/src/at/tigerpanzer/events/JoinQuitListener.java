@@ -40,7 +40,7 @@ public class JoinQuitListener implements Listener {
                 }
                 if(Main.getInstance().getConfig().getString("WelcomeMessage.WelcomeMessageOn").contains("true")) {
                     for(String msg : Main.getInstance().getConfig().getStringList("WelcomeMessage.WelcomeMessageText")) {
-                        p.sendMessage(Utils.color(msg).replaceAll("%player%", p.getDisplayName()).replaceAll("%prefix%", Main.getInstance().getConfig().getString("Prefix")));
+                        p.sendMessage(Utils.color((msg).replaceAll("%player%", p.getDisplayName()).replaceAll("%prefix%", Main.getInstance().getConfig().getString("Prefix"))));
                     }
                 }
             }
