@@ -39,9 +39,8 @@ public class JoinQuitListener implements Listener {
                     ActionbarUtils.sendActionBar(p, Utils.color(Main.getInstance().getConfig().getString("actionbar.actionbar1").replaceAll("%player%", p.getDisplayName())));
                 }
                 if(Main.getInstance().getConfig().getString("WelcomeMessage.WelcomeMessageOn").contains("true")) {
-                    Player p1 = e.getPlayer();
                     for(String msg : Main.getInstance().getConfig().getStringList("WelcomeMessage.WelcomeMessageText")) {
-                        p.sendMessage(Utils.color(msg).replaceAll("%player%", p1.getDisplayName()).replaceAll("%prefix%", Main.getInstance().getConfig().getString("Prefix")));
+                        p.sendMessage(Utils.color(msg).replaceAll("%player%", p.getDisplayName()).replaceAll("%prefix%", Main.getInstance().getConfig().getString("Prefix")));
                     }
                 }
             }
