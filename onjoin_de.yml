@@ -18,12 +18,17 @@ Title:
 #Willkommens Nachricht im Chat
 WelcomeMessage:
   WelcomeMessageOn: true
-  WelcomeMessageHeader: '&e------------------------------------'
-  WelcomeMessageLine1: '&eWillkommen auf unseren Server!'
-  WelcomeMessageLine2: '&eOnJoin &8- &7Dein Join Plugin'
-  WelcomeMessageLine3: '&7Plugin by &bTigerpanzer_02/Tigerkatze'
-  WelcomeMessageLine4: '&7Dein Netzwerk @CC-SW'
-  WelcomeMessageFooder: '&e------------------------------------'
+  #Du kannst beliebig viele Zeilen hinzufügen und entfernen! (Verfügbare Placeholder: %prefix% und %player%)
+  WelcomeMessageText:
+    - '&e------------------------------------'
+    - '&e|  '
+    - '&e|  Heey, &a%player%&7!'
+    - '&e|  &eWillkommen auf unseren Server!'
+    - '&e|  &eOnJoin &8- &7Dein Join Plugin'
+    - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
+    - '&e|  &7Dein Netzwerk @CC-SW'
+    - '&e|  '
+    - '&e------------------------------------'
 #Soll es eine Nachricht an alle Spieler geben, wenn ein Spieler den Server betritt
 Join:
   #Soll der Chat vom Spieler am Anfang bereinigt werden

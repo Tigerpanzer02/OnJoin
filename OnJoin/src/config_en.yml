@@ -18,12 +18,17 @@ Title:
 #Welcome Message in the Chat
 WelcomeMessage:
   WelcomeMessageOn: true
-  WelcomeMessageHeader: '&e------------------------------------'
-  WelcomeMessageLine1: '&eWelcome to our Server!'
-  WelcomeMessageLine2: '&eOnJoin &8- &7Your Join Plugin'
-  WelcomeMessageLine3: '&7Plugin by &bTigerpanzer_02/Tigerkatze'
-  WelcomeMessageLine4: '&7Your Network @CC-SW'
-  WelcomeMessageFooder: '&e------------------------------------'
+  #You can add and remove as many lines as you like! (Available placeholders: %prefix% and %player%)
+  WelcomeMessageText:
+    - '&e------------------------------------'
+    - '&e|  '
+    - '&e|  Heey, &a%player%&7!'
+    - '&e|  &eWelcome to our Server!'
+    - '&e|  &eOnJoin &8- &7Your Join Plugin'
+    - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
+    - '&e|  &7Your Network @CC-SW'
+    - '&e|  '
+    - '&e------------------------------------'
 #Should there be a message to all players when a player enters the server
 Join:
   #Should the chat be cleaned up by the player at the beginning?
