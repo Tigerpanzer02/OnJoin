@@ -17,23 +17,26 @@ public class JoinCommand implements CommandExecutor {
             if(cmd.getName().equalsIgnoreCase("onjoin")) {
                 if((player.hasPermission("OnJoin.config")) || (player.hasPermission("OnJoin.*"))) {
                     if(args.length == 0) {
-                        player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "- Maybe in next Update -"));
+                        for(String msg : Main.getInstance().getConfig().getStringList("Help.HelpText")) {
+                            player.sendMessage(Utils.color((msg).replaceAll("%player%", player.getDisplayName()).replaceAll("%prefix%", Main.getInstance().getConfig().getString("Prefix"))));
+                        }
 
                         return true;
                     } else if(args.length == 2) {
                         if(args[0].equalsIgnoreCase("translate")) {
                             if(args[1].equalsIgnoreCase("de")) {
-                                player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.outconfigcreate")));
+                                //player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Help.OutConfigCreate")));
+                                player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "-- MAYBE NEXT UPDATE --"));
                             } else if(args[1].equalsIgnoreCase("en")) {
-                                player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.outconfigcreate")));
-
+                                //player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Help.OutConfigCreate")));
+                                player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "-- MAYBE NEXT UPDATE --"));
                             }
                         }
                     } else if(args.length == 1) {
 
-                        if(args[0].equalsIgnoreCase("reload")) {
+                        if(args[0].equalsIgnoreCase("reloadconfig")) {
                             Main.getInstance().reloadConfig();
-                            player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.outconfigcreate")));
+                            player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Help.OutConfigLoad")));
                         }
                     } else {
                         player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "Bitte benutze /onjoin"));
@@ -48,6 +51,7 @@ public class JoinCommand implements CommandExecutor {
                 return true;
             }
         }
+        System.out.println(Utils.color(Main.getInstance().getConfig().getString("NoPlayer")));
         return false;
     }
 }

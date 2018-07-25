@@ -1,14 +1,28 @@
 #Alle Consolen-Nachrichten
 Console:
   PrefixConsole: '&7[&eOnJoin&7]'
-  outconfigcreate: 'Eine Config wurde im Plugin-Ordner erstellt!'
-  outconfigload: 'Die Einstellungen aus der Config wurden erfolgreich geladen!'
   newupdatebconrl: 'Neue Version verfügbar! Downloade sie dir auf SpigotMC!'
+#Nachrichten - Command OnJoin
+Help:
+  HelpText:
+    - ''
+    - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
+    - '&e|  '
+    - '&e|  &7/&eonjoin'
+    - '&e|    &c->  &7Übersicht'
+    - '&e|  '
+    - '&e|  &7/&eonjoin &areloadconfig'
+    - '&e|    &c->  &7Lade deine Config neu'
+    - '&e|  '
+    - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
+    - ''
+  OutConfigCreate: 'Eine Config wurde im Plugin-Ordner erstellt!'
+  OutConfigLoad: 'Die Einstellungen aus der Config wurden erfolgreich geladen!'
 #Allgemeine Nachrichten
 Prefix: '&7[&eOnJoin&7] &7»&e '
 Permissionfail: '&cDafür hast du keine Rechte'
-targetfalse: '&cDer Spieler ist momentan &enicht online &coder wurde &efalsch geschrieben'
-noplayer: '&cDu bist kein Spieler'
+TargetFalse: '&cDer Spieler ist momentan &enicht online &coder wurde &efalsch geschrieben'
+NoPlayer: '&cDu bist kein Spieler'
 #Titel in der Mitte des Screens
 Title:
   TitleOnJoin: true
@@ -24,6 +38,7 @@ WelcomeMessage:
     - '&e|  '
     - '&e|  Heey, &a%player%&7!'
     - '&e|  &eWillkommen auf unseren Server!'
+    - '&e|  '
     - '&e|  &eOnJoin &8- &7Dein Join Plugin'
     - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
     - '&e|  &7Dein Netzwerk @CC-SW'

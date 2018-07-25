@@ -1,14 +1,28 @@
 #All Consolen-Messages
 Console:
   PrefixConsole: '&7[&eOnJoin&7]'
-  outconfigcreate: 'Config generated in plugins folder!'
-  outconfigload: 'All settings from configuration loaded successfully!'
   newupdatebconrl: 'New version available! You can download the new version at SpigotMC!'
+#Messages - Command Onjoin
+Help:
+  HelpText:
+    - ''
+    - '&e--------- &7[&aHELP &7| &eOnJoin&7]&e ---------'
+    - '&e|  '
+    - '&e|  &7/&eonjoin'
+    - '&e|    &c->  &7Overview'
+    - '&e|  '
+    - '&e|  &7/&eonjoin &areloadconfig'
+    - '&e|    &c->  &7Reload your config'
+    - '&e|  '
+    - '&e--------- &7[&aHELP &7| &eOnJoin&7]&e ---------'
+    - ''
+  OutConfigCreate: 'Config generated in plugins folder!'
+  OutConfigLoad: 'All settings from configuration loaded successfully!'
 #General Messages
 Prefix: '&7[&eOnJoin&7] &7»&e '
 Permissionfail: "&cYou don't have permission to do this!"
-targetfalse: "&cPlayer is not online or doesn't exist"
-noplayer: '&cOnly players can do that!'
+TargetFalse: "&cPlayer is not online or doesn't exist"
+NoPlayer: '&cOnly players can do that!'
 #Titel in the middle of the screen
 Title:
   TitleOnJoin: true
@@ -24,6 +38,7 @@ WelcomeMessage:
     - '&e|  '
     - '&e|  Heey, &a%player%&7!'
     - '&e|  &eWelcome to our Server!'
+    - '&e|  '
     - '&e|  &eOnJoin &8- &7Your Join Plugin'
     - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
     - '&e|  &7Your Network @CC-SW'
