@@ -1,7 +1,7 @@
 name: OnJoin
 author: Tigerpanzer (SpigotMC Tigerkatze) [CC-SW Network]
 main: at.tigerpanzer.Main
-version: 1.6.0
+version: 1.6.1PRE
 description:
 commands:
   onjoin:  
