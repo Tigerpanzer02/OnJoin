@@ -22,7 +22,7 @@ Help:
 Prefix: '&7[&eOnJoin&7] &7»&e '
 Permissionfail: '&cDafür hast du keine Rechte'
 TargetFalse: '&cDer Spieler ist momentan &enicht online &coder wurde &efalsch geschrieben'
-NoPlayer: '&cDu bist kein Spieler'
+NoPlayer: 'Du bist kein Spieler'
 #Titel in der Mitte des Screens
 Title:
   TitleOnJoin: true

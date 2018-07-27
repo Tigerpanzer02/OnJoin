@@ -22,7 +22,7 @@ Help:
 Prefix: '&7[&eOnJoin&7] &7»&e '
 Permissionfail: "&cYou don't have permission to do this!"
 TargetFalse: "&cPlayer is not online or doesn't exist"
-NoPlayer: '&cOnly players can do that!'
+NoPlayer: 'Only players can do that!'
 #Titel in the middle of the screen
 Title:
   TitleOnJoin: true

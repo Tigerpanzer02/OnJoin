@@ -47,11 +47,13 @@ public class JoinCommand implements CommandExecutor {
                     return true;
                 }
             } else {
-                sender.sendMessage(Utils.color("Nur Spieler können diesen Befehl nutzen!"));
+                player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "Bitte benutze /onjoin"));
                 return true;
             }
+        } else {
+            System.out.println(Utils.color(Main.getInstance().getConfig().getString("NoPlayer")));
         }
-        System.out.println(Utils.color(Main.getInstance().getConfig().getString("NoPlayer")));
         return false;
+
     }
 }
