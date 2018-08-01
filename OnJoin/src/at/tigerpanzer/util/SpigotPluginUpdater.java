@@ -71,10 +71,10 @@ public class SpigotPluginUpdater {
             if(newVersionAvailiable(plugin.getDescription().getVersion(), version.replaceAll("[a-zA-z ]", ""))) {
                 if(out) {
                     plugin.getLogger().log(Level.INFO, " New Version: {0}", version.replaceAll("[a-zA-z ]", ""));
-                    /*plugin.getLogger().log(Level.INFO, main.prefix + " Download it here: {0}", downloadURL);*/
+                    //plugin.getLogger().log(Level.INFO, Main.getInstance().getConfig().getString("Prefix") + " Download it here: {0}", downloadURL);
                     plugin.getLogger().log(Level.INFO, " Changelog: {0}", changeLog);
                     Bukkit.getConsoleSender().sendMessage(Utils.color(Main.getInstance().getConfig().getString("Console.PrefixConsole") + Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
-                    Bukkit.broadcastMessage(Utils.color(Main.getInstance().getConfig().getString("Console.PrefixConsole") + Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
+                    Bukkit.broadcastMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
                     Main.getInstance().NeedUpdateJoin = true;
                 }
                 return true;
