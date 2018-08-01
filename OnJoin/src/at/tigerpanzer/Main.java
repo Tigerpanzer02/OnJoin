@@ -1,11 +1,13 @@
 package at.tigerpanzer;
 
 import at.tigerpanzer.command.JoinCommand;
+import at.tigerpanzer.events.JoinExecuteCommand;
 import at.tigerpanzer.events.JoinFirework;
 import at.tigerpanzer.events.JoinQuitListener;
 import at.tigerpanzer.util.SpigotPluginUpdater;
 import at.tigerpanzer.util.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,9 +20,11 @@ public class Main extends JavaPlugin implements Listener {
         return instance;
     }
 
+    public boolean NeedUpdateJoin;
     @Override
     public void onEnable() {
         instance = this;
+        Main.getInstance().NeedUpdateJoin = false;
         saveDefaultConfig();
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cWird &aGESTARTET &7| &cis &aSTARTED"));
         register();
@@ -52,5 +56,6 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("onjoin").setExecutor(new JoinCommand());
         Bukkit.getPluginManager().registerEvents(new JoinQuitListener(), this);
         Bukkit.getPluginManager().registerEvents(new JoinFirework(), this);
+        Bukkit.getPluginManager().registerEvents(new JoinExecuteCommand(), this);
     }
 }

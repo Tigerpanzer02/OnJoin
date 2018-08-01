@@ -46,6 +46,14 @@ WelcomeMessage:
     - '&e------------------------------------'
 #Soll es eine Nachricht an alle Spieler geben, wenn ein Spieler den Server betritt
 Join:
+  #Soll es eine Nachricht an einen Spieler mit Permission schicken
+  UpdateMessageOn: true
+  UpdateMessageText:
+  - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
+  - '&c|  Neues Update verfügbar! Du kannst es dir'
+  - '&c|  auf SpigotMC herunterladen!'
+  - '&c|  https://www.spigotmc.org/resources/56907/'
+  - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
   #Soll der Chat vom Spieler am Anfang bereinigt werden
   ChatClearOn: true
   #Soll wenn ein Spieler mit der Permission OnJoin.* oder OnJoin.Firework den Server betretet ein Feuerwerk beim Spieler erscheinen?
@@ -67,6 +75,12 @@ Join:
   #Soll es einen Ton geben
   JoinSoundOn: true
   JoinSound: FIREWORK_LAUNCH
+#Führe Commands nach dem Joinen aus
+ExecuteCommand:
+  CommandOn: true
+  Commands:
+  - 'console;say %player% Hallo! Ändere es in der Config!'
+  - 'player;help'
 #Nachricht in der Actionbar
 actionbar:
   actionbaronjoin: true

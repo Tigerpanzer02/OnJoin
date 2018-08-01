@@ -22,6 +22,15 @@ public class JoinQuitListener implements Listener {
                 p.sendMessage(" ");
             }
         }
+        if(Main.getInstance().NeedUpdateJoin) {
+            if((p.hasPermission("OnJoin.UpdateMessage")) || (p.hasPermission("OnJoin.*"))) {
+                if(Main.getInstance().getConfig().getString("Join.UpdateMessageOn").contains("true")) {
+                    for(String msg : Main.getInstance().getConfig().getStringList("Join.UpdateMessageText")) {
+                        p.sendMessage(Utils.color((msg).replaceAll("%player%", p.getDisplayName()).replaceAll("%prefix%", Main.getInstance().getConfig().getString("Prefix"))));
+                    }
+                }
+            }
+        }
         if(Main.getInstance().getConfig().getString("Join.JoinSoundOn").contains("true")) {
             p.playSound(p.getLocation(), Sound.valueOf(Main.getInstance().getConfig().getString("Join.JoinSound")), 3, 1);
         }

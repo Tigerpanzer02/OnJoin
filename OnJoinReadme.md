@@ -1,6 +1,11 @@
 ##### OnJoin by Tigerpanzer_02 (SpigotMC: Tigerkatze) | CC-SW Network #####
 #
 # Placeholders: %prefix%, %player%
+# Permissions: All rights with OnJoin.*
+#              Firework: OnJoin.Firework
+#              Command: OnJoin.config
+#              Join Commands: OnJoin.ExecuteCommand
+#              Update Message: OnJoin.UpdateMessage
 #
 ##[GER]
 #

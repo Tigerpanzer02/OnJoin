@@ -46,6 +46,14 @@ WelcomeMessage:
     - '&e------------------------------------'
 #Should there be a message to all players when a player enters the server
 Join:
+  #Should it sends a message to Player with the Permission
+  UpdateMessageOn: true
+  UpdateMessageText:
+    - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
+    - '&c|  New Update is avaible! You can'
+    - '&c|  download at SpigotMC!'
+    - '&c|  https://www.spigotmc.org/resources/56907/'
+    - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
   #Should the chat be cleaned up by the player at the beginning?
   ChatClearOn: true
   #Should the Player with Permission OnJoin.* or OnJoin.Firework have a Firework when he joins?
@@ -67,6 +75,12 @@ Join:
   #Should there be a sound
   JoinSoundOn: true
   JoinSound: FIREWORK_LAUNCH
+#Execute Commands after Join
+ExecuteCommand:
+  CommandOn: true
+  Commands:
+    - 'console;say %player% Hello! Change this in Config!'
+    - 'player;help'
 #Message on the actionbar
 actionbar:
   actionbaronjoin: true

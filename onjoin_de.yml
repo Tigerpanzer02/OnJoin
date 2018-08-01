@@ -5,17 +5,17 @@ Console:
 #Nachrichten - Command OnJoin
 Help:
   HelpText:
-    - ''
-    - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
-    - '&e|  '
-    - '&e|  &7/&eonjoin'
-    - '&e|    &c->  &7Übersicht'
-    - '&e|  '
-    - '&e|  &7/&eonjoin &areloadconfig'
-    - '&e|    &c->  &7Lade deine Config neu'
-    - '&e|  '
-    - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
-    - ''
+  - ''
+  - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
+  - '&e|  '
+  - '&e|  &7/&eonjoin'
+  - '&e|    &c->  &7Übersicht'
+  - '&e|  '
+  - '&e|  &7/&eonjoin &areloadconfig'
+  - '&e|    &c->  &7Lade deine Config neu'
+  - '&e|  '
+  - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
+  - ''
   OutConfigCreate: 'Eine Config wurde im Plugin-Ordner erstellt!'
   OutConfigLoad: 'Die Einstellungen aus der Config wurden erfolgreich geladen!'
 #Allgemeine Nachrichten
@@ -34,18 +34,26 @@ WelcomeMessage:
   WelcomeMessageOn: true
   #Du kannst beliebig viele Zeilen hinzufügen und entfernen! (Verfügbare Placeholder: %prefix% und %player%)
   WelcomeMessageText:
-    - '&e------------------------------------'
-    - '&e|  '
-    - '&e|  Heey, &a%player%&7!'
-    - '&e|  &eWillkommen auf unseren Server!'
-    - '&e|  '
-    - '&e|  &eOnJoin &8- &7Dein Join Plugin'
-    - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-    - '&e|  &7Dein Netzwerk @CC-SW'
-    - '&e|  '
-    - '&e------------------------------------'
+  - '&e------------------------------------'
+  - '&e|  '
+  - '&e|  Heey, &a%player%&7!'
+  - '&e|  &eWillkommen auf unseren Server!'
+  - '&e|  '
+  - '&e|  &eOnJoin &8- &7Dein Join Plugin'
+  - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
+  - '&e|  &7Dein Netzwerk @CC-SW'
+  - '&e|  '
+  - '&e------------------------------------'
 #Soll es eine Nachricht an alle Spieler geben, wenn ein Spieler den Server betritt
 Join:
+  #Soll es eine Nachricht an einen Spieler mit Permission schicken
+  UpdateMessageOn: true
+  UpdateMessageText:
+  - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
+  - '&c|  Neues Update verfügbar! Du kannst es dir'
+  - '&c|  auf SpigotMC herunterladen!'
+  - '&c|  https://www.spigotmc.org/resources/56907/'
+  - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
   #Soll der Chat vom Spieler am Anfang bereinigt werden
   ChatClearOn: true
   #Soll wenn ein Spieler mit der Permission OnJoin.* oder OnJoin.Firework den Server betretet ein Feuerwerk beim Spieler erscheinen?
@@ -67,6 +75,12 @@ Join:
   #Soll es einen Ton geben
   JoinSoundOn: true
   JoinSound: FIREWORK_LAUNCH
+#Führe Commands nach dem Joinen aus
+ExecuteCommand:
+  CommandOn: true
+  Commands:
+  - 'console;say %player% Hallo! Ändere es in der Config!'
+  - 'player;help'
 #Nachricht in der Actionbar
 actionbar:
   actionbaronjoin: true

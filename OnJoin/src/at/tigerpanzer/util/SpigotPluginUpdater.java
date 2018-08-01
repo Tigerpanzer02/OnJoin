@@ -3,6 +3,8 @@ package at.tigerpanzer.util;
 
 import at.tigerpanzer.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -51,7 +53,6 @@ public class SpigotPluginUpdater {
         out = true;
     }
 
-
     public boolean needsUpdate() {
         if(canceled) {
             return false;
@@ -70,10 +71,11 @@ public class SpigotPluginUpdater {
             if(newVersionAvailiable(plugin.getDescription().getVersion(), version.replaceAll("[a-zA-z ]", ""))) {
                 if(out) {
                     plugin.getLogger().log(Level.INFO, " New Version: {0}", version.replaceAll("[a-zA-z ]", ""));
-                    /**plugin.getLogger().log(Level.INFO, main.prefix + " Download it here: {0}", downloadURL);*/
+                    /*plugin.getLogger().log(Level.INFO, main.prefix + " Download it here: {0}", downloadURL);*/
                     plugin.getLogger().log(Level.INFO, " Changelog: {0}", changeLog);
-                    Bukkit.getConsoleSender().sendMessage("[OnJoin] " + Utils.color(Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
+                    Bukkit.getConsoleSender().sendMessage(Utils.color(Main.getInstance().getConfig().getString("Console.PrefixConsole") + Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
                     Bukkit.broadcastMessage(Utils.color(Main.getInstance().getConfig().getString("Console.PrefixConsole") + Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
+                    Main.getInstance().NeedUpdateJoin = true;
                 }
                 return true;
             }
@@ -85,7 +87,8 @@ public class SpigotPluginUpdater {
         return false;
     }
 
-    public boolean newVersionAvailiable(String oldv, String newv) {
+
+    private boolean newVersionAvailiable(String oldv, String newv) {
         if(oldv != null && newv != null) {
             oldv = oldv.replace('.', '_');
             newv = newv.replace('.', '_');
