@@ -1,11 +1,26 @@
 ##### OnJoin by Tigerpanzer_02 (SpigotMC: Tigerkatze) | CC-SW Network #####
 #
-# Placeholders: %prefix%, %player%
+#Placeholders
+#       Without PlaceholderAPI
+#           - %prefix%
+#           - %player%
+#           - %onjoin-player-displayname%
+#           - %onjoin-player-uuid%
+#           - %onjoin-player-gamemode%
+#           - %onjoin-world%"
+#           - %onjoin-player-health%"
+#           - %onjoin-player-max-health%"
+#           - %onjoin-max-players%"
+#           - %onjoin-online-players%"
+#       With PlaceholderAPI
+#           + https://www.spigotmc.org/wiki/placeholderapi-placeholders/
+#
 # Permissions: All rights with OnJoin.*
 #              Firework: OnJoin.Firework
 #              Command: OnJoin.config
 #              Join Commands: OnJoin.ExecuteCommand
 #              Update Message: OnJoin.UpdateMessage
+#              Heal: OnJoin.Heal
 #
 ##[GER]
 #

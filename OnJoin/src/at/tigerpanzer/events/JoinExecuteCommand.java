@@ -1,6 +1,7 @@
 package at.tigerpanzer.events;
 
 import at.tigerpanzer.Main;
+import at.tigerpanzer.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +21,7 @@ public class JoinExecuteCommand implements Listener {
                 for(String command : commands) {
                     String[] parts = command.split(";");
                     String sender = parts[0];
-                    String cmd = parts[1].replaceAll("%player%", p.getName());
+                    String cmd = Utils.setPlaceholders(p, parts[1]);
                     if(sender.equalsIgnoreCase("console")) {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
                     } else {

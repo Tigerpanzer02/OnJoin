@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 
 public class JoinCommand implements CommandExecutor {
 
@@ -17,8 +19,9 @@ public class JoinCommand implements CommandExecutor {
             if(cmd.getName().equalsIgnoreCase("onjoin")) {
                 if((player.hasPermission("OnJoin.config")) || (player.hasPermission("OnJoin.*"))) {
                     if(args.length == 0) {
-                        for(String msg : Main.getInstance().getConfig().getStringList("Help.HelpText")) {
-                            player.sendMessage(Utils.color((msg).replaceAll("%player%", player.getDisplayName()).replaceAll("%prefix%", Main.getInstance().getConfig().getString("Prefix"))));
+                        List<String> HelpText = Main.getInstance().getConfig().getStringList("Help.HelpText");
+                        for(String msg : HelpText) {
+                            player.sendMessage(Utils.setPlaceholders(player, msg));
                         }
 
                         return true;
@@ -36,18 +39,18 @@ public class JoinCommand implements CommandExecutor {
 
                         if(args[0].equalsIgnoreCase("reloadconfig")) {
                             Main.getInstance().reloadConfig();
-                            player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Help.OutConfigLoad")));
+                            player.sendMessage(Utils.setPlaceholders(player, Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Help.OutConfigLoad")));
                         }
                     } else {
-                        player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "Bitte benutze /onjoin"));
+                        player.sendMessage(Utils.setPlaceholders(player, Main.getInstance().getConfig().getString("Prefix") + "Use /onjoin"));
                         return true;
                     }
                 } else {
-                    player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Permissionfail")));
+                    player.sendMessage(Utils.setPlaceholders(player, Main.getInstance().getConfig().getString("Permissionfail")));
                     return true;
                 }
             } else {
-                player.sendMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + "Bitte benutze /onjoin"));
+                player.sendMessage(Utils.setPlaceholders(player, Main.getInstance().getConfig().getString("Prefix") + "Use /onjoin"));
                 return true;
             }
         } else {

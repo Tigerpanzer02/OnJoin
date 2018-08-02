@@ -1,3 +1,5 @@
+#Soll das Plugin auf die PlaceholderAPI zugreifen für Platzhalter
+PlaceholderAPI: false
 #Alle Consolen-Nachrichten
 Console:
   PrefixConsole: '&7[&eOnJoin&7]'
@@ -32,7 +34,7 @@ Title:
 #Willkommens Nachricht im Chat
 WelcomeMessage:
   WelcomeMessageOn: true
-  #Du kannst beliebig viele Zeilen hinzufügen und entfernen! (Verfügbare Placeholder: %prefix% und %player%)
+  #Du kannst beliebig viele Zeilen hinzufügen und entfernen!
   WelcomeMessageText:
   - '&e------------------------------------'
   - '&e|  '
@@ -75,6 +77,17 @@ Join:
   #Soll es einen Ton geben
   JoinSoundOn: true
   JoinSound: FIREWORK_LAUNCH
+#Soll der Spieler geheilt werden
+Heal:
+  HealOn: true
+  Health: 20
+  FoodLevel: 20
+  ClearPotionEffects: true
+  #Soll der Spieler mit Permissions geheilt werden
+  HealOnWithPermission: true
+  HealthWithPermission: 20
+  FoodLevelWithPermission: 20
+  ClearPotionEffectsWithPermission: true
 #Führe Commands nach dem Joinen aus
 ExecuteCommand:
   CommandOn: true
