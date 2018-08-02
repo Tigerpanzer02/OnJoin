@@ -1,3 +1,5 @@
+#Should the Plugin use the PlaceholderAPI for Placeholders
+PlaceholderAPI: false
 #All Consolen-Messages
 Console:
   PrefixConsole: '&7[&eOnJoin&7]'

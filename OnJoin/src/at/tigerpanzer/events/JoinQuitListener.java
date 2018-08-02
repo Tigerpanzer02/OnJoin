@@ -4,6 +4,7 @@ import at.tigerpanzer.Main;
 import at.tigerpanzer.util.ActionbarUtils;
 import at.tigerpanzer.util.TitleUtils;
 import at.tigerpanzer.util.Utils;
+import com.mysql.jdbc.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -13,7 +14,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class JoinQuitListener implements Listener {
-
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
@@ -26,7 +26,11 @@ public class JoinQuitListener implements Listener {
             if((p.hasPermission("OnJoin.UpdateMessage")) || (p.hasPermission("OnJoin.*"))) {
                 if(Main.getInstance().getConfig().getString("Join.UpdateMessageOn").contains("true")) {
                     for(String msg : Main.getInstance().getConfig().getStringList("Join.UpdateMessageText")) {
-                        p.sendMessage(Utils.color((msg).replaceAll("%player%", p.getDisplayName()).replaceAll("%prefix%", Main.getInstance().getConfig().getString("Prefix"))));
+                        if(Main.getInstance().PlaceholderAPI) {
+                            p.sendMessage(Utils.setPlaceholders(p, msg));
+                        } else {
+                            p.sendMessage(Utils.color((msg).replaceAll("%player%", p.getDisplayName()).replaceAll("%prefix%", Main.getInstance().getConfig().getString("Prefix"))));
+                        }
                     }
                 }
             }
