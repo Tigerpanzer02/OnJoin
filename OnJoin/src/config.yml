@@ -77,6 +77,15 @@ Join:
   #Soll es einen Ton geben
   JoinSoundOn: true
   JoinSound: FIREWORK_LAUNCH
+Heal:
+  HealOn: true
+  Health: 20
+  FoodLevel: 20
+  ClearPotionEffects: true
+  HealOnWithPermission: true
+  HealthWithPermission: 20
+  FoodLevelWithPermission: 20
+  ClearPotionEffectsWithPermission: true
 #Führe Commands nach dem Joinen aus
 ExecuteCommand:
   CommandOn: true
