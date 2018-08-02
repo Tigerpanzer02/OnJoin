@@ -15,12 +15,12 @@
 #       With PlaceholderAPI
 #           + https://www.spigotmc.org/wiki/placeholderapi-placeholders/
 #
-# Permissions: All rights with OnJoin.*
-#              Firework: OnJoin.Firework
-#              Command: OnJoin.config
-#              Join Commands: OnJoin.ExecuteCommand
-#              Update Message: OnJoin.UpdateMessage
-#              Heal: OnJoin.Heal
+#Permissions: All rights with OnJoin.*
+#            Firework: OnJoin.Firework
+#            Command: OnJoin.config
+#            Join Commands: OnJoin.ExecuteCommand
+#            Update Message: OnJoin.UpdateMessage
+#            Heal: OnJoin.Heal
 #
 ##[GER]
 #
