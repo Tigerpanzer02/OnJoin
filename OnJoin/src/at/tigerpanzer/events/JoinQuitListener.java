@@ -33,20 +33,19 @@ public class JoinQuitListener implements Listener {
                 }
             }
         }
-        if(Main.getInstance().getConfig().getString("Heal.HealOn").contains("true")) {
-            p.setHealth(Main.getInstance().getConfig().getInt("Heal.Health"));
-            p.setFoodLevel(Main.getInstance().getConfig().getInt("Heal.FoodLevel"));
-            if(Main.getInstance().getConfig().getString("Heal.ClearPotionEffects").contains("true")) {
-                p.getActivePotionEffects().clear();
-            }
-        }
-        if(Main.getInstance().getConfig().getString("Heal.HealOnWithPermission").contains("true")) {
-            if((p.hasPermission("OnJoin.Heal")) || (p.hasPermission("OnJoin.*"))) {
+        if((p.hasPermission("OnJoin.Heal")) || (p.hasPermission("OnJoin.*"))) {
+            if(Main.getInstance().getConfig().getString("Heal.HealOnWithPermission").contains("true")) {
                 p.setHealth(Main.getInstance().getConfig().getInt("Heal.HealthWithPermission"));
                 p.setFoodLevel(Main.getInstance().getConfig().getInt("Heal.FoodLevelWithPermission"));
                 if(Main.getInstance().getConfig().getString("Heal.ClearPotionEffectsWithPermission").contains("true")) {
                     p.getActivePotionEffects().clear();
                 }
+            }
+        } else if(Main.getInstance().getConfig().getString("Heal.HealOn").contains("true")) {
+            p.setHealth(Main.getInstance().getConfig().getInt("Heal.Health"));
+            p.setFoodLevel(Main.getInstance().getConfig().getInt("Heal.FoodLevel"));
+            if(Main.getInstance().getConfig().getString("Heal.ClearPotionEffects").contains("true")) {
+                p.getActivePotionEffects().clear();
             }
         }
         if(Main.getInstance().getConfig().getString("Join.JoinSoundOn").contains("true")) {
