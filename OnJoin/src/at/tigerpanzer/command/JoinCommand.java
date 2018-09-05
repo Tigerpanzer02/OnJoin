@@ -12,7 +12,7 @@ import java.util.List;
 
 public class JoinCommand implements CommandExecutor {
 
-
+    @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
