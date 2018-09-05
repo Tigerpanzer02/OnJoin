@@ -9,15 +9,6 @@ import org.bukkit.Bukkit;
  */
 public class ReflectionUtils {
 
-    public static Class<?> getOBC(final String name) {
-        try {
-            return Class.forName("org.bukkit.craftbukkit." + getVersion() + '.' + name);
-        } catch(ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public static Class<?> getNMSClass(String name) {
         try {
             return Class.forName("net.minecraft.server." + getVersion() + "." + name);
