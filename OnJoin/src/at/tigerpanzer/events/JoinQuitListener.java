@@ -5,6 +5,7 @@ import at.tigerpanzer.util.ActionbarUtils;
 import at.tigerpanzer.util.TitleUtils;
 import at.tigerpanzer.util.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,6 +33,10 @@ public class JoinQuitListener implements Listener {
                     }
                 }
             }
+        }
+        if(Main.getInstance().getConfig().getString("SpawnLocation.SpawnLocationEnable").contains("true")) {
+            final Location SpawnLocation = new Location(Bukkit.getServer().getWorld(Main.getInstance().getConfig().getString("SpawnLocation.World")), Main.getInstance().getConfig().getDouble("SpawnLocation.XCoord"), Main.getInstance().getConfig().getDouble("SpawnLocation.YCoord"), Main.getInstance().getConfig().getDouble("SpawnLocation.ZCoord"), (float)Main.getInstance().getConfig().getInt("SpawnLocation.Yaw"), (float)Main.getInstance().getConfig().getInt("SpawnLocation.Pitch"));
+            p.teleport(SpawnLocation);
         }
         if((p.hasPermission("OnJoin.Heal")) || (p.hasPermission("OnJoin.*"))) {
             if(Main.getInstance().getConfig().getString("Heal.HealOnWithPermission").contains("true")) {
