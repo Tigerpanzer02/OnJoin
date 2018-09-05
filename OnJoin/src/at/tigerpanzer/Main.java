@@ -8,8 +8,6 @@ import at.tigerpanzer.util.SpigotPluginUpdater;
 import at.tigerpanzer.util.Utils;
 import me.clip.placeholderapi.PlaceholderAPIPlugin;
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,18 +15,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin implements Listener {
 
     private static Main instance;
+    public boolean needUpdateJoin;
+    public boolean placeholderAPI;
 
     public static Main getInstance() {
         return instance;
     }
 
-    public boolean NeedUpdateJoin;
-    public boolean PlaceholderAPI;
-
     @Override
     public void onEnable() {
         instance = this;
-        Main.getInstance().NeedUpdateJoin = false;
+        Main.getInstance().needUpdateJoin = false;
         saveDefaultConfig();
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cWird &aGESTARTET &7| &cis &aSTARTED"));
         register();
@@ -40,10 +37,10 @@ public class Main extends JavaPlugin implements Listener {
         if(Main.getInstance().getConfig().getString("PlaceholderAPI").contains("true")) {
             if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
                 Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " §a✔ §ePlaceholderAPI §7| §aVersion§7:§e " + PlaceholderAPIPlugin.getInstance().getDescription().getVersion()));
-                Main.getInstance().PlaceholderAPI = true;
+                Main.getInstance().placeholderAPI = true;
             } else {
                 Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " §c✖ §4PlaceholderAPI"));
-                Main.getInstance().PlaceholderAPI = false;
+                Main.getInstance().placeholderAPI = false;
             }
         }
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));

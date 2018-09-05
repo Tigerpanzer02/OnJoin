@@ -3,8 +3,6 @@ package at.tigerpanzer.util;
 
 import at.tigerpanzer.Main;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -75,7 +73,7 @@ public class SpigotPluginUpdater {
                     plugin.getLogger().log(Level.INFO, " Changelog: {0}", changeLog);
                     Bukkit.getConsoleSender().sendMessage(Utils.color(Main.getInstance().getConfig().getString("Console.PrefixConsole") + Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
                     Bukkit.broadcastMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
-                    Main.getInstance().NeedUpdateJoin = true;
+                    Main.getInstance().needUpdateJoin = true;
                 }
                 return true;
             }
