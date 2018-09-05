@@ -12,7 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
-public class Main extends JavaPlugin implements Listener {
+public class Main extends JavaPlugin {
 
     private static Main instance;
     private boolean needUpdateJoin;
