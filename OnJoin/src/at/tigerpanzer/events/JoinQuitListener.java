@@ -17,6 +17,10 @@ import java.util.List;
 
 public class JoinQuitListener implements Listener {
 
+    public JoinQuitListener(Main plugin){
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();

@@ -12,6 +12,10 @@ import java.util.List;
 
 public class JoinExecuteCommand implements Listener {
 
+    public JoinExecuteCommand(Main plugin) {
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
     @EventHandler
     public void onJoin(final PlayerJoinEvent e) {
         Player p = e.getPlayer();

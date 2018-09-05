@@ -8,7 +8,6 @@ import at.tigerpanzer.util.SpigotPluginUpdater;
 import at.tigerpanzer.util.Utils;
 import me.clip.placeholderapi.PlaceholderAPIPlugin;
 import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -17,6 +16,10 @@ public class Main extends JavaPlugin {
     private static Main instance;
     private boolean needUpdateJoin;
     private boolean placeholderAPI;
+
+    public static Main getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
@@ -59,10 +62,10 @@ public class Main extends JavaPlugin {
     }
 
     private void register() {
-        getCommand("onjoin").setExecutor(new JoinCommand());
-        Bukkit.getPluginManager().registerEvents(new JoinQuitListener(), this);
-        Bukkit.getPluginManager().registerEvents(new JoinFirework(), this);
-        Bukkit.getPluginManager().registerEvents(new JoinExecuteCommand(), this);
+        new JoinCommand(this);
+        new JoinQuitListener(this);
+        new JoinFirework(this);
+        new JoinExecuteCommand(this);
     }
 
     public boolean needUpdateJoin() {
@@ -75,9 +78,5 @@ public class Main extends JavaPlugin {
 
     public boolean isPlaceholderAPIEnabled() {
         return placeholderAPI;
-    }
-
-    public static Main getInstance() {
-        return instance;
     }
 }

@@ -16,6 +16,10 @@ import java.util.List;
 
 public class JoinFirework implements Listener {
 
+    public JoinFirework(Main plugin) {
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();

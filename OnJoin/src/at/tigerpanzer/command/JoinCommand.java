@@ -12,6 +12,10 @@ import java.util.List;
 
 public class JoinCommand implements CommandExecutor {
 
+    public JoinCommand(Main plugin){
+        plugin.getCommand("onjoin").setExecutor(this);
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         if(sender instanceof Player) {
