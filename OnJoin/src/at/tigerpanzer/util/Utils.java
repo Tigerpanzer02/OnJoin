@@ -16,7 +16,7 @@ public class Utils {
 
     public static String setPlaceholders(final Player p, String str) {
         String formatted = str;
-        if(Main.getInstance().placeholderAPI) {
+        if(Main.getInstance().isPlaceholderAPIEnabled()) {
             formatted = PlaceholderAPI.setPlaceholders(p, str);
         }
         formatted = StringUtils.replace(formatted, "%prefix%", Main.getInstance().getConfig().getString("Prefix"));

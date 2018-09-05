@@ -25,7 +25,7 @@ public class JoinQuitListener implements Listener {
                 p.sendMessage(" ");
             }
         }
-        if(Main.getInstance().needUpdateJoin) {
+        if(Main.getInstance().needUpdateJoin()) {
             if((p.hasPermission("OnJoin.UpdateMessage")) || (p.hasPermission("OnJoin.*"))) {
                 if(Main.getInstance().getConfig().getBoolean("Join.UpdateMessageOn")) {
                     List<String> UpdateMessageText = Main.getInstance().getConfig().getStringList("Join.UpdateMessageText");

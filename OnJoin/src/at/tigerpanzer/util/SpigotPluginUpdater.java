@@ -73,7 +73,7 @@ public class SpigotPluginUpdater {
                     plugin.getLogger().log(Level.INFO, " Changelog: {0}", changeLog);
                     Bukkit.getConsoleSender().sendMessage(Utils.color(Main.getInstance().getConfig().getString("Console.PrefixConsole") + Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
                     Bukkit.broadcastMessage(Utils.color(Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Console.newupdatebconrl")));
-                    Main.getInstance().needUpdateJoin = true;
+                    Main.getInstance().setNeedUpdateJoin(false);
                 }
                 return true;
             }

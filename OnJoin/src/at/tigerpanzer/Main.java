@@ -15,17 +15,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin implements Listener {
 
     private static Main instance;
-    public boolean needUpdateJoin;
-    public boolean placeholderAPI;
-
-    public static Main getInstance() {
-        return instance;
-    }
+    private boolean needUpdateJoin;
+    private boolean placeholderAPI;
 
     @Override
     public void onEnable() {
         instance = this;
-        Main.getInstance().needUpdateJoin = false;
+        needUpdateJoin = false;
         saveDefaultConfig();
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cWird &aGESTARTET &7| &cis &aSTARTED"));
         register();
@@ -37,10 +33,10 @@ public class Main extends JavaPlugin implements Listener {
         if(Main.getInstance().getConfig().getString("PlaceholderAPI").contains("true")) {
             if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
                 Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " §a✔ §ePlaceholderAPI §7| §aVersion§7:§e " + PlaceholderAPIPlugin.getInstance().getDescription().getVersion()));
-                Main.getInstance().placeholderAPI = true;
+                placeholderAPI = true;
             } else {
                 Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " §c✖ §4PlaceholderAPI"));
-                Main.getInstance().placeholderAPI = false;
+                placeholderAPI = false;
             }
         }
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
@@ -67,5 +63,21 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new JoinQuitListener(), this);
         Bukkit.getPluginManager().registerEvents(new JoinFirework(), this);
         Bukkit.getPluginManager().registerEvents(new JoinExecuteCommand(), this);
+    }
+
+    public boolean needUpdateJoin() {
+        return needUpdateJoin;
+    }
+
+    public void setNeedUpdateJoin(boolean needUpdateJoin) {
+        this.needUpdateJoin = needUpdateJoin;
+    }
+
+    public boolean isPlaceholderAPIEnabled() {
+        return placeholderAPI;
+    }
+
+    public static Main getInstance() {
+        return instance;
     }
 }
