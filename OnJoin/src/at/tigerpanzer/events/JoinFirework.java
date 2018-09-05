@@ -15,11 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JoinFirework implements Listener {
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if(p.hasPermission("OnJoin.Firework") || (p.hasPermission("OnJoin.*"))) {
-            if(Main.getInstance().getConfig().getString("Join.Firework-On").contains("true")) {
+        if(p.hasPermission("OnJoin.Firework") || p.hasPermission("OnJoin.*")) {
+            if(Main.getInstance().getConfig().getBoolean("Join.Firework-On")) {
                 for(int i = 1; i < Main.getInstance().getConfig().getInt("Join.Firework.Amount"); i++) {
                     List<Color> colors = new ArrayList<>();
                     List<Color> fade = new ArrayList<>();
