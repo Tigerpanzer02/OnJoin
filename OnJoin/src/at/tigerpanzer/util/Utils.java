@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -15,16 +16,18 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Utils {
 
+    private static Main plugin = JavaPlugin.getPlugin(Main.class);
+
     public static String color(String msg) {
         return ChatColor.translateAlternateColorCodes('&', msg);
     }
 
     public static String setPlaceholders(final Player p, String str) {
         String formatted = str;
-        if(Main.getInstance().isPlaceholderAPIEnabled()) {
+        if(plugin.isPlaceholderAPIEnabled()) {
             formatted = PlaceholderAPI.setPlaceholders(p, str);
         }
-        formatted = StringUtils.replace(formatted, "%prefix%", Main.getInstance().getConfig().getString("Prefix"));
+        formatted = StringUtils.replace(formatted, "%prefix%", plugin.getConfig().getString("Prefix"));
         formatted = StringUtils.replace(formatted, "%player%", p.getName());
         formatted = StringUtils.replace(formatted, "%onjoin-player-displayname%", p.getDisplayName());
         formatted = StringUtils.replace(formatted, "%onjoin-player-uuid%", p.getUniqueId().toString());

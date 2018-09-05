@@ -14,66 +14,69 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import java.util.List;
 
 public class JoinQuitListener implements Listener {
+    
+    private Main plugin;
 
     public JoinQuitListener(Main plugin) {
+        this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if(Main.getInstance().getConfig().getBoolean("Join.ChatClearOn")) {
+        if(plugin.getConfig().getBoolean("Join.ChatClearOn")) {
             for(int i = 0; i < 200; i++) {
                 p.sendMessage(" ");
             }
         }
-        if(Main.getInstance().needUpdateJoin()) {
+        if(plugin.needUpdateJoin()) {
             if((p.hasPermission("OnJoin.UpdateMessage")) || (p.hasPermission("OnJoin.*"))) {
-                if(Main.getInstance().getConfig().getBoolean("Join.UpdateMessageOn")) {
-                    List<String> UpdateMessageText = Main.getInstance().getConfig().getStringList("Join.UpdateMessageText");
+                if(plugin.getConfig().getBoolean("Join.UpdateMessageOn")) {
+                    List<String> UpdateMessageText = plugin.getConfig().getStringList("Join.UpdateMessageText");
                     for(String msg : UpdateMessageText) {
                         p.sendMessage(Utils.setPlaceholders(p, msg));
                     }
                 }
             }
         }
-        if(Main.getInstance().getConfig().getBoolean("SpawnLocation.SpawnLocationEnable")) {
-            final Location SpawnLocation = new Location(Bukkit.getServer().getWorld(Main.getInstance().getConfig().getString("SpawnLocation.World")), Main.getInstance().getConfig().getDouble("SpawnLocation.XCoord"), Main.getInstance().getConfig().getDouble("SpawnLocation.YCoord"), Main.getInstance().getConfig().getDouble("SpawnLocation.ZCoord"), (float) Main.getInstance().getConfig().getInt("SpawnLocation.Yaw"), (float) Main.getInstance().getConfig().getInt("SpawnLocation.Pitch"));
+        if(plugin.getConfig().getBoolean("SpawnLocation.SpawnLocationEnable")) {
+            final Location SpawnLocation = new Location(Bukkit.getServer().getWorld(plugin.getConfig().getString("SpawnLocation.World")), plugin.getConfig().getDouble("SpawnLocation.XCoord"), plugin.getConfig().getDouble("SpawnLocation.YCoord"), plugin.getConfig().getDouble("SpawnLocation.ZCoord"), (float) plugin.getConfig().getInt("SpawnLocation.Yaw"), (float) plugin.getConfig().getInt("SpawnLocation.Pitch"));
             p.teleport(SpawnLocation);
         }
         if((p.hasPermission("OnJoin.Heal")) || (p.hasPermission("OnJoin.*"))) {
-            if(Main.getInstance().getConfig().getBoolean("Heal.HealOnWithPermission")) {
-                p.setHealth(Main.getInstance().getConfig().getInt("Heal.HealthWithPermission"));
-                p.setFoodLevel(Main.getInstance().getConfig().getInt("Heal.FoodLevelWithPermission"));
-                if(Main.getInstance().getConfig().getBoolean("Heal.ClearPotionEffectsWithPermission")) {
+            if(plugin.getConfig().getBoolean("Heal.HealOnWithPermission")) {
+                p.setHealth(plugin.getConfig().getInt("Heal.HealthWithPermission"));
+                p.setFoodLevel(plugin.getConfig().getInt("Heal.FoodLevelWithPermission"));
+                if(plugin.getConfig().getBoolean("Heal.ClearPotionEffectsWithPermission")) {
                     p.getActivePotionEffects().clear();
                 }
             }
-        } else if(Main.getInstance().getConfig().getString("Heal.HealOn").contains("true")) {
-            p.setHealth(Main.getInstance().getConfig().getInt("Heal.Health"));
-            p.setFoodLevel(Main.getInstance().getConfig().getInt("Heal.FoodLevel"));
-            if(Main.getInstance().getConfig().getBoolean("Heal.ClearPotionEffects")) {
+        } else if(plugin.getConfig().getString("Heal.HealOn").contains("true")) {
+            p.setHealth(plugin.getConfig().getInt("Heal.Health"));
+            p.setFoodLevel(plugin.getConfig().getInt("Heal.FoodLevel"));
+            if(plugin.getConfig().getBoolean("Heal.ClearPotionEffects")) {
                 p.getActivePotionEffects().clear();
             }
         }
-        if(Main.getInstance().getConfig().getBoolean("Join.JoinSoundOn")) {
-            p.playSound(p.getLocation(), Sound.valueOf(Main.getInstance().getConfig().getString("Join.JoinSound")), 3, 1);
+        if(plugin.getConfig().getBoolean("Join.JoinSoundOn")) {
+            p.playSound(p.getLocation(), Sound.valueOf(plugin.getConfig().getString("Join.JoinSound")), 3, 1);
         }
-        if(Main.getInstance().getConfig().getBoolean("Join.JoinMessageOn")) {
-            e.setJoinMessage(Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Join.JoinMessage")));
-        } else if(!Main.getInstance().getConfig().getBoolean("Join.JoinMessageOn")) {
+        if(plugin.getConfig().getBoolean("Join.JoinMessageOn")) {
+            e.setJoinMessage(Utils.setPlaceholders(p, plugin.getConfig().getString("Join.JoinMessage")));
+        } else if(!plugin.getConfig().getBoolean("Join.JoinMessageOn")) {
             e.setJoinMessage("");
         }
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            if(Main.getInstance().getConfig().getBoolean("Title.TitleOnJoin")) {
-                Utils.sendTitle(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Title.Title1")), 25, 90, 0);
-                Utils.sendSubTitle(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Title.SubTitle1")), 25, 90, 0);
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            if(plugin.getConfig().getBoolean("Title.TitleOnJoin")) {
+                Utils.sendTitle(p, Utils.setPlaceholders(p, plugin.getConfig().getString("Title.Title1")), 25, 90, 0);
+                Utils.sendSubTitle(p, Utils.setPlaceholders(p, plugin.getConfig().getString("Title.SubTitle1")), 25, 90, 0);
 
-                if(Main.getInstance().getConfig().getBoolean("actionbar.actionbaronjoin")) {
-                    Utils.sendActionBar(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("actionbar.actionbar1")));
+                if(plugin.getConfig().getBoolean("actionbar.actionbaronjoin")) {
+                    Utils.sendActionBar(p, Utils.setPlaceholders(p, plugin.getConfig().getString("actionbar.actionbar1")));
                 }
-                if(Main.getInstance().getConfig().getBoolean("WelcomeMessage.WelcomeMessageOn")) {
-                    List<String> WelcomeMessageText = Main.getInstance().getConfig().getStringList("WelcomeMessage.WelcomeMessageText");
+                if(plugin.getConfig().getBoolean("WelcomeMessage.WelcomeMessageOn")) {
+                    List<String> WelcomeMessageText = plugin.getConfig().getStringList("WelcomeMessage.WelcomeMessageText");
                     for(String msg : WelcomeMessageText) {
                         p.sendMessage(Utils.setPlaceholders(e.getPlayer(), msg));
                     }
@@ -81,12 +84,12 @@ public class JoinQuitListener implements Listener {
             }
         }, 2L);
 
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            if(Main.getInstance().getConfig().getBoolean("Title.TitleOnJoin")) {
-                Utils.sendSubTitle(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Title.SubTitle2")), 0, 90, 0);
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            if(plugin.getConfig().getBoolean("Title.TitleOnJoin")) {
+                Utils.sendSubTitle(p, Utils.setPlaceholders(p, plugin.getConfig().getString("Title.SubTitle2")), 0, 90, 0);
             }
-            if(Main.getInstance().getConfig().getBoolean("actionbar.actionbaronjoin")) {
-                Utils.sendActionBar(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("actionbar.actionbar2")));
+            if(plugin.getConfig().getBoolean("actionbar.actionbaronjoin")) {
+                Utils.sendActionBar(p, Utils.setPlaceholders(p, plugin.getConfig().getString("actionbar.actionbar2")));
 
             }
         }, 65L);
@@ -95,12 +98,12 @@ public class JoinQuitListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
-        if(Main.getInstance().getConfig().getBoolean("Quit.QuitSoundOn")) {
-            p.playSound(p.getLocation(), Sound.valueOf(Main.getInstance().getConfig().getString("Quit.QuitSound")), 3, 1);
+        if(plugin.getConfig().getBoolean("Quit.QuitSoundOn")) {
+            p.playSound(p.getLocation(), Sound.valueOf(plugin.getConfig().getString("Quit.QuitSound")), 3, 1);
         }
-        if(Main.getInstance().getConfig().getBoolean("Quit.QuitMessageOn")) {
-            e.setQuitMessage(Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Quit.QuitMessage")));
-        } else if(!Main.getInstance().getConfig().getBoolean("Quit.QuitMessageOn")) {
+        if(plugin.getConfig().getBoolean("Quit.QuitMessageOn")) {
+            e.setQuitMessage(Utils.setPlaceholders(p, plugin.getConfig().getString("Quit.QuitMessage")));
+        } else if(!plugin.getConfig().getBoolean("Quit.QuitMessageOn")) {
             e.setQuitMessage("");
         }
     }

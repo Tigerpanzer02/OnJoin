@@ -16,7 +16,10 @@ import java.util.List;
 
 public class JoinFirework implements Listener {
 
+    private Main plugin;
+
     public JoinFirework(Main plugin) {
+        this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -24,12 +27,12 @@ public class JoinFirework implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         if(p.hasPermission("OnJoin.Firework") || p.hasPermission("OnJoin.*")) {
-            if(Main.getInstance().getConfig().getBoolean("Join.Firework-On")) {
-                for(int i = 1; i < Main.getInstance().getConfig().getInt("Join.Firework.Amount"); i++) {
+            if(plugin.getConfig().getBoolean("Join.Firework-On")) {
+                for(int i = 1; i < plugin.getConfig().getInt("Join.Firework.Amount"); i++) {
                     List<Color> colors = new ArrayList<>();
                     List<Color> fade = new ArrayList<>();
-                    List<String> lore = Main.getInstance().getConfig().getStringList("Join.Firework.Colors");
-                    List<String> lore2 = Main.getInstance().getConfig().getStringList("Join.Firework.Fade");
+                    List<String> lore = plugin.getConfig().getStringList("Join.Firework.Colors");
+                    List<String> lore2 = plugin.getConfig().getStringList("Join.Firework.Fade");
                     for(String l : lore) {
                         colors.add(getColor(l));
                     }
@@ -37,17 +40,17 @@ public class JoinFirework implements Listener {
                         fade.add(getColor(l));
                     }
                     final Firework f = e.getPlayer().getWorld().spawn(
-                            p.getLocation().add(0.5D, Main.getInstance().getConfig().getInt("Join.Firework.Firework-Height"), 0.5D),
+                            p.getLocation().add(0.5D, plugin.getConfig().getInt("Join.Firework.Firework-Height"), 0.5D),
                             Firework.class);
 
                     FireworkMeta fm = f.getFireworkMeta();
-                    fm.addEffect(FireworkEffect.builder().flicker(Main.getInstance().getConfig().getBoolean("Join.Firework.Flicker")).trail(Main.getInstance().getConfig().getBoolean("Join.Firework.Trail")).with(FireworkEffect.Type.valueOf(Main.getInstance().getConfig().getString("Join.Firework.Type"))).withColor(colors).withFade(fade).build());
-                    if(!Main.getInstance().getConfig().getBoolean("Join.Firework.Instant-Explode")) {
-                        fm.setPower(Main.getInstance().getConfig().getInt("Join.Firework.Power"));
+                    fm.addEffect(FireworkEffect.builder().flicker(plugin.getConfig().getBoolean("Join.Firework.Flicker")).trail(plugin.getConfig().getBoolean("Join.Firework.Trail")).with(FireworkEffect.Type.valueOf(plugin.getConfig().getString("Join.Firework.Type"))).withColor(colors).withFade(fade).build());
+                    if(!plugin.getConfig().getBoolean("Join.Firework.Instant-Explode")) {
+                        fm.setPower(plugin.getConfig().getInt("Join.Firework.Power"));
                     }
                     f.setFireworkMeta(fm);
-                    if(Main.getInstance().getConfig().getBoolean("Join.Firework.Instant-Explode")) {
-                        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), f::detonate, 1L);
+                    if(plugin.getConfig().getBoolean("Join.Firework.Instant-Explode")) {
+                        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, f::detonate, 1L);
                     }
                 }
             }

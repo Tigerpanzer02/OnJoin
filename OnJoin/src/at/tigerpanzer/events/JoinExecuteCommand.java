@@ -11,8 +11,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import java.util.List;
 
 public class JoinExecuteCommand implements Listener {
+    
+    private Main plugin;
 
     public JoinExecuteCommand(Main plugin) {
+        this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -20,8 +23,8 @@ public class JoinExecuteCommand implements Listener {
     public void onJoin(final PlayerJoinEvent e) {
         Player p = e.getPlayer();
         if((p.hasPermission("OnJoin.ExecuteCommand")) || (p.hasPermission("OnJoin.*"))) {
-            if(Main.getInstance().getConfig().getString("ExecuteCommand.CommandOn").contains("true")) {
-                final List<String> commands = Main.getInstance().getConfig().getStringList("ExecuteCommand.Commands");
+            if(plugin.getConfig().getString("ExecuteCommand.CommandOn").contains("true")) {
+                final List<String> commands = plugin.getConfig().getStringList("ExecuteCommand.Commands");
                 for(String command : commands) {
                     String[] parts = command.split(";");
                     String sender = parts[0];

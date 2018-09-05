@@ -12,18 +12,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 
 public class Main extends JavaPlugin {
-
-    private static Main instance;
     private boolean needUpdateJoin;
     private boolean placeholderAPI;
 
-    public static Main getInstance() {
-        return instance;
-    }
-
     @Override
     public void onEnable() {
-        instance = this;
         needUpdateJoin = false;
         saveDefaultConfig();
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cWird &aGESTARTET &7| &cis &aSTARTED"));
@@ -33,7 +26,7 @@ public class Main extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cPlugin version: &e" + getDescription().getVersion()));
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cPlugin author: &e" + getDescription().getAuthors()));
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cPlugin status: &aaktiviert &c| &aenabled"));
-        if(Main.getInstance().getConfig().getString("PlaceholderAPI").contains("true")) {
+        if(getConfig().getString("PlaceholderAPI").contains("true")) {
             if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
                 Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " §a✔ §ePlaceholderAPI §7| §aVersion§7:§e " + PlaceholderAPIPlugin.getInstance().getDescription().getVersion()));
                 placeholderAPI = true;
@@ -47,7 +40,6 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        instance = null;
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cPlugin version: &e" + getDescription().getVersion()));
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cPlugin author: &e" + getDescription().getAuthors()));
