@@ -1,8 +1,6 @@
 package at.tigerpanzer.events;
 
 import at.tigerpanzer.Main;
-import at.tigerpanzer.util.ActionbarUtils;
-import at.tigerpanzer.util.TitleUtils;
 import at.tigerpanzer.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -17,7 +15,7 @@ import java.util.List;
 
 public class JoinQuitListener implements Listener {
 
-    public JoinQuitListener(Main plugin){
+    public JoinQuitListener(Main plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -40,7 +38,7 @@ public class JoinQuitListener implements Listener {
             }
         }
         if(Main.getInstance().getConfig().getBoolean("SpawnLocation.SpawnLocationEnable")) {
-            final Location SpawnLocation = new Location(Bukkit.getServer().getWorld(Main.getInstance().getConfig().getString("SpawnLocation.World")), Main.getInstance().getConfig().getDouble("SpawnLocation.XCoord"), Main.getInstance().getConfig().getDouble("SpawnLocation.YCoord"), Main.getInstance().getConfig().getDouble("SpawnLocation.ZCoord"), (float)Main.getInstance().getConfig().getInt("SpawnLocation.Yaw"), (float)Main.getInstance().getConfig().getInt("SpawnLocation.Pitch"));
+            final Location SpawnLocation = new Location(Bukkit.getServer().getWorld(Main.getInstance().getConfig().getString("SpawnLocation.World")), Main.getInstance().getConfig().getDouble("SpawnLocation.XCoord"), Main.getInstance().getConfig().getDouble("SpawnLocation.YCoord"), Main.getInstance().getConfig().getDouble("SpawnLocation.ZCoord"), (float) Main.getInstance().getConfig().getInt("SpawnLocation.Yaw"), (float) Main.getInstance().getConfig().getInt("SpawnLocation.Pitch"));
             p.teleport(SpawnLocation);
         }
         if((p.hasPermission("OnJoin.Heal")) || (p.hasPermission("OnJoin.*"))) {
@@ -68,11 +66,11 @@ public class JoinQuitListener implements Listener {
         }
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             if(Main.getInstance().getConfig().getBoolean("Title.TitleOnJoin")) {
-                TitleUtils.sendTitle(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Title.Title1")), 25, 90, 0);
-                TitleUtils.sendSubTitle(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Title.SubTitle1")), 25, 90, 0);
+                Utils.sendTitle(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Title.Title1")), 25, 90, 0);
+                Utils.sendSubTitle(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Title.SubTitle1")), 25, 90, 0);
 
                 if(Main.getInstance().getConfig().getBoolean("actionbar.actionbaronjoin")) {
-                    ActionbarUtils.sendActionBar(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("actionbar.actionbar1")));
+                    Utils.sendActionBar(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("actionbar.actionbar1")));
                 }
                 if(Main.getInstance().getConfig().getBoolean("WelcomeMessage.WelcomeMessageOn")) {
                     List<String> WelcomeMessageText = Main.getInstance().getConfig().getStringList("WelcomeMessage.WelcomeMessageText");
@@ -85,10 +83,10 @@ public class JoinQuitListener implements Listener {
 
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             if(Main.getInstance().getConfig().getBoolean("Title.TitleOnJoin")) {
-                TitleUtils.sendSubTitle(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Title.SubTitle2")), 0, 90, 0);
+                Utils.sendSubTitle(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("Title.SubTitle2")), 0, 90, 0);
             }
             if(Main.getInstance().getConfig().getBoolean("actionbar.actionbaronjoin")) {
-                ActionbarUtils.sendActionBar(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("actionbar.actionbar2")));
+                Utils.sendActionBar(p, Utils.setPlaceholders(p, Main.getInstance().getConfig().getString("actionbar.actionbar2")));
 
             }
         }, 65L);
