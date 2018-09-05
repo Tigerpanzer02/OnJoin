@@ -1,5 +1,5 @@
 #Should the Plugin use the PlaceholderAPI for Placeholders
-PlaceholderAPI: false
+PlaceholderAPI: true
 #All Consolen-Messages
 Console:
   PrefixConsole: '&7[&eOnJoin&7]'
@@ -15,6 +15,9 @@ Help:
   - '&e|  '
   - '&e|  &7/&eonjoin &areloadconfig'
   - '&e|    &c->  &7Reload your config'
+  - '&e|  '
+  - '&e|  &7/&eonjoin &asetspawn'
+  - '&e|    &c->  &7Set the Spawnlocation'
   - '&e|  '
   - '&e--------- &7[&aHELP &7| &eOnJoin&7]&e ---------'
   - ''
@@ -75,7 +78,7 @@ Join:
   JoinMessageOn: true
   JoinMessage: '&7%player% has joined the Server'
   #Should there be a sound
-  JoinSoundOn: true
+  JoinSoundOn: false
   JoinSound: FIREWORK_LAUNCH
 #Should the Player that join heal
 Heal:
@@ -90,7 +93,7 @@ Heal:
   ClearPotionEffectsWithPermission: true
 #Execute Commands after Join
 ExecuteCommand:
-  CommandOn: true
+  CommandOn: false
   Commands:
   - 'console;say %player% Hello! Change this in Config!'
   - 'player;help'
@@ -104,5 +107,17 @@ Quit:
   QuitMessageOn: true
   QuitMessage: '&7%player% has left the Server'
   #Should there be a sound
-  QuitSoundOn: true
+  QuitSoundOn: false
   QuitSound: BAT_DEATH
+#Should Players that join be teleported to a location
+SpawnLocation:
+  SpawnLocationEnable: false
+  World: world
+  XCoord: 0
+  YCoord: 0
+  ZCoord: 0
+  Yaw: 0
+  Pitch: 0
+  SetSpawnMessageSetTo: '&aSpawn set to&7: '
+  SetSpawnMessageYaw: '&2Yaw&7: '
+  SetSpawnMessagePitch: '&2Pitch&7: '
