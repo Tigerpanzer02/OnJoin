@@ -39,20 +39,21 @@ public class JoinCommand implements CommandExecutor {
                         if(args[0].equalsIgnoreCase("reloadconfig")) {
                             Main.getInstance().reloadConfig();
                             player.sendMessage(Utils.setPlaceholders(player, Main.getInstance().getConfig().getString("Prefix") + Main.getInstance().getConfig().getString("Help.OutConfigLoad")));
-                        } else if(Main.getInstance().getConfig().getString("SpawnLocation.SpawnLocationEnable").contains("true")) {
-                            if(args[0].equalsIgnoreCase("setspawn")) {
-                                Main.getInstance().getConfig().set("SpawnLocation.World", player.getLocation().getWorld().getName());
-                                Main.getInstance().getConfig().set("SpawnLocation.XCoord", player.getLocation().getX());
-                                Main.getInstance().getConfig().set("SpawnLocation.YCoord", player.getLocation().getY());
-                                Main.getInstance().getConfig().set("SpawnLocation.ZCoord", player.getLocation().getZ());
-                                Main.getInstance().getConfig().set("SpawnLocation.Yaw", player.getLocation().getYaw());
-                                Main.getInstance().getConfig().set("SpawnLocation.Pitch", player.getLocation().getPitch());
-                                player.sendMessage(Main.getInstance().getConfig().getString("SpawnLocation.SetSpawnMessageSetTo") + "Spawn set to: " + player.getLocation().getWorld().getName() + ", " + player.getLocation().getBlockX() + ", " + player.getLocation().getBlockY() + ", " + player.getLocation().getBlockZ());
-                                player.sendMessage(Main.getInstance().getConfig().getString("SpawnLocation.SetSpawnMessageYaw") + "Yaw: " + player.getLocation().getYaw());
-                                player.sendMessage(Main.getInstance().getConfig().getString("SpawnLocation.SetSpawnMessagePitch") + "Pitch: " + player.getLocation().getPitch());
-                                Main.getInstance().saveConfig();
-                            }
                         }
+                        if(args[0].equalsIgnoreCase("setspawn")) {
+                            Main.getInstance().getConfig().set("SpawnLocation.World", player.getLocation().getWorld().getName());
+                            Main.getInstance().getConfig().set("SpawnLocation.XCoord", player.getLocation().getX());
+                            Main.getInstance().getConfig().set("SpawnLocation.YCoord", player.getLocation().getY());
+                            Main.getInstance().getConfig().set("SpawnLocation.ZCoord", player.getLocation().getZ());
+                            Main.getInstance().getConfig().set("SpawnLocation.Yaw", player.getLocation().getYaw());
+                            Main.getInstance().getConfig().set("SpawnLocation.Pitch", player.getLocation().getPitch());
+                            Main.getInstance().getConfig().set("SpawnLocation.SpawnLocationEnable", true);
+                            player.sendMessage(Main.getInstance().getConfig().getString("SpawnLocation.SetSpawnMessageSetTo") + player.getLocation().getWorld().getName() + ", " + player.getLocation().getBlockX() + ", " + player.getLocation().getBlockY() + ", " + player.getLocation().getBlockZ());
+                            player.sendMessage(Main.getInstance().getConfig().getString("SpawnLocation.SetSpawnMessageYaw") + player.getLocation().getYaw());
+                            player.sendMessage(Main.getInstance().getConfig().getString("SpawnLocation.SetSpawnMessagePitch") + player.getLocation().getPitch());
+                            Main.getInstance().saveConfig();
+                        }
+
                     } else {
                         player.sendMessage(Utils.setPlaceholders(player, Main.getInstance().getConfig().getString("Prefix") + "Use /onjoin"));
                         return true;
