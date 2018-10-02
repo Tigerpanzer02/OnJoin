@@ -1,9 +1,8 @@
-package at.tigerpanzer.util;
+package at.tigerpanzer.onjoin.util;
 
 
-import at.tigerpanzer.Main;
+import at.tigerpanzer.onjoin.Main;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

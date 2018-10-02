@@ -100,7 +100,7 @@
                             <relocations>
                                 <relocation>
                                     <pattern>pl.plajerlair.core</pattern>
-                                    <shadedPattern>at.tigerpanzer.plajerlair.core</shadedPattern>
+                                    <shadedPattern>at.tigerpanzer.onjoin.plajerlair.core</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>

@@ -1,11 +1,11 @@
-package at.tigerpanzer;
+package at.tigerpanzer.onjoin;
 
-import at.tigerpanzer.command.JoinCommand;
-import at.tigerpanzer.events.JoinExecuteCommand;
-import at.tigerpanzer.events.JoinFirework;
-import at.tigerpanzer.events.JoinQuitListener;
-import at.tigerpanzer.util.SpigotPluginUpdater;
-import at.tigerpanzer.util.Utils;
+import at.tigerpanzer.onjoin.command.JoinCommand;
+import at.tigerpanzer.onjoin.events.JoinExecuteCommand;
+import at.tigerpanzer.onjoin.events.JoinFirework;
+import at.tigerpanzer.onjoin.events.JoinQuitListener;
+import at.tigerpanzer.onjoin.util.SpigotPluginUpdater;
+import at.tigerpanzer.onjoin.util.Utils;
 import me.clip.placeholderapi.PlaceholderAPIPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

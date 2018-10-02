@@ -1,7 +1,7 @@
-package at.tigerpanzer.command;
+package at.tigerpanzer.onjoin.command;
 
-import at.tigerpanzer.Main;
-import at.tigerpanzer.util.Utils;
+import at.tigerpanzer.onjoin.Main;
+import at.tigerpanzer.onjoin.util.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

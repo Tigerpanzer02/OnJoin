@@ -1,7 +1,7 @@
-package at.tigerpanzer.events;
+package at.tigerpanzer.onjoin.events;
 
-import at.tigerpanzer.Main;
-import at.tigerpanzer.util.Utils;
+import at.tigerpanzer.onjoin.Main;
+import at.tigerpanzer.onjoin.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

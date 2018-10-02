@@ -1,6 +1,6 @@
-package at.tigerpanzer.events;
+package at.tigerpanzer.onjoin.events;
 
-import at.tigerpanzer.Main;
+import at.tigerpanzer.onjoin.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
