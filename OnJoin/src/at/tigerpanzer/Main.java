@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 
 public class Main extends JavaPlugin {
+
     private boolean needUpdateJoin;
     private boolean placeholderAPI;
 
@@ -26,14 +27,12 @@ public class Main extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cPlugin version: &e" + getDescription().getVersion()));
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cPlugin author: &e" + getDescription().getAuthors()));
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cPlugin status: &aaktiviert &c| &aenabled"));
-        if(getConfig().getString("PlaceholderAPI").contains("true")) {
-            if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-                Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " §a✔ §ePlaceholderAPI §7| §aVersion§7:§e " + PlaceholderAPIPlugin.getInstance().getDescription().getVersion()));
-                placeholderAPI = true;
-            } else {
-                Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " §c✖ §4PlaceholderAPI"));
-                placeholderAPI = false;
-            }
+        if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " §a✔ §ePlaceholderAPI §7| §aVersion§7:§e " + PlaceholderAPIPlugin.getInstance().getDescription().getVersion()));
+            placeholderAPI = true;
+        } else {
+            Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " §c✖ §4PlaceholderAPI"));
+            placeholderAPI = false;
         }
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
     }
