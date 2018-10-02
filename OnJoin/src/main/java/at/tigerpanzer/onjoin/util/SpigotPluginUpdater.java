@@ -70,7 +70,7 @@ public class SpigotPluginUpdater {
                     plugin.getLogger().log(Level.INFO, " New Version: {0}", version.replaceAll("[a-zA-z ]", ""));
                     //plugin.getLogger().log(Level.INFO, Main.getInstance().getConfig().getString("Prefix") + " Download it here: {0}", downloadURL);
                     plugin.getLogger().log(Level.INFO, " Changelog: {0}", changeLog);
-                    Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.getConfig().getString("Console.PrefixConsole") + plugin.getConfig().getString("Console.newupdatebconrl")));
+                    Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.getConsolePrefix() + plugin.getConfig().getString("Console.newupdatebconrl")));
                     Bukkit.broadcastMessage(Utils.color(plugin.getConfig().getString("Prefix") + plugin.getConfig().getString("Console.newupdatebconrl")));
                     plugin.setNeedUpdateJoin(false);
                 }
