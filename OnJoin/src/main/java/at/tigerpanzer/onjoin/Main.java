@@ -9,6 +9,7 @@ import at.tigerpanzer.onjoin.util.Utils;
 import me.clip.placeholderapi.PlaceholderAPIPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.plajerlair.core.services.ServiceRegistry;
 
 
 public class Main extends JavaPlugin {
@@ -18,6 +19,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        ServiceRegistry.registerService(this);
         needUpdateJoin = false;
         saveDefaultConfig();
         Bukkit.getConsoleSender().sendMessage(Utils.color(getConfig().getString("Console.PrefixConsole") + " &cWird &aGESTARTET &7| &cis &aSTARTED"));
