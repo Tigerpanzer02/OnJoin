@@ -1,6 +1,6 @@
-package at.tigerpanzer.util;
+package at.tigerpanzer.onjoin.util;
 
-import at.tigerpanzer.Main;
+import at.tigerpanzer.onjoin.Main;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;

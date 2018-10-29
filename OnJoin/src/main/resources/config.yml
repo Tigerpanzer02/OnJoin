@@ -1,5 +1,3 @@
-#Soll das Plugin auf die PlaceholderAPI zugreifen für Platzhalter
-PlaceholderAPI: true
 #Alle Consolen-Nachrichten
 Console:
   PrefixConsole: '&7[&eOnJoin&7]'
@@ -7,20 +5,20 @@ Console:
 #Nachrichten - Command OnJoin
 Help:
   HelpText:
-  - ''
-  - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
-  - '&e|  '
-  - '&e|  &7/&eonjoin'
-  - '&e|    &c->  &7Übersicht'
-  - '&e|  '
-  - '&e|  &7/&eonjoin &areloadconfig'
-  - '&e|    &c->  &7Lade deine Config neu'
-  - '&e|  '
-  - '&e|  &7/&eonjoin &asetspawn'
-  - '&e|    &c->  &7Setze die Spawnlocation'
-  - '&e|  '
-  - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
-  - ''
+    - ''
+    - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
+    - '&e|  '
+    - '&e|  &7/&eonjoin'
+    - '&e|    &c->  &7Übersicht'
+    - '&e|  '
+    - '&e|  &7/&eonjoin &areloadconfig'
+    - '&e|    &c->  &7Lade deine Config neu'
+    - '&e|  '
+    - '&e|  &7/&eonjoin &asetspawn'
+    - '&e|    &c->  &7Setze die Spawnlocation'
+    - '&e|  '
+    - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
+    - ''
   OutConfigCreate: 'Eine Config wurde im Plugin-Ordner erstellt!'
   OutConfigLoad: 'Die Einstellungen aus der Config wurden erfolgreich geladen!'
 #Allgemeine Nachrichten
@@ -39,16 +37,16 @@ WelcomeMessage:
   WelcomeMessageOn: true
   #Du kannst beliebig viele Zeilen hinzufügen und entfernen!
   WelcomeMessageText:
-  - '&e------------------------------------'
-  - '&e|  '
-  - '&e|  Heey, &a%player%&7!'
-  - '&e|  &eWillkommen auf unseren Server!'
-  - '&e|  '
-  - '&e|  &eOnJoin &8- &7Dein Join Plugin'
-  - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-  - '&e|  &7Dein Netzwerk @CC-SW'
-  - '&e|  '
-  - '&e------------------------------------'
+    - '&e------------------------------------'
+    - '&e|  '
+    - '&e|  Heey, &a%player%&7!'
+    - '&e|  &eWillkommen auf unseren Server!'
+    - '&e|  '
+    - '&e|  &eOnJoin &8- &7Dein Join Plugin'
+    - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
+    - '&e|  &7Dein Netzwerk @CC-SW'
+    - '&e|  '
+    - '&e------------------------------------'
 #Soll es eine Nachricht an alle Spieler geben, wenn ein Spieler den Server betritt
 Join:
   #Soll es eine Nachricht an einen Spieler mit Permission schicken
@@ -86,7 +84,7 @@ Heal:
   Health: 20
   FoodLevel: 20
   ClearPotionEffects: true
-  #Soll der Spieler mit Permissions geheilt werden
+#Soll der Spieler mit Permissions geheilt werden
   HealOnWithPermission: true
   HealthWithPermission: 20
   FoodLevelWithPermission: 20
