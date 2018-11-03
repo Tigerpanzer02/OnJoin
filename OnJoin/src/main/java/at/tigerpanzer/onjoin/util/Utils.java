@@ -1,6 +1,7 @@
 package at.tigerpanzer.onjoin.util;
 
 import at.tigerpanzer.onjoin.Main;
+import at.tigerpanzer.onjoin.handlers.LanguageManager;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -9,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.plajerlair.core.services.exception.ReportedException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -20,6 +22,24 @@ public class Utils {
 
     public static String color(String msg) {
         return ChatColor.translateAlternateColorCodes('&', msg);
+    }
+
+    public static String colorMessage(String message) {
+        try {
+            return ChatColor.translateAlternateColorCodes('&', LanguageManager.getLanguageMessage(message));
+        } catch(NullPointerException e1) {
+            new ReportedException(JavaPlugin.getPlugin(Main.class), e1);
+            e1.printStackTrace();
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage("Game message not found!");
+            if(LanguageManager.isDefaultLanguageUsed()) {
+                Bukkit.getConsoleSender().sendMessage("Please regenerate your language.yml file! If error still occurs report it to the developer!");
+            } else {
+                Bukkit.getConsoleSender().sendMessage("Locale message string not found! Please contact developer!");
+            }
+            Bukkit.getConsoleSender().sendMessage("Access string: " + message);
+            return "ERR_MESSAGE_NOT_FOUND";
+        }
     }
 
     public static String setPlaceholders(final Player p, String str) {
@@ -89,7 +109,7 @@ public class Utils {
         }
     }
 
-    public static Class<?> getNMSClass(String name) {
+    private static Class<?> getNMSClass(String name) {
         try {
             return Class.forName("net.minecraft.server." + getVersion() + "." + name);
         } catch(ClassNotFoundException e) {

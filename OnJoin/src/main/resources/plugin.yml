@@ -1,7 +1,7 @@
 name: OnJoin
 author: Tigerpanzer (SpigotMC Tigerkatze) [CC-SW Network]
-main: at.tigerpanzer.onjoin.Main
-version: 1.8.1
+main: main.java.at.tigerpanzer.onjoin.Main
+version: 2.0.0TESTINGSTAGE
 description:
 softdepend: [PlaceholderAPI]
 commands:

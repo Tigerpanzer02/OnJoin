@@ -1,6 +1,7 @@
 package at.tigerpanzer.onjoin.events;
 
 import at.tigerpanzer.onjoin.Main;
+import at.tigerpanzer.onjoin.util.Storage;
 import at.tigerpanzer.onjoin.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,15 +21,26 @@ public class JoinExecuteCommand implements Listener {
     }
 
     @EventHandler
-    public void onJoin(final PlayerJoinEvent e) {
+    public void onJoinExecuteCommand(final PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if(!p.hasPermission("OnJoin.ExecuteCommand") || !p.hasPermission("OnJoin.*")) {
-            return;
+        List<String> commands;
+        if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
+            if(!p.hasPermission("OnJoin.FirstJoin.ExecuteCommand") || !p.hasPermission("OnJoin.*")) {
+                return;
+            }
+            if(!plugin.getConfig().getBoolean("FirstJoin.ExecuteCommand.CommandOn")) {
+                return;
+            }
+            commands = plugin.getConfig().getStringList("FirstJoin.ExecuteCommand.Commands");
+        } else {
+            if(!p.hasPermission("OnJoin.ExecuteCommand") || !p.hasPermission("OnJoin.*")) {
+                return;
+            }
+            if(!plugin.getConfig().getBoolean("ExecuteCommand.CommandOn")) {
+                return;
+            }
+            commands = plugin.getConfig().getStringList("ExecuteCommand.Commands");
         }
-        if(!plugin.getConfig().getBoolean("ExecuteCommand.CommandOn")) {
-            return;
-        }
-        final List<String> commands = plugin.getConfig().getStringList("ExecuteCommand.Commands");
         for(String command : commands) {
             String[] parts = command.split(";");
             String sender = parts[0];
