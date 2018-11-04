@@ -18,7 +18,6 @@ public class MySQL {
         if(!isConnected()) {
             try {
                 MySQL.con = DriverManager.getConnection("jdbc:mysql://" + MySQL.host + ":" + MySQL.port + "/" + MySQL.database + "?autoReconnect=true", MySQL.username, MySQL.password);
-                System.out.println("[OnJoin] MySQL-Verbindung aufgebaut!");
             } catch(SQLException ex) {
                 ex.printStackTrace();
             }
@@ -29,7 +28,6 @@ public class MySQL {
         if(isConnected()) {
             try {
                 MySQL.con.close();
-                System.out.println("[OnJoin] MySQL-Verbindung geschlossen!");
             } catch(SQLException ex) {
                 ex.printStackTrace();
             }
