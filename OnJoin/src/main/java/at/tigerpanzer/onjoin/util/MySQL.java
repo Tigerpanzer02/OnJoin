@@ -46,7 +46,7 @@ public class MySQL {
     public static void createTable() {
         if(isConnected()) {
             try {
-                MySQL.con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS FirstJoin (PlayerName VARCHAR(100), UUID VARCHAR(100), FirstJoin VARCHAR(10), Date VARCHAR(100))");
+                MySQL.con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS FirstJoin (id int(30) NOT NULL AUTO_INCREMENT PRIMARY KEY, PlayerName VARCHAR(100), UUID VARCHAR(100), FirstJoin VARCHAR(10), Date VARCHAR(100))");
             } catch(SQLException ex) {
                 ex.printStackTrace();
             }

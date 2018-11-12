@@ -32,11 +32,7 @@ public class Utils {
             e1.printStackTrace();
             MessageUtils.errorOccurred();
             Bukkit.getConsoleSender().sendMessage("Game message not found!");
-            if(LanguageManager.isDefaultLanguageUsed()) {
-                Bukkit.getConsoleSender().sendMessage("Please regenerate your language.yml file! If error still occurs report it to the developer!");
-            } else {
-                Bukkit.getConsoleSender().sendMessage("Locale message string not found! Please contact developer!");
-            }
+            Bukkit.getConsoleSender().sendMessage("Locale message string not found! Please contact developer or update language.yml if not already!");
             Bukkit.getConsoleSender().sendMessage("Access string: " + message);
             return "ERR_MESSAGE_NOT_FOUND";
         }
