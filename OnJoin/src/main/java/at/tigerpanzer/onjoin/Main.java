@@ -15,7 +15,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.plajerlair.core.services.ServiceRegistry;
+import pl.plajerlair.core.utils.ConfigUtils;
 import pl.plajerlair.core.utils.UpdateChecker;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 public class Main extends JavaPlugin {
@@ -25,14 +29,18 @@ public class Main extends JavaPlugin {
     private boolean mySQLEnabled;
     private boolean firstJoinEnabled;
     private String consolePrefix;
+    private List<String> filesToGenerate = Arrays.asList("config", "language");
 
     @Override
     public void onEnable() {
-        ServiceRegistry.registerService(this);
+       ServiceRegistry.registerService(this);
+        saveDefaultConfig();
+        for(String s : filesToGenerate) {
+            ConfigUtils.getConfig(this, s);
+        }
         LanguageManager.init(this);
         LanguageMigrator.configUpdate();
         LanguageMigrator.languageFileUpdate();
-        saveDefaultConfig();
         consolePrefix = Utils.color(getConfig().getString("Console.PrefixConsole"));
         needUpdateJoin = false;
         mySQLEnabled = false;
@@ -41,6 +49,7 @@ public class Main extends JavaPlugin {
         register();
         if(getConfig().getBoolean("MySQL.Enabled", false)) {
             connectMySQL();
+            mySQLEnabled = true;
         }
         if(getConfig().getBoolean("Join.UpdateMessageOn", true)) {
             update();
@@ -71,6 +80,9 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if(mySQLEnabled) {
+            MySQL.disconnect();
+        }
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin version: &e" + getDescription().getVersion()));
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin author: &e" + getDescription().getAuthors()));
@@ -115,7 +127,6 @@ public class Main extends JavaPlugin {
         MySQL.database = getConfig().getString("MySQL.Database");
         MySQL.connect();
         MySQL.createTable();
-        mySQLEnabled = true;
     }
 
     public String getConsolePrefix() {

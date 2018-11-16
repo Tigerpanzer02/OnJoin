@@ -20,10 +20,11 @@ import java.util.List;
  */
 public class LanguageMigrator {
 
+
     private static final int LANGUAGE_FILE_VERSION = 1;
     private static final int CONFIG_FILE_VERSION = 1;
   private static Main plugin = JavaPlugin.getPlugin(Main.class);
-  private static List<String> migratable = Arrays.asList("bungee", "config", "kits", "language", "lobbyitems", "mysql");
+  private static List<String> migratable = Arrays.asList("config", "language");
 
   public static void configUpdate() {
     if (plugin.getConfig().getInt("Version") == CONFIG_FILE_VERSION) {
@@ -77,7 +78,7 @@ public class LanguageMigrator {
     Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Don't worry! Old files will be renamed not overridden!");
     for (String file : migratable) {
       if (ConfigUtils.getFile(plugin, file).exists()) {
-        ConfigUtils.getFile(plugin, file).renameTo(new File(plugin.getDataFolder(), "VD2_" + file + ".yml"));
+        ConfigUtils.getFile(plugin, file).renameTo(new File(plugin.getDataFolder(), "ONJOIN_" + file + ".yml"));
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Renamed file " + file + ".yml");
       }
     }

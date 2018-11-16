@@ -24,7 +24,7 @@ public class MySQL {
         }
     }
 
-    private static void disconnect() {
+    public static void disconnect() {
         if(isConnected()) {
             try {
                 MySQL.con.close();
@@ -61,7 +61,6 @@ public class MySQL {
                 ps.executeUpdate();
             } catch(SQLException ex) {
                 ex.printStackTrace();
-                reconnect();
             }
         }
     }
@@ -72,7 +71,6 @@ public class MySQL {
                 MySQL.con.createStatement().executeUpdate(qry);
             } catch(SQLException ex) {
                 ex.printStackTrace();
-                reconnect();
             }
         }
     }
