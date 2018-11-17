@@ -1,0 +1,144 @@
+##########################
+##        General       ##
+##########################
+
+
+#Alle Consolen-Nachrichten
+Console:
+  PrefixConsole: '&7[&eOnJoin&7]'
+
+
+#Nachrichten - Command OnJoin
+Help:
+  HelpText:
+    - ''
+    - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
+    - '&e|  '
+    - '&e|  &7/&eonjoin'
+    - '&e|    &c->  &7Übersicht'
+    - '&e|  '
+    - '&e|  &7/&eonjoin &areloadconfig'
+    - '&e|    &c->  &7Lade deine Config neu'
+    - '&e|  '
+    - '&e|  &7/&eonjoin &asetspawn'
+    - '&e|    &c->  &7Setze die Spawnlocation'
+    - '&e|  '
+    - '&e|  &7/&eonjoin &alocale <de/default>'
+    - '&e|    &c->  &7Ändere die Sprache'
+    - '&e|  '
+    - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
+    - ''
+  LanguageSwitch: 'Deine Config wurde angepasst!'
+  OutConfigLoad: 'Die Einstellungen aus der Config wurden erfolgreich geladen!'
+
+
+#Allgemeine Nachrichten
+Prefix: '&7[&eOnJoin&7] &7»&e '
+Permissionfail: '&cDafür hast du keine Rechte'
+TargetFalse: '&cDer Spieler ist momentan &enicht online &coder wurde &efalsch geschrieben'
+NoPlayer: 'Du bist kein Spieler'
+
+
+########################
+##     First Join     ##
+########################
+
+
+FirstJoin:
+#Titel in der Mitte des Screens
+  Title:
+    Title1: '&bCC&3SW'
+    SubTitle1: '&eFirstJoin'
+    SubTitle2: '&aTitle&8 - &7Kann in der &8onjoin.yml &7editiert werden'
+  #Willkommens Nachricht im Chat
+  WelcomeMessage:
+    #Du kannst beliebig viele Zeilen hinzufügen und entfernen!
+    WelcomeMessageText:
+      - '&e------------------------------------'
+      - '&e|  '
+      - '&e|  Heey, &a%player%&7!'
+      - '&e|  &eWillkommen auf unseren Server!'
+      - '&e|  '
+      - '&e|  &eOnJoin &8- &7Dein Join Plugin'
+      - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
+      - '&e|  &7Dein Netzwerk @CC-SW'
+      - '&e|  '
+      - '&e------------------------------------'
+  #Join Nachricht
+  Join:
+    JoinMessage: '&7%player% hat den Server betreten'
+  #Actionbar Nachricht
+  Actionbar:
+    Actionbar1: '&7Willkommen %player%!'
+    Actionbar2: '&7 CC-SW Network'
+  #Leave Nachricht
+  Quit:
+    QuitMessage: '&7%player% hat den Server verlassen'
+
+
+########################
+##    Normal Join     ##
+########################
+
+
+#Titel in der Mitte des Screens
+Title:
+  Title1: '&bCC&3SW'
+  SubTitle1: '&eOnJoin'
+  SubTitle2: '&aTitle&8 - &7Editiere es in der &8onjoin.yml'
+
+
+#Willkommensnachricht
+WelcomeMessage:
+  #Du kannst so viele Zeilen wie du möchtest hinzufügen
+  WelcomeMessageText:
+    - '&e------------------------------------'
+    - '&e|  '
+    - '&e|  Heey, &a%player%&7!'
+    - '&e|  &eWillkommen auf unserem Server!'
+    - '&e|  '
+    - '&e|  &eOnJoin &8- &7Dein Join Plugin'
+    - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
+    - '&e|  &7Dein Netzwerk @CC-SW'
+    - '&e|  '
+    - '&e------------------------------------'
+
+
+#Update Nachricht, falls eins verfügbar ist
+Join:
+  UpdateMessageText:
+    - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
+    - '&c|  New Update is avaible! You can'
+    - '&c|  download at SpigotMC!'
+    - '&c|  https://www.spigotmc.org/resources/56907/'
+    - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
+  #Nachricht wenn ein Spieler den Server betretet
+  JoinMessage: '&7%player% ist dem Server beigetreten'
+
+
+#Nachricht in der Actionbar
+Actionbar:
+  Actionbar1: '&7Willkommen %player%!'
+  Actionbar2: '&7 CC-SW Network'
+
+
+#Nachricht wenn ein Spieler den Server verlässt
+Quit:
+  QuitMessage: '&7%player% hat den Server verlassen'
+
+
+#Should Players that join be teleported to a location
+SpawnLocation:
+  SetSpawnMessageSetTo: '&aSpawn gesetzt zu&7: '
+  SetSpawnMessageYaw: '&2Yaw&7: '
+  SetSpawnMessagePitch: '&2Pitch&7: '
+
+
+##########################
+##     DON´T MODIFY     ##
+##########################
+
+
+# Don't edit it. But who's stopping you? It's your server!
+# Really, don't edit ;p
+File-Version-Do-Not-Edit: 1
