@@ -1,9 +1,9 @@
 package at.tigerpanzer.onjoin.util;
 
 import at.tigerpanzer.onjoin.Main;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,15 +14,11 @@ import java.util.Date;
 
 public class Storage {
 
-    private Main plugin;
-
-    public Storage(Main plugin) {
-        this.plugin = plugin;
-    }
+    private static Main plugin = JavaPlugin.getPlugin(Main.class);
 
     private static String path = "plugins//OnJoin//Data//%s.yml";
 
-    private void SetDataToFile(Player playerName, boolean FirstJoin, String Date) {
+    private static void SetDataToFile(Player playerName, boolean FirstJoin, String Date) {
         String UUID = playerName.getUniqueId().toString();
         File file = new File(String.format(path, UUID));
         YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
@@ -96,7 +92,7 @@ public class Storage {
         }
     }
 
-    public void DataOnJoin(Player p) {
+    public static void DataOnJoin(Player p) {
         String name = p.getUniqueId().toString();
         File file = new File(String.format(path, name));
         Date date = new Date(System.currentTimeMillis());
@@ -120,14 +116,13 @@ public class Storage {
             if(file.exists()) {
                 return;
             } else {
-                boolean FirstJoin = true;
                 String Date = getDate();
-                SetDataToFile(p, FirstJoin, Date);
+                SetDataToFile(p, true, Date);
             }
         }
     }
 
-    public void DataOnQuit(Player p) {
+    public static void DataOnQuit(Player p) {
         if(plugin.mySQLEnabled()) {
             String name = p.getUniqueId().toString();
             File file = new File(String.format(path, name));

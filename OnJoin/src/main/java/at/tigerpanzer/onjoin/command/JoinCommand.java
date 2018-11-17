@@ -23,7 +23,7 @@ public class JoinCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         if(!(sender instanceof Player)) {
-            sender.sendMessage(Utils.color(plugin.getConfig().getString("NoPlayer")));
+            sender.sendMessage(Utils.colorMessage("NoPlayer"));
             return true;
         }
         Player player = (Player) sender;
@@ -38,13 +38,15 @@ public class JoinCommand implements CommandExecutor {
             }
             return true;
         } else if(args.length == 2) {
-            if(args[0].equalsIgnoreCase("translate")) {
+            if(args[0].equalsIgnoreCase("locale")) {
                 if(args[1].equalsIgnoreCase("de")) {
-                    //player.sendMessage(Utils.color(plugin.getConfig().getString("Prefix") + plugin.getConfig().getString("Help.OutConfigCreate")));
-                    player.sendMessage(Utils.color(Utils.colorMessage("Prefix") + "-- MAYBE NEXT UPDATE --"));
-                } else if(args[1].equalsIgnoreCase("en")) {
-                    //player.sendMessage(Utils.color(plugin.getConfig().getString("Prefix") + plugin.getConfig().getString("Help.OutConfigCreate")));
-                    player.sendMessage(Utils.color(Utils.colorMessage("Prefix") + "-- MAYBE NEXT UPDATE --"));
+                    plugin.getConfig().set("locale", "de");
+                    plugin.saveConfig();
+                    player.sendMessage(Utils.color(Utils.colorMessage("Prefix") + LanguageManager.getLanguageMessage("Help.LanguageSwitch")));
+                } else if(args[1].equalsIgnoreCase("default")) {
+                    plugin.getConfig().set("locale", "default");
+                    plugin.saveConfig();
+                    player.sendMessage(Utils.color(Utils.colorMessage("Prefix") + LanguageManager.getLanguageMessage("Help.LanguageSwitch")));
                 }
             }
             return true;

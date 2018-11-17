@@ -27,6 +27,7 @@ public class JoinQuitListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
+        Storage.DataOnJoin(p);
         boolean chatclearon;
         boolean spawnlocationenable;
         String spawnlocationworld;
@@ -80,9 +81,9 @@ public class JoinQuitListener implements Listener {
             title1 = Utils.colorMessage("FirstJoin.Title.Title1");
             subtitle1 = Utils.colorMessage("FirstJoin.Title.SubTitle1");
             subtitle2 = Utils.colorMessage("FirstJoin.Title.SubTitle2");
-            actionbaronjoin = plugin.getConfig().getBoolean("FirstJoin.actionbar.actionbaronjoin");
-            actionbar1 = Utils.colorMessage("FirstJoin.actionbar.actionbar1");
-            actionbar2 = Utils.colorMessage("FirstJoin.actionbar.actionbar2");
+            actionbaronjoin = plugin.getConfig().getBoolean("FirstJoin.Actionbar.ActionbarOnJoin");
+            actionbar1 = Utils.colorMessage("FirstJoin.Actionbar.Actionbar1");
+            actionbar2 = Utils.colorMessage("FirstJoin.Actionbar.Actionbar2");
             welcomemessageon = plugin.getConfig().getBoolean("FirstJoin.WelcomeMessage.WelcomeMessageOn");
             WelcomeMessageText = LanguageManager.getLanguageList("FirstJoin.WelcomeMessage.WelcomeMessageText");
         } else {
@@ -117,9 +118,9 @@ public class JoinQuitListener implements Listener {
             title1 = Utils.colorMessage("Title.Title1");
             subtitle1 = Utils.colorMessage("Title.SubTitle1");
             subtitle2 = Utils.colorMessage("Title.SubTitle2");
-            actionbaronjoin = plugin.getConfig().getBoolean("actionbar.actionbaronjoin");
-            actionbar1 = Utils.colorMessage("actionbar.actionbar1");
-            actionbar2 = Utils.colorMessage("actionbar.actionbar2");
+            actionbaronjoin = plugin.getConfig().getBoolean("Actionbar.ActionbarOnJoin");
+            actionbar1 = Utils.colorMessage("Actionbar.Actionbar1");
+            actionbar2 = Utils.colorMessage("Actionbar.Actionbar2");
             welcomemessageon = plugin.getConfig().getBoolean("WelcomeMessage.WelcomeMessageOn");
             WelcomeMessageText = LanguageManager.getLanguageList("WelcomeMessage.WelcomeMessageText");
         }
@@ -195,6 +196,9 @@ public class JoinQuitListener implements Listener {
             quitsound = plugin.getConfig().getString("Quit.QuitSound");
             quitmessageon = plugin.getConfig().getBoolean("Quit.QuitMessageOn");
             quitmessage = Utils.colorMessage("Quit.QuitMessage");
+        }
+        if(plugin.mySQLEnabled()){
+           Storage.DataOnQuit(p);
         }
         if(quitsoundon) {
             p.playSound(p.getLocation(), Sound.valueOf(quitsound), 3, 1);

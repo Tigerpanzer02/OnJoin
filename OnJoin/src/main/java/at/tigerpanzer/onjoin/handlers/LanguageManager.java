@@ -3,7 +3,7 @@
 package at.tigerpanzer.onjoin.handlers;
 
 import at.tigerpanzer.onjoin.Main;
-import pl.plajerlair.core.utils.ConfigUtils;
+import at.tigerpanzer.onjoin.util.Utils;
 
 import java.io.File;
 import java.util.List;
@@ -18,12 +18,21 @@ public class LanguageManager {
         if(!new File(plugin.getDataFolder() + File.separator + "language.yml").exists()) {
             plugin.saveResource("language.yml", false);
         }
+        if(!new File(plugin.getDataFolder() + File.separator + "language_de.yml").exists()) {
+            plugin.saveResource("language_de.yml", false);
+        }
     }
     public static List<String> getLanguageList(String path) {
-        return ConfigUtils.getConfig(plugin, "language").getStringList(path);
+        if(plugin.getConfig().get("locale").equals("de"))  {
+            return Utils.getConfig(plugin, "language_de").getStringList(path);
+        }
+        return Utils.getConfig(plugin, "language").getStringList(path);
     }
 
     public static String getLanguageMessage(String message) {
-        return ConfigUtils.getConfig(plugin, "language").getString(message, "ERR_MESSAGE_NOT_FOUND");
+        if(plugin.getConfig().get("locale").equals("de"))  {
+            return Utils.getConfig(plugin, "language_de").getString(message, "ERR_MESSAGE_NOT_FOUND");
+        }
+        return Utils.getConfig(plugin, "language").getString(message, "ERR_MESSAGE_NOT_FOUND");
     }
 }

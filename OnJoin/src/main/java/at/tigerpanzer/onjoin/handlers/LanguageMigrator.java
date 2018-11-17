@@ -4,12 +4,11 @@ package at.tigerpanzer.onjoin.handlers;
 
 import at.tigerpanzer.onjoin.Main;
 import at.tigerpanzer.onjoin.util.MessageUtils;
+import at.tigerpanzer.onjoin.util.Utils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
-import pl.plajerlair.core.utils.ConfigUtils;
-import pl.plajerlair.core.utils.MigratorUtils;
 
 import java.io.File;
 import java.util.Arrays;
@@ -30,6 +29,7 @@ public class LanguageMigrator {
     if (plugin.getConfig().getInt("Version") == CONFIG_FILE_VERSION) {
       return;
     }
+    Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
     Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "[OnJoin] System notify >> Your config file is outdated! Updating...");
     File file = new File(plugin.getDataFolder() + "/config.yml");
 
@@ -45,17 +45,19 @@ public class LanguageMigrator {
     }
     Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[OnJoin] [System notify] Config updated, no comments were removed :)");
     Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[OnJoin] [System notify] You're using latest config file version! Nice!");
+    Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
   }
 
   public static void languageFileUpdate() {
-    if (ConfigUtils.getConfig(plugin, "language").getString("File-Version-Do-Not-Edit", "").equals(String.valueOf(LANGUAGE_FILE_VERSION))) {
+    if (Utils.getConfig(plugin, "language").getString("File-Version-Do-Not-Edit", "").equals(String.valueOf(LANGUAGE_FILE_VERSION))) {
       return;
     }
+    Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
     Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "[OnJoin] [System notify] Your language file is outdated! Updating...");
 
     int version = 0;
-    if (NumberUtils.isNumber(ConfigUtils.getConfig(plugin, "language").getString("File-Version-Do-Not-Edit"))) {
-      version = Integer.valueOf(ConfigUtils.getConfig(plugin, "language").getString("File-Version-Do-Not-Edit"));
+    if (NumberUtils.isNumber(Utils.getConfig(plugin, "language").getString("File-Version-Do-Not-Edit"))) {
+      version = Integer.valueOf(Utils.getConfig(plugin, "language").getString("File-Version-Do-Not-Edit"));
     }
     updateLanguageVersionControl(version);
 
@@ -70,35 +72,38 @@ public class LanguageMigrator {
     }
     Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[OnJoin] [System notify] Language file updated! Nice!");
     Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[OnJoin] [System notify] You're using latest language file version! Nice!");
+    Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
   }
 
   public static void migrateToNewFormat() {
+    Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
     MessageUtils.gonnaMigrate();
     Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "OnJoin is migrating all files to the new file format...");
     Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Don't worry! Old files will be renamed not overridden!");
     for (String file : migratable) {
-      if (ConfigUtils.getFile(plugin, file).exists()) {
-        ConfigUtils.getFile(plugin, file).renameTo(new File(plugin.getDataFolder(), "ONJOIN_" + file + ".yml"));
+      if (Utils.getFile(plugin, file).exists()) {
+        Utils.getFile(plugin, file).renameTo(new File(plugin.getDataFolder(), "ONJOIN_" + file + ".yml"));
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Renamed file " + file + ".yml");
       }
     }
     Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Done! Enabling OnJoin...");
+    Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
   }
 
   private static void updateLanguageVersionControl(int oldVersion) {
     File file = new File(plugin.getDataFolder() + "/language.yml");
-    MigratorUtils.removeLineFromFile(file, "# Don't edit it. But who's stopping you? It's your server!");
-    MigratorUtils.removeLineFromFile(file, "# Really, don't edit ;p");
-    MigratorUtils.removeLineFromFile(file, "File-Version-Do-Not-Edit: " + oldVersion);
-    MigratorUtils.addNewLines(file, "# Don't edit it. But who's stopping you? It's your server!\r\n# Really, don't edit ;p\r\nFile-Version-Do-Not-Edit: " + LANGUAGE_FILE_VERSION + "\r\n");
+    Utils.removeLineFromFile(file, "# Don't edit it. But who's stopping you? It's your server!");
+    Utils.removeLineFromFile(file, "# Really, don't edit ;p");
+    Utils.removeLineFromFile(file, "File-Version-Do-Not-Edit: " + oldVersion);
+    Utils.addNewLines(file, "# Don't edit it. But who's stopping you? It's your server!\r\n# Really, don't edit ;p\r\nFile-Version-Do-Not-Edit: " + LANGUAGE_FILE_VERSION + "\r\n");
   }
 
   private static void updateConfigVersionControl(int oldVersion) {
     File file = new File(plugin.getDataFolder() + "/config.yml");
-    MigratorUtils.removeLineFromFile(file, "# Don't modify.");
-    MigratorUtils.removeLineFromFile(file, "Version: " + oldVersion);
-    MigratorUtils.removeLineFromFile(file, "# No way! You've reached the end! Let us join!?");
-    MigratorUtils.addNewLines(file, "# Don't modify\r\nVersion: " + CONFIG_FILE_VERSION + "\r\n\r\n# No way! You've reached the end! Let us join!?");
+    Utils.removeLineFromFile(file, "# Don't modify.");
+    Utils.removeLineFromFile(file, "Version: " + oldVersion);
+    Utils.removeLineFromFile(file, "# No way! You've reached the end! Let us join!?");
+    Utils.addNewLines(file, "# Don't modify\r\nVersion: " + CONFIG_FILE_VERSION + "\r\n\r\n# No way! You've reached the end! Let us join!?");
   }
 
 }
