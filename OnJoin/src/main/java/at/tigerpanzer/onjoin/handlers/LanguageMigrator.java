@@ -21,7 +21,7 @@ public class LanguageMigrator {
 
 
     private static final int LANGUAGE_FILE_VERSION = 1;
-    private static final int CONFIG_FILE_VERSION = 1;
+    private static final int CONFIG_FILE_VERSION = 2;
   private static Main plugin = JavaPlugin.getPlugin(Main.class);
   private static List<String> migratable = Arrays.asList("config", "language");
 
@@ -39,6 +39,8 @@ public class LanguageMigrator {
     for (int i = version; i < LANGUAGE_FILE_VERSION; i++) {
       switch (version) {
         case 1:
+          Utils.insertAfterLine(file, "MySQL:", "              #Should the MySQL connection after 45 minutes reconnected?\n" +
+                  "          AutoReconnect: false");
           break;
       }
       version++;
