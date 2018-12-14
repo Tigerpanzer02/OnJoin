@@ -105,7 +105,7 @@ public class LanguageMigrator {
     Utils.removeLineFromFile(file, "# Don't modify.");
     Utils.removeLineFromFile(file, "Version: " + oldVersion);
     Utils.removeLineFromFile(file, "# No way! You've reached the end! Let us join!?");
-    Utils.addNewLines(file, "# Don't modify\r\nVersion: " + CONFIG_FILE_VERSION + "\r\n\r\n# No way! You've reached the end! Let us join!?");
+    Utils.addNewLines(file, "# Don't modify.\r\nVersion: " + CONFIG_FILE_VERSION + "\r\n\r\n# No way! You've reached the end! Let us join!?");
   }
 
 }
