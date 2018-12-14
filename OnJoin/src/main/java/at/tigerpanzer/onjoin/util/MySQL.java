@@ -34,7 +34,7 @@ public class MySQL {
         }
     }
 
-    private static void reconnect() {
+    public static void reconnect() {
         disconnect();
         connect();
     }

@@ -17,7 +17,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
-
 public class Main extends JavaPlugin {
 
     private boolean needUpdateJoin;
@@ -128,6 +127,12 @@ public class Main extends JavaPlugin {
         MySQL.database = getConfig().getString("MySQL.Database");
         MySQL.connect();
         MySQL.createTable();
+        if(getConfig().getBoolean("MySQL.AutoReconnect")) {
+            Bukkit.getScheduler().runTaskTimer(this, () -> {
+                if(mySQLEnabled)
+                    MySQL.reconnect();
+            }, 20L * 2700, 20L * 2700);
+        }
     }
 
     public String getConsolePrefix() {
