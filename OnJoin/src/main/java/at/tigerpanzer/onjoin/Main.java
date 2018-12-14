@@ -128,6 +128,10 @@ public class Main extends JavaPlugin {
         MySQL.database = getConfig().getString("MySQL.Database");
         MySQL.connect();
         MySQL.createTable();
+        Bukkit.getScheduler().runTaskTimer(this, () -> {
+            if(mySQLEnabled)
+            MySQL.reconnect();
+        }, 20L * 2700, 20L * 2700);
     }
 
     public String getConsolePrefix() {
