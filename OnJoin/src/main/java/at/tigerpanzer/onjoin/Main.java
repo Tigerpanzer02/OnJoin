@@ -25,6 +25,7 @@ public class Main extends JavaPlugin {
     private boolean firstJoinEnabled;
     private boolean usedbefore2;
     private String consolePrefix;
+    public static MySQL mysql;
 
     @Override
     public void onEnable() {
@@ -79,7 +80,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         if(mySQLEnabled) {
-            MySQL.disconnect();
+            mysql.Disconnect();
         }
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin version: &e" + getDescription().getVersion()));
@@ -120,17 +121,11 @@ public class Main extends JavaPlugin {
     }
 
     private void connectMySQL() {
-        MySQL.username = getConfig().getString("MySQL.Username");
-        MySQL.password = getConfig().getString("MySQL.Password");
-        MySQL.host = getConfig().getString("MySQL.Host");
-        MySQL.port = getConfig().getString("MySQL.Port");
-        MySQL.database = getConfig().getString("MySQL.Database");
-        MySQL.connect();
-        MySQL.createTable();
+        Main.mysql = new MySQL(getConfig().getString("MySQL.Host"), getConfig().getString("MySQL.Database"), getConfig().getString("MySQL.Username"), getConfig().getString("MySQL.Password"), getConfig().getInt("MySQL.Port", 3306));
         if(getConfig().getBoolean("MySQL.AutoReconnect")) {
             Bukkit.getScheduler().runTaskTimer(this, () -> {
                 if(mySQLEnabled)
-                    MySQL.reconnect();
+                    mysql.Reconnect();
             }, 20L * 2700, 20L * 2700);
         }
     }
@@ -157,5 +152,9 @@ public class Main extends JavaPlugin {
 
     public boolean isPlaceholderAPIEnabled() {
         return placeholderAPI;
+    }
+
+    public static MySQL getMysql() {
+        return mysql;
     }
 }

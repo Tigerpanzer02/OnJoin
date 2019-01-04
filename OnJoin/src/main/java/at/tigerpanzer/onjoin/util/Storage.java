@@ -99,11 +99,11 @@ public class Storage {
         //GetPlayerData
         if(plugin.mySQLEnabled()) {
             try {
-                ResultSet rs = MySQL.getResultSet("SELECT * FROM FirstJoin WHERE UUID='" + p.getUniqueId() + "'");
+                ResultSet rs = Main.mysql.getResultSet ("SELECT * FROM FirstJoin WHERE UUID='" + p.getUniqueId() + "'");
                 if(!rs.next()) {
-                    MySQL.update("INSERT INTO FirstJoin (PlayerName, UUID, FirstJoin, Date) VALUES ('" + p.getName() + "','" + p.getUniqueId() + "','true','" + getDate() + "')");
+                    Main.mysql.ExecuteCommand("INSERT INTO FirstJoin (PlayerName, UUID, FirstJoin, Date) VALUES ('" + p.getName() + "','" + p.getUniqueId() + "','true','" + getDate() + "')");
                 } else {
-                    MySQL.update("UPDATE FirstJoin SET Spielername='" + p.getName() + "' WHERE UUID='" + p.getUniqueId() + "'");
+                    Main.mysql.ExecuteCommand("UPDATE FirstJoin SET Spielername='" + p.getName() + "' WHERE UUID='" + p.getUniqueId() + "'");
                     boolean FirstJoin = rs.getBoolean("FirstJoin");
                     String Date = rs.getString("Date");
                     SetDataToFile(p, FirstJoin, Date);
@@ -132,7 +132,7 @@ public class Storage {
                 boolean FirstJoin = cfg.getBoolean("FirstJoin");
                 String Date = cfg.getString("Date");
 
-                MySQL.update("UPDATE FirstJoin SET FirstJoin='" + FirstJoin + "', Date='" + Date + "' WHERE UUID='" + name + "'");
+                Main.mysql.ExecuteCommand("UPDATE FirstJoin SET FirstJoin='" + FirstJoin + "', Date='" + Date + "' WHERE UUID='" + name + "'");
             } catch(Exception ex2) {
                 ex2.printStackTrace();
             }
