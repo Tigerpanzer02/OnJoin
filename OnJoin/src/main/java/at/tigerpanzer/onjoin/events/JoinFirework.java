@@ -37,7 +37,7 @@ public class JoinFirework implements Listener {
         boolean fireworkinstantexplode;
         int fireworkpower;
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
-            if(!p.hasPermission("OnJoin.FirstJoin.Firework") || !p.hasPermission("OnJoin.*")) {
+            if(!p.hasPermission("OnJoin.FirstJoin.Firework")) {
                 return;
             }
             if(!plugin.getConfig().getBoolean("FirstJoin.Join.FireworkOn")) {
@@ -53,8 +53,9 @@ public class JoinFirework implements Listener {
             fireworkinstantexplode = plugin.getConfig().getBoolean("FirstJoin.Join.Firework.InstantExplode");
             fireworkpower = plugin.getConfig().getInt("FirstJoin.Join.Firework.Power");
         } else {
-            if(!p.hasPermission("OnJoin.Firework") || !p.hasPermission("OnJoin.*")) {
-                return;
+            p.sendMessage("DEBUG | EVENT FIREWORK | " + p.hasPermission("OnJoin.Firework") + p.hasPermission("OnJoin.*"));
+            if(!p.hasPermission("OnJoin.Firework")) {
+               return;
             }
             if(!plugin.getConfig().getBoolean("Join.FireworkOn")) {
                 return;

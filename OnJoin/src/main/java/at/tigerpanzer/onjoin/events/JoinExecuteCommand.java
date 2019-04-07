@@ -25,7 +25,7 @@ public class JoinExecuteCommand implements Listener {
         Player p = e.getPlayer();
         List<String> commands;
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
-            if(!p.hasPermission("OnJoin.FirstJoin.ExecuteCommand") || !p.hasPermission("OnJoin.*")) {
+            if(!p.hasPermission("OnJoin.FirstJoin.ExecuteCommand")) {
                 return;
             }
             if(!plugin.getConfig().getBoolean("FirstJoin.ExecuteCommand.CommandOn")) {
@@ -33,7 +33,7 @@ public class JoinExecuteCommand implements Listener {
             }
             commands = plugin.getConfig().getStringList("FirstJoin.ExecuteCommand.Commands");
         } else {
-            if(!p.hasPermission("OnJoin.ExecuteCommand") || !p.hasPermission("OnJoin.*")) {
+            if(!p.hasPermission("OnJoin.ExecuteCommand")) {
                 return;
             }
             if(!plugin.getConfig().getBoolean("ExecuteCommand.CommandOn")) {

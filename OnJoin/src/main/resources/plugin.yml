@@ -6,3 +6,16 @@ description: With this plugin, joins are unique on your server
 softdepend: [PlaceholderAPI]
 commands:
   onjoin:  
+
+permissions:
+  OnJoin.*:
+    description: Gives you all permissions for OnJoin
+    children:
+      OnJoin.Firework: true
+      OnJoin.config: true
+      OnJoin.UpdateMessage: true
+      OnJoin.ExecuteCommand: true
+      OnJoin.Heal: true
+      OnJoin.FirstJoin.Firework: true
+      OnJoin.FirstJoin.ExecuteCommand: true
+      OnJoin.FirstJoin.Heal: true

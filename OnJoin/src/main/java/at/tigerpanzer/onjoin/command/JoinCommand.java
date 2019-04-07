@@ -27,7 +27,7 @@ public class JoinCommand implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        if(!player.hasPermission("OnJoin.config") || !player.hasPermission("OnJoin.*")) {
+        if(!player.hasPermission("OnJoin.config")) {
             player.sendMessage(Utils.setPlaceholders(player, Utils.colorMessage("Permissionfail")));
             return true;
         }
