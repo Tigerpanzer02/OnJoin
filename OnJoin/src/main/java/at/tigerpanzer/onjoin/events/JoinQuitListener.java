@@ -58,7 +58,7 @@ public class JoinQuitListener implements Listener {
             spawnlocationz = plugin.getConfig().getDouble("FirstJoin.SpawnLocation.ZCoord");
             spawnlocationyaw = plugin.getConfig().getInt("FirstJoin.SpawnLocation.Yaw");
             spawnlocationpitch = plugin.getConfig().getInt("FirstJoin.SpawnLocation.Pitch");
-            if((p.hasPermission("FirstJoin.OnJoin.Heal")) || (p.hasPermission("OnJoin.*"))) {
+            if((p.hasPermission("FirstJoin.OnJoin.Heal"))) {
                 if(plugin.getConfig().getBoolean("FirstJoin.Heal.HealOnWithPermission")) {
                     p.setHealth(plugin.getConfig().getInt("FirstJoin.Heal.HealthWithPermission"));
                     p.setFoodLevel(plugin.getConfig().getInt("FirstJoin.Heal.FoodLevelWithPermission"));
@@ -95,7 +95,7 @@ public class JoinQuitListener implements Listener {
             spawnlocationz = plugin.getConfig().getDouble("SpawnLocation.ZCoord");
             spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation.Yaw");
             spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation.Pitch");
-            if((p.hasPermission("OnJoin.Heal")) || (p.hasPermission("OnJoin.*"))) {
+            if((p.hasPermission("OnJoin.Heal"))) {
                 if(plugin.getConfig().getBoolean("Heal.HealOnWithPermission")) {
                     p.setHealth(plugin.getConfig().getInt("Heal.HealthWithPermission"));
                     p.setFoodLevel(plugin.getConfig().getInt("Heal.FoodLevelWithPermission"));
@@ -167,7 +167,7 @@ public class JoinQuitListener implements Listener {
             }
         }, 65L);
         if(plugin.needUpdateJoin()) {
-            if((p.hasPermission("OnJoin.UpdateMessage")) || (p.hasPermission("OnJoin.*"))) {
+            if((p.hasPermission("OnJoin.UpdateMessage"))) {
                 if(plugin.getConfig().getBoolean("Join.UpdateMessageOn")) {
                     List<String> UpdateMessageText = LanguageManager.getLanguageList("Join.UpdateMessageText");
                     for(String msg : UpdateMessageText) {
