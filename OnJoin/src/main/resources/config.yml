@@ -18,8 +18,10 @@ locale: default
 #Do you want to use a MySQL database?
 MySQL:
   Enabled: false
-  #Should the MySQL connection after 45 minutes reconnected?
+  #Should the MySQL connection reconnect after amount of time?
   AutoReconnect: false
+    #Time in Minutes
+    ReconnectCoolDown: 45
   Username: accountname
   Password: password
   Database: database
@@ -194,6 +196,6 @@ SpawnLocation:
 
 
 # Don't modify.
-Version: 2
+Version: 3
 
 # No way! You've reached the end! Let us join!?
