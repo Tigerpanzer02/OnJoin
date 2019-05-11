@@ -44,7 +44,7 @@ public class MySQL {
         try {
             connection = DriverManager.getConnection(url, Username, Password);
             createTable();
-            System.out.println(messageprefix + "Verbindung aufgebaut");
+            System.out.println(messageprefix + "MySQL Connection succesfull");
         } catch (SQLException e2) {
             System.out.println(messageprefix + "Error 02");
             e2.printStackTrace();
@@ -55,9 +55,9 @@ public class MySQL {
         try {
             if (!connection.isClosed() && connection != null) {
                 connection.close();
-                System.out.println(messageprefix + "Die Verbindung zum MySQL-Server wurde erfolgreich getrennt!");
+                System.out.println(messageprefix + "MySQL Connection disconnect!");
             } else {
-                System.out.println(messageprefix + "Die Verbindung ist bereits getrennt!");
+                System.out.println(messageprefix + "The Connection is already not avaible!");
             }
         } catch (SQLException e3) {
             System.out.println(messageprefix + "Error 03");
