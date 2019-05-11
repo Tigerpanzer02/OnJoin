@@ -50,6 +50,7 @@ public class JoinQuitListener implements Listener {
         boolean welcomemessageon;
         List<String> WelcomeMessageText;
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
+            Utils.debugmessage("Loading First join for " + p.getName());
             chatclearon = plugin.getConfig().getBoolean("FirstJoin.Join.ChatClearOn");
             spawnlocationenable = plugin.getConfig().getBoolean("FirstJoin.SpawnLocation.SpawnLocationEnable");
             spawnlocationworld = plugin.getConfig().getString("FirstJoin.SpawnLocation.World");
@@ -87,6 +88,7 @@ public class JoinQuitListener implements Listener {
             welcomemessageon = plugin.getConfig().getBoolean("FirstJoin.WelcomeMessage.WelcomeMessageOn");
             WelcomeMessageText = LanguageManager.getLanguageList("FirstJoin.WelcomeMessage.WelcomeMessageText");
         } else {
+            Utils.debugmessage("Loading normal join for " + p.getName());
             chatclearon = plugin.getConfig().getBoolean("Join.ChatClearOn");
             spawnlocationenable = plugin.getConfig().getBoolean("SpawnLocation.SpawnLocationEnable");
             spawnlocationworld = plugin.getConfig().getString("SpawnLocation.World");
@@ -131,13 +133,16 @@ public class JoinQuitListener implements Listener {
         }
         if(spawnlocationenable) {
             final Location SpawnLocation = new Location(Bukkit.getServer().getWorld(spawnlocationworld), spawnlocationx, spawnlocationy, spawnlocationz, (float) spawnlocationyaw, (float) spawnlocationpitch);
+            Utils.debugmessage("Teleporting " + p.getName() + " to " + SpawnLocation);
             p.teleport(SpawnLocation);
         }
         if(joinsoundon) {
             p.playSound(p.getLocation(), Sound.valueOf(joinsound), 3, 1);
+            Utils.debugmessage("Send sound to " + p.getName());
         }
         if(joinmessageon) {
             e.setJoinMessage(Utils.setPlaceholders(p, joinmessage));
+            Utils.debugmessage("Join messaged send to " + p.getName());
         } else {
             e.setJoinMessage("");
         }
@@ -145,11 +150,13 @@ public class JoinQuitListener implements Listener {
             if(titleonjoin) {
                 Utils.sendTitle(p, Utils.setPlaceholders(p, title1), 25, 90, 0);
                 Utils.sendSubTitle(p, Utils.setPlaceholders(p, subtitle1), 25, 90, 0);
-
+                Utils.debugmessage("Title join for " + p.getName());
                 if(actionbaronjoin) {
                     Utils.sendActionBar(p, Utils.setPlaceholders(p, actionbar1));
+                    Utils.debugmessage("Actionbar for " + p.getName());
                 }
                 if(welcomemessageon) {
+                    Utils.debugmessage("Welcome message for " + p.getName());
                     for(String msg : WelcomeMessageText) {
                         p.sendMessage(Utils.setPlaceholders(e.getPlayer(), msg));
                     }
@@ -159,14 +166,17 @@ public class JoinQuitListener implements Listener {
 
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             if(titleonjoin) {
+                Utils.debugmessage("Subtitle 2 for " + p.getName());
                 Utils.sendSubTitle(p, Utils.setPlaceholders(p, subtitle2), 0, 90, 0);
             }
             if(actionbaronjoin) {
+                Utils.debugmessage("Actionbar 2 for " + p.getName());
                 Utils.sendActionBar(p, Utils.setPlaceholders(p, actionbar2));
 
             }
         }, 65L);
         if(plugin.needUpdateJoin()) {
+            Utils.debugmessage("Plugin needs update ");
             if((p.hasPermission("OnJoin.UpdateMessage"))) {
                 if(plugin.getConfig().getBoolean("Join.UpdateMessageOn")) {
                     List<String> UpdateMessageText = LanguageManager.getLanguageList("Join.UpdateMessageText");
@@ -186,24 +196,29 @@ public class JoinQuitListener implements Listener {
         boolean quitmessageon;
         String quitmessage;
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
+            Utils.debugmessage("Loading FirstQuit for " + p.getName());
             quitsoundon = plugin.getConfig().getBoolean("FirstJoin.Quit.QuitSoundOn");
             quitsound = plugin.getConfig().getString("FirstJoin.Quit.QuitSound");
             quitmessageon = plugin.getConfig().getBoolean("FirstJoin.Quit.QuitMessageOn");
             quitmessage = Utils.colorMessage("FirstJoin.Quit.QuitMessage");
             Storage.setFirstJoin(p, false);
         } else {
+            Utils.debugmessage("Loading NormalQuit for " + p.getName());
             quitsoundon = plugin.getConfig().getBoolean("Quit.QuitSoundOn");
             quitsound = plugin.getConfig().getString("Quit.QuitSound");
             quitmessageon = plugin.getConfig().getBoolean("Quit.QuitMessageOn");
             quitmessage = Utils.colorMessage("Quit.QuitMessage");
         }
         if(plugin.mySQLEnabled()){
+            Utils.debugmessage("Saved data to mysql for " + p.getName());
            Storage.DataOnQuit(p);
         }
         if(quitsoundon) {
             p.playSound(p.getLocation(), Sound.valueOf(quitsound), 3, 1);
+            Utils.debugmessage("Send Sound to " + p.getName());
         }
         if(quitmessageon) {
+            Utils.debugmessage("Send quitmessage to " + p.getName());
             e.setQuitMessage(Utils.setPlaceholders(p, quitmessage));
         } else {
             e.setQuitMessage("");

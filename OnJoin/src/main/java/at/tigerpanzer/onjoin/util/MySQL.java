@@ -35,7 +35,7 @@ public class MySQL {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e1) {
-            System.out.println(messageprefix + "Error 01");
+            Utils.debugmessage(messageprefix + "Error 01");
             e1.printStackTrace();
         }
         String url = "jdbc:mysql://" + Host + ":" + Port + "/" + Database + "?verifyServerCertificate=false&useSSL=true&autoReConnect=true";
@@ -44,9 +44,9 @@ public class MySQL {
         try {
             connection = DriverManager.getConnection(url, Username, Password);
             createTable();
-            System.out.println(messageprefix + "MySQL Connection succesfull");
+            Utils.debugmessage(messageprefix + "MySQL Connection succesfull");
         } catch (SQLException e2) {
-            System.out.println(messageprefix + "Error 02");
+            Utils.debugmessage(messageprefix + "Error 02");
             e2.printStackTrace();
         }
     }
@@ -55,12 +55,12 @@ public class MySQL {
         try {
             if (!connection.isClosed() && connection != null) {
                 connection.close();
-                System.out.println(messageprefix + "MySQL Connection disconnect!");
+                Utils.debugmessage(messageprefix + "MySQL Connection disconnect!");
             } else {
-                System.out.println(messageprefix + "The Connection is already not avaible!");
+                Utils.debugmessage(messageprefix + "The Connection is already not avaible!");
             }
         } catch (SQLException e3) {
-            System.out.println(messageprefix + "Error 03");
+            Utils.debugmessage(messageprefix + "Error 03");
             e3.printStackTrace();
         }
     }
@@ -73,7 +73,7 @@ public class MySQL {
                 return true;
             }
         } catch (SQLException e2) {
-            System.out.println(messageprefix + "Error 04");
+            Utils.debugmessage(messageprefix + "Error 04");
             e2.printStackTrace();
         }
         return false;
@@ -94,7 +94,7 @@ public class MySQL {
             return rs;
 
         } catch (SQLException e4) {
-            System.out.println(messageprefix + "Error 05");
+            Utils.debugmessage(messageprefix + "Error 05");
             e4.printStackTrace();
         }
         return null;
@@ -111,7 +111,7 @@ public class MySQL {
             Statement st = connection.createStatement();
             st.executeUpdate(command);
         } catch (SQLException e4) {
-            System.out.println(messageprefix + "Error 06");
+            Utils.debugmessage(messageprefix + "Error 06");
             e4.printStackTrace();
         }
 
@@ -123,7 +123,7 @@ public class MySQL {
             try {
                 connection.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS FirstJoin (id int(30) NOT NULL AUTO_INCREMENT PRIMARY KEY, PlayerName VARCHAR(100), UUID VARCHAR(100), FirstJoin VARCHAR(10), Date VARCHAR(100))");
             } catch (SQLException e) {
-                System.out.println(messageprefix + "Error 07");
+                Utils.debugmessage(messageprefix + "Error 07");
                 e.printStackTrace();
             }
         }
