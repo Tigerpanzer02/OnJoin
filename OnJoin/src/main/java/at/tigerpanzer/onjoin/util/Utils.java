@@ -97,6 +97,13 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', msg);
     }
 
+    public static void debugmessage(String message) {
+        if(plugin.getConfig().getBoolean("debug")) {
+            String consolePrefix = "[OnJoin | Debug] ";
+            Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + message));
+        }
+    }
+
     public static String colorMessage(String message) {
         try {
             return ChatColor.translateAlternateColorCodes('&', LanguageManager.getLanguageMessage(message));

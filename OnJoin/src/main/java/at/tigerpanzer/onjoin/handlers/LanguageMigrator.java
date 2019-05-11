@@ -5,6 +5,7 @@ package at.tigerpanzer.onjoin.handlers;
 import at.tigerpanzer.onjoin.Main;
 import at.tigerpanzer.onjoin.util.MessageUtils;
 import at.tigerpanzer.onjoin.util.Utils;
+import com.mysql.jdbc.Util;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -48,6 +49,8 @@ public class LanguageMigrator {
                             "  Enabled:", "  #Should the MySQL connection reconnect after amount of time?");
                     Utils.insertAfterLine(file, "AutoReconnect:", "    #Time in Minutes\n" +
                             "    ReconnectCoolDown: 45");
+                    Utils.insertAfterLine(file, "locale:", "# Should the plugin send debug messages into console? | This mode can be good to find bugs!\n" +
+                            "debug: false");
                     break;
             }
 
