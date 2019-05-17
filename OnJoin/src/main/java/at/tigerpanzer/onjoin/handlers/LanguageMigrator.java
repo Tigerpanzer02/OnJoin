@@ -5,7 +5,6 @@ package at.tigerpanzer.onjoin.handlers;
 import at.tigerpanzer.onjoin.Main;
 import at.tigerpanzer.onjoin.util.MessageUtils;
 import at.tigerpanzer.onjoin.util.Utils;
-import com.mysql.jdbc.Util;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
