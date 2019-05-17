@@ -64,7 +64,7 @@ public class MySQL {
                 connection.close();
                 Utils.debugmessage(messageprefix + "MySQL Connection disconnect!");
             } else {
-                Utils.debugmessage(messageprefix + "The Connection is already not avaible!");
+                Utils.debugmessage(messageprefix + "The Connection is already not available!");
             }
         } catch (SQLException e3) {
             Utils.debugmessage(messageprefix + "Error 03");
