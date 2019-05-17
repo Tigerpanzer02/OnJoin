@@ -51,7 +51,7 @@ public class MySQL {
         try {
             connection = DriverManager.getConnection(url, Username, Password);
             createTable();
-            Utils.debugmessage(messageprefix + "MySQL Connection succesfull");
+            Utils.debugmessage(messageprefix + "MySQL Connection successful");
         } catch (SQLException e2) {
             Utils.debugmessage(messageprefix + "Error 02");
             e2.printStackTrace();
