@@ -1,3 +1,11 @@
+/*
+ *  OnJoin - Your Server Join Plugin
+ *          With this plugin, joins are
+ *          unique on your server​
+ *
+ *  Maintained by Tigerpanzer_02
+ */
+
 package at.tigerpanzer.onjoin.util;
 
 import at.tigerpanzer.onjoin.Main;

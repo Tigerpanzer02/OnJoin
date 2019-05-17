@@ -1,5 +1,8 @@
 /*
- *  OnJoin 2 - Powerful join system
+ *  OnJoin - Your Server Join Plugin
+ *          With this plugin, joins are
+ *          unique on your server​
+ *
  *  Maintained by Tigerpanzer_02
  */
 
