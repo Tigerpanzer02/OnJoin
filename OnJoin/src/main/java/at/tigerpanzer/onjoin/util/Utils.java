@@ -1,3 +1,11 @@
+/*
+ *  OnJoin - Your Server Join Plugin
+ *          With this plugin, joins are
+ *          unique on your server​
+ *
+ *  Maintained by Tigerpanzer_02
+ */
+
 package at.tigerpanzer.onjoin.util;
 
 import at.tigerpanzer.onjoin.Main;
@@ -95,6 +103,13 @@ public class Utils {
 
     public static String color(String msg) {
         return ChatColor.translateAlternateColorCodes('&', msg);
+    }
+
+    public static void debugmessage(String message) {
+        if(plugin.getConfig().getBoolean("debug")) {
+            String consolePrefix = "[OnJoin | Debug] ";
+            Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + message));
+        }
     }
 
     public static String colorMessage(String message) {

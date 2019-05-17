@@ -1,3 +1,11 @@
+/*
+ *  OnJoin - Your Server Join Plugin
+ *          With this plugin, joins are
+ *          unique on your server​
+ *
+ *  Maintained by Tigerpanzer_02
+ */
+
 package at.tigerpanzer.onjoin;
 
 import at.tigerpanzer.onjoin.command.JoinCommand;
@@ -126,7 +134,7 @@ public class Main extends JavaPlugin {
             Bukkit.getScheduler().runTaskTimer(this, () -> {
                 if(mySQLEnabled)
                     mysql.Reconnect();
-            }, 20L * 2700, 20L * 2700);
+            }, ((20L * 60) * getConfig().getInt("MySQL.AutoReconnect.ReconnectCoolDown")), ((20L * 60) * getConfig().getInt("MySQL.AutoReconnect.ReconnectCoolDown")));
         }
     }
 

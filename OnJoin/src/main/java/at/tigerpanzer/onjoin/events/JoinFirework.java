@@ -1,7 +1,16 @@
+/*
+ *  OnJoin - Your Server Join Plugin
+ *          With this plugin, joins are
+ *          unique on your server​
+ *
+ *  Maintained by Tigerpanzer_02
+ */
+
 package at.tigerpanzer.onjoin.events;
 
 import at.tigerpanzer.onjoin.Main;
 import at.tigerpanzer.onjoin.util.Storage;
+import at.tigerpanzer.onjoin.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
@@ -37,6 +46,7 @@ public class JoinFirework implements Listener {
         boolean fireworkinstantexplode;
         int fireworkpower;
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
+            Utils.debugmessage("Loading First firework for " + p.getName());
             if(!p.hasPermission("OnJoin.FirstJoin.Firework")) {
                 return;
             }
@@ -53,6 +63,7 @@ public class JoinFirework implements Listener {
             fireworkinstantexplode = plugin.getConfig().getBoolean("FirstJoin.Join.Firework.InstantExplode");
             fireworkpower = plugin.getConfig().getInt("FirstJoin.Join.Firework.Power");
         } else {
+            Utils.debugmessage("Loading normal firework for " + p.getName());
             if(!p.hasPermission("OnJoin.Firework")) {
                return;
             }
@@ -70,6 +81,7 @@ public class JoinFirework implements Listener {
             fireworkpower = plugin.getConfig().getInt("Join.Firework.Power");
         }
         for(int i = 1; i < fireworkamount; i++) {
+            Utils.debugmessage("Execute Firework " + p.getName());
             List<Color> colors = new ArrayList<>();
             List<Color> fade = new ArrayList<>();
             for(String l : lore) {
@@ -90,6 +102,7 @@ public class JoinFirework implements Listener {
             if(fireworkinstantexplode) {
                 Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, f::detonate, 1L);
             }
+            Utils.debugmessage("Firework launched on " + p.getName());
         }
     }
 

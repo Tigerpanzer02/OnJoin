@@ -1,5 +1,13 @@
 
 
+/*
+ *  OnJoin - Your Server Join Plugin
+ *          With this plugin, joins are
+ *          unique on your server​
+ *
+ *  Maintained by Tigerpanzer_02
+ */
+
 package at.tigerpanzer.onjoin.handlers;
 
 import at.tigerpanzer.onjoin.Main;
@@ -21,7 +29,7 @@ public class LanguageMigrator {
 
 
     private static final int LANGUAGE_FILE_VERSION = 1;
-    private static final int CONFIG_FILE_VERSION = 2;
+    private static final int CONFIG_FILE_VERSION = 3;
     private static Main plugin = JavaPlugin.getPlugin(Main.class);
     private static List<String> migratable = Arrays.asList("config", "language");
 
@@ -42,7 +50,17 @@ public class LanguageMigrator {
                     Utils.insertAfterLine(file, "MySQL:", "    #Should the MySQL connection after 45 minutes reconnected?\n" +
                             "    AutoReconnect: false");
                     break;
+                case 2:
+                    Utils.removeLineFromFile(file, "  #Should the MySQL connection after 45 minutes reconnected?");
+                    Utils.insertAfterLine(file, "MySQL:\n" +
+                            "  Enabled:", "  #Should the MySQL connection reconnect after amount of time?");
+                    Utils.insertAfterLine(file, "AutoReconnect:", "    #Time in Minutes\n" +
+                            "    ReconnectCoolDown: 45");
+                    Utils.insertAfterLine(file, "locale:", "# Should the plugin send debug messages into console? | This mode can be good to find bugs!\n" +
+                            "debug: false");
+                    break;
             }
+
             version++;
         }
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[OnJoin] [System notify] Config updated, no comments were removed :)");
