@@ -9,11 +9,14 @@
 package at.tigerpanzer.onjoin.events;
 
 import at.tigerpanzer.onjoin.Main;
+import at.tigerpanzer.onjoin.handlers.LanguageManager;
+import at.tigerpanzer.onjoin.util.MessageUtils;
 import at.tigerpanzer.onjoin.util.Storage;
 import at.tigerpanzer.onjoin.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,52 +36,23 @@ public class JoinFirework implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
+    private int fireworkamount;
+    private List<String> lore;
+    private List<String> lore2;
+    private int fireworkhight;
+    private boolean fireworkflicker;
+    private boolean fireworktrail;
+    private String fireworkftype;
+    private boolean fireworkinstantexplode;
+    private int fireworkpower;
+    private boolean fireworkenable;
+
     @EventHandler
     public void onJoinFirework(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        int fireworkamount;
-        List<String> lore;
-        List<String> lore2;
-        int fireworkhight;
-        boolean fireworkflicker;
-        boolean fireworktrail;
-        String fireworkftype;
-        boolean fireworkinstantexplode;
-        int fireworkpower;
-        if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
-            Utils.debugmessage("Loading First firework for " + p.getName());
-            if(!p.hasPermission("OnJoin.FirstJoin.Firework")) {
-                return;
-            }
-            if(!plugin.getConfig().getBoolean("FirstJoin.Join.FireworkOn")) {
-                return;
-            }
-            fireworkamount = plugin.getConfig().getInt("FirstJoin.Join.Firework.Amount");
-            lore = plugin.getConfig().getStringList("FirstJoin.Join.Firework.Colors");
-            lore2 = plugin.getConfig().getStringList("FirstJoin.Join.Firework.Fade");
-            fireworkhight = plugin.getConfig().getInt("FirstJoin.Join.Firework.Firework-Height");
-            fireworkflicker = plugin.getConfig().getBoolean("FirstJoin.Join.Firework.Flicker");
-            fireworktrail = plugin.getConfig().getBoolean("FirstJoin.Join.Firework.Trail");
-            fireworkftype = plugin.getConfig().getString("FirstJoin.Join.Firework.Type");
-            fireworkinstantexplode = plugin.getConfig().getBoolean("FirstJoin.Join.Firework.InstantExplode");
-            fireworkpower = plugin.getConfig().getInt("FirstJoin.Join.Firework.Power");
-        } else {
-            Utils.debugmessage("Loading normal firework for " + p.getName());
-            if(!p.hasPermission("OnJoin.Firework")) {
-               return;
-            }
-            if(!plugin.getConfig().getBoolean("Join.FireworkOn")) {
-                return;
-            }
-            fireworkamount = plugin.getConfig().getInt("Join.Firework.Amount");
-            lore = plugin.getConfig().getStringList("Join.Firework.Colors");
-            lore2 = plugin.getConfig().getStringList("Join.Firework.Fade");
-            fireworkhight = plugin.getConfig().getInt("Join.Firework.Firework-Height");
-            fireworkflicker = plugin.getConfig().getBoolean("Join.Firework.Flicker");
-            fireworktrail = plugin.getConfig().getBoolean("Join.Firework.Trail");
-            fireworkftype = plugin.getConfig().getString("Join.Firework.Type");
-            fireworkinstantexplode = plugin.getConfig().getBoolean("Join.Firework.InstantExplode");
-            fireworkpower = plugin.getConfig().getInt("Join.Firework.Power");
+        getfireworkvalues(p);
+        if(!fireworkenable) {
+            return;
         }
         for(int i = 1; i < fireworkamount; i++) {
             Utils.debugmessage("Execute Firework " + p.getName());
@@ -104,6 +78,60 @@ public class JoinFirework implements Listener {
             }
             Utils.debugmessage("Firework launched on " + p.getName());
         }
+    }
+
+    private void getfireworkvalues(Player player) {
+        try {
+            ConfigurationSection section = plugin.getConfig().getConfigurationSection("Firework");
+            for(String key : section.getKeys(false)) {
+                if(!key.equals("default")) {
+                    if(key.equals("firstjoin")) {
+                        if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            fireworkenable = plugin.getConfig().getBoolean("Firework." + key + ".Enabled");
+                            fireworkamount = plugin.getConfig().getInt("Firework." + key + ".Amount");
+                            lore = plugin.getConfig().getStringList("Firework." + key + ".Colors");
+                            lore2 = plugin.getConfig().getStringList("Firework." + key + ".Fade");
+                            fireworkhight = plugin.getConfig().getInt("Firework." + key + ".Firework-Height");
+                            fireworkflicker = plugin.getConfig().getBoolean("Firework." + key + ".Flicker");
+                            fireworktrail = plugin.getConfig().getBoolean("Firework." + key + ".Trail");
+                            fireworkftype = plugin.getConfig().getString("Firework." + key + ".Type");
+                            fireworkinstantexplode = plugin.getConfig().getBoolean("Firework." + key + ".InstantExplode");
+                            fireworkpower = plugin.getConfig().getInt("Firework." + key + ".Power");
+                            break;
+                        }
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("Firework." + key + ".Permission"))) {
+                        fireworkamount = plugin.getConfig().getInt("Firework." + key + ".Amount");
+                        lore = plugin.getConfig().getStringList("Firework." + key + ".Colors");
+                        lore2 = plugin.getConfig().getStringList("Firework." + key + ".Fade");
+                        fireworkhight = plugin.getConfig().getInt("Firework." + key + ".Firework-Height");
+                        fireworkflicker = plugin.getConfig().getBoolean("Firework." + key + ".Flicker");
+                        fireworktrail = plugin.getConfig().getBoolean("Firework." + key + ".Trail");
+                        fireworkftype = plugin.getConfig().getString("Firework." + key + ".Type");
+                        fireworkinstantexplode = plugin.getConfig().getBoolean("Firework." + key + ".InstantExplode");
+                        fireworkpower = plugin.getConfig().getInt("Firework." + key + ".Power");
+                        fireworkenable = true;
+                        break;
+                    }
+                }
+            }
+            fireworkenable = plugin.getConfig().getBoolean("Firework." + "default" + ".Enabled");
+            fireworkamount = plugin.getConfig().getInt("Firework." + "default" + ".Amount");
+            lore = plugin.getConfig().getStringList("Firework." + "default" + ".Colors");
+            lore2 = plugin.getConfig().getStringList("Firework." + "default" + ".Fade");
+            fireworkhight = plugin.getConfig().getInt("Firework." + "default" + ".Firework-Height");
+            fireworkflicker = plugin.getConfig().getBoolean("Firework." + "default" + ".Flicker");
+            fireworktrail = plugin.getConfig().getBoolean("Firework." + "default" + ".Trail");
+            fireworkftype = plugin.getConfig().getString("Firework." + "default" + ".Type");
+            fireworkinstantexplode = plugin.getConfig().getBoolean("Firework." + "default" + ".InstantExplode");
+            fireworkpower = plugin.getConfig().getInt("Firework." + "default" + ".Power");
+        }catch(Exception ex) {
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the fireworkvalues"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            ex.printStackTrace();
+        }
+
     }
 
     private Color getColor(String color) {

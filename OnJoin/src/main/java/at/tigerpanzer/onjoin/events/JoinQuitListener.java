@@ -10,11 +10,13 @@ package at.tigerpanzer.onjoin.events;
 
 import at.tigerpanzer.onjoin.Main;
 import at.tigerpanzer.onjoin.handlers.LanguageManager;
+import at.tigerpanzer.onjoin.util.MessageUtils;
 import at.tigerpanzer.onjoin.util.Storage;
 import at.tigerpanzer.onjoin.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,6 +28,13 @@ import java.util.List;
 public class JoinQuitListener implements Listener {
 
     private Main plugin;
+    private boolean spawnlocationenable;
+    private String spawnlocationworld;
+    private double spawnlocationx;
+    private double spawnlocationy;
+    private double spawnlocationz;
+    private int spawnlocationyaw;
+    private int spawnlocationpitch;
 
     public JoinQuitListener(Main plugin) {
         this.plugin = plugin;
@@ -37,13 +46,6 @@ public class JoinQuitListener implements Listener {
         Player p = e.getPlayer();
         Storage.DataOnJoin(p);
         boolean chatclearon;
-        boolean spawnlocationenable;
-        String spawnlocationworld;
-        double spawnlocationx;
-        double spawnlocationy;
-        double spawnlocationz;
-        int spawnlocationyaw;
-        int spawnlocationpitch;
         boolean joinsoundon;
         String joinsound;
         boolean joinmessageon;
@@ -57,31 +59,12 @@ public class JoinQuitListener implements Listener {
         String actionbar2;
         boolean welcomemessageon;
         List<String> WelcomeMessageText;
+        WelcomeMessageText = welcomeMessage(p);
+        healthvalues(p);
+        spawnvalues(p);
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
             Utils.debugmessage("Loading First join for " + p.getName());
             chatclearon = plugin.getConfig().getBoolean("FirstJoin.Join.ChatClearOn");
-            spawnlocationenable = plugin.getConfig().getBoolean("FirstJoin.SpawnLocation.SpawnLocationEnable");
-            spawnlocationworld = plugin.getConfig().getString("FirstJoin.SpawnLocation.World");
-            spawnlocationx = plugin.getConfig().getDouble("FirstJoin.SpawnLocation.XCoord");
-            spawnlocationy = plugin.getConfig().getDouble("FirstJoin.SpawnLocation.YCoord");
-            spawnlocationz = plugin.getConfig().getDouble("FirstJoin.SpawnLocation.ZCoord");
-            spawnlocationyaw = plugin.getConfig().getInt("FirstJoin.SpawnLocation.Yaw");
-            spawnlocationpitch = plugin.getConfig().getInt("FirstJoin.SpawnLocation.Pitch");
-            if((p.hasPermission("FirstJoin.OnJoin.Heal"))) {
-                if(plugin.getConfig().getBoolean("FirstJoin.Heal.HealOnWithPermission")) {
-                    p.setHealth(plugin.getConfig().getInt("FirstJoin.Heal.HealthWithPermission"));
-                    p.setFoodLevel(plugin.getConfig().getInt("FirstJoin.Heal.FoodLevelWithPermission"));
-                    if(plugin.getConfig().getBoolean("FirstJoin.Heal.ClearPotionEffectsWithPermission")) {
-                        p.getActivePotionEffects().clear();
-                    }
-                }
-            } else if(plugin.getConfig().getString("FirstJoin.Heal.HealOn").contains("true")) {
-                p.setHealth(plugin.getConfig().getInt("FirstJoin.Heal.Health"));
-                p.setFoodLevel(plugin.getConfig().getInt("FirstJoin.Heal.FoodLevel"));
-                if(plugin.getConfig().getBoolean("FirstJoin.Heal.ClearPotionEffects")) {
-                    p.getActivePotionEffects().clear();
-                }
-            }
             joinsoundon = plugin.getConfig().getBoolean("FirstJoin.Join.JoinSoundOn");
             joinsound = plugin.getConfig().getString("FirstJoin.Join.JoinSound");
             joinmessageon = plugin.getConfig().getBoolean("FirstJoin.Join.JoinMessageOn");
@@ -94,32 +77,9 @@ public class JoinQuitListener implements Listener {
             actionbar1 = Utils.colorMessage("FirstJoin.Actionbar.Actionbar1");
             actionbar2 = Utils.colorMessage("FirstJoin.Actionbar.Actionbar2");
             welcomemessageon = plugin.getConfig().getBoolean("FirstJoin.WelcomeMessage.WelcomeMessageOn");
-            WelcomeMessageText = LanguageManager.getLanguageList("FirstJoin.WelcomeMessage.WelcomeMessageText");
         } else {
             Utils.debugmessage("Loading normal join for " + p.getName());
             chatclearon = plugin.getConfig().getBoolean("Join.ChatClearOn");
-            spawnlocationenable = plugin.getConfig().getBoolean("SpawnLocation.SpawnLocationEnable");
-            spawnlocationworld = plugin.getConfig().getString("SpawnLocation.World");
-            spawnlocationx = plugin.getConfig().getDouble("SpawnLocation.XCoord");
-            spawnlocationy = plugin.getConfig().getDouble("SpawnLocation.YCoord");
-            spawnlocationz = plugin.getConfig().getDouble("SpawnLocation.ZCoord");
-            spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation.Yaw");
-            spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation.Pitch");
-            if((p.hasPermission("OnJoin.Heal"))) {
-                if(plugin.getConfig().getBoolean("Heal.HealOnWithPermission")) {
-                    p.setHealth(plugin.getConfig().getInt("Heal.HealthWithPermission"));
-                    p.setFoodLevel(plugin.getConfig().getInt("Heal.FoodLevelWithPermission"));
-                    if(plugin.getConfig().getBoolean("Heal.ClearPotionEffectsWithPermission")) {
-                        p.getActivePotionEffects().clear();
-                    }
-                }
-            } else if(plugin.getConfig().getString("Heal.HealOn").contains("true")) {
-                p.setHealth(plugin.getConfig().getInt("Heal.Health"));
-                p.setFoodLevel(plugin.getConfig().getInt("Heal.FoodLevel"));
-                if(plugin.getConfig().getBoolean("Heal.ClearPotionEffects")) {
-                    p.getActivePotionEffects().clear();
-                }
-            }
             joinsoundon = plugin.getConfig().getBoolean("Join.JoinSoundOn");
             joinsound = plugin.getConfig().getString("Join.JoinSound");
             joinmessageon = plugin.getConfig().getBoolean("Join.JoinMessageOn");
@@ -132,7 +92,6 @@ public class JoinQuitListener implements Listener {
             actionbar1 = Utils.colorMessage("Actionbar.Actionbar1");
             actionbar2 = Utils.colorMessage("Actionbar.Actionbar2");
             welcomemessageon = plugin.getConfig().getBoolean("WelcomeMessage.WelcomeMessageOn");
-            WelcomeMessageText = LanguageManager.getLanguageList("WelcomeMessage.WelcomeMessageText");
         }
         if(chatclearon) {
             for(int i = 0; i < 200; i++) {
@@ -194,6 +153,9 @@ public class JoinQuitListener implements Listener {
                 }
             }
         }
+        if(plugin.oldversion) {
+            p.sendMessage(Utils.color("&e--------- &7[&4UPGRADE &7| &eOnJoin&7]&e --------- \n" + "&eThis update offers new customisations. Please check your configs!!!\n" + "&cWe detected that you have used a version before 2.1.0! Please have a look on the &dUpdateChanges" + "\n&e--------- &7[&4UPGRADE &7| &eOnJoin&7]&e ---------"));
+        }
     }
 
     @EventHandler
@@ -217,9 +179,9 @@ public class JoinQuitListener implements Listener {
             quitmessageon = plugin.getConfig().getBoolean("Quit.QuitMessageOn");
             quitmessage = Utils.colorMessage("Quit.QuitMessage");
         }
-        if(plugin.mySQLEnabled()){
+        if(plugin.mySQLEnabled()) {
             Utils.debugmessage("Saved data to mysql for " + p.getName());
-           Storage.DataOnQuit(p);
+            Storage.DataOnQuit(p);
         }
         if(quitsoundon) {
             p.playSound(p.getLocation(), Sound.valueOf(quitsound), 3, 1);
@@ -230,6 +192,124 @@ public class JoinQuitListener implements Listener {
             e.setQuitMessage(Utils.setPlaceholders(p, quitmessage));
         } else {
             e.setQuitMessage("");
+        }
+    }
+
+    private List<String> welcomeMessage(Player player) {
+        try {
+            ConfigurationSection section = LanguageManager.getLanguageSection("WelcomeMessage");
+            for(String key : section.getKeys(false)) {
+                if(!key.equals("default")) {
+                    Utils.debugmessage("Key: " + key);
+                    if(key.equals("firstjoin")) {
+                        if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            Utils.debugmessage("Send Firstjoin welcome");
+                            return LanguageManager.getLanguageList("WelcomeMessage.firstjoin.Text");
+                        }
+                        Utils.debugmessage("FirstJoin is disabled or the player joined has already joined");
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission"))) {
+                        Utils.debugmessage("Player permission " + LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission") + " = " + player.hasPermission(LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission")));
+                        return LanguageManager.getLanguageList("WelcomeMessage." + key + ".Text");
+                    }
+                }
+            }
+            Utils.debugmessage("Send default welcome");
+            return LanguageManager.getLanguageList("WelcomeMessage.default.Text");
+        } catch(Exception ex) {
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the welcomemessagevalues"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            ex.printStackTrace();
+        }
+        Utils.debugmessage("Send default welcome");
+        return LanguageManager.getLanguageList("WelcomeMessage.default.Text");
+    }
+
+    private void healthvalues(Player player) {
+        try {
+            ConfigurationSection section = plugin.getConfig().getConfigurationSection("Heal");
+            for(String key : section.getKeys(false)) {
+                if(!key.equals("default")) {
+                    if(key.equals("firstjoin")) {
+                        if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            player.setHealth(plugin.getConfig().getInt("Heal." + key + ".Health"));
+                            player.setFoodLevel(plugin.getConfig().getInt("Heal." + key + ".FoodLevel"));
+                            if(plugin.getConfig().getBoolean("Heal." + key + ".ClearPotionEffects")) {
+                                player.getActivePotionEffects().clear();
+                            }
+                            break;
+                        }
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("Heal." + key + ".Permission"))) {
+                        player.setHealth(plugin.getConfig().getInt("Heal." + key + ".Health"));
+                        player.setFoodLevel(plugin.getConfig().getInt("Heal." + key + ".FoodLevel"));
+                        if(plugin.getConfig().getBoolean("Heal." + key + ".ClearPotionEffects")) {
+                            player.getActivePotionEffects().clear();
+                        }
+                        break;
+                    }
+                }
+            }
+            if(plugin.getConfig().getBoolean("Heal.default.Enabled")) {
+                player.setHealth(plugin.getConfig().getInt("Heal." + "default" + ".Health"));
+                player.setFoodLevel(plugin.getConfig().getInt("Heal." + "default" + ".FoodLevel"));
+                if(plugin.getConfig().getBoolean("Heal." + "default" + ".ClearPotionEffects")) {
+                    player.getActivePotionEffects().clear();
+                }
+            }
+        } catch(Exception ex) {
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the healvalues"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            ex.printStackTrace();
+        }
+
+    }
+
+
+    private void spawnvalues(Player player) {
+        try {
+            ConfigurationSection section = plugin.getConfig().getConfigurationSection("SpawnLocation");
+            for(String key : section.getKeys(false)) {
+                if(!key.equals("default")) {
+                    if(key.equals("firstjoin")) {
+                        if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            spawnlocationenable = plugin.getConfig().getBoolean("SpawnLocation." + key + ".Enabled");
+                            spawnlocationworld = plugin.getConfig().getString("SpawnLocation." + key + ".World");
+                            spawnlocationx = plugin.getConfig().getDouble("SpawnLocation." + key + ".XCoord");
+                            spawnlocationy = plugin.getConfig().getDouble("SpawnLocation." + key + ".YCoord");
+                            spawnlocationz = plugin.getConfig().getDouble("SpawnLocation." + key + ".ZCoord");
+                            spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation." + key + ".Yaw");
+                            spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation." + key + ".Pitch");
+                            break;
+                        }
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("SpawnLocation." + key + ".Permission"))) {
+                        spawnlocationworld = plugin.getConfig().getString("SpawnLocation." + key + ".World");
+                        spawnlocationx = plugin.getConfig().getDouble("SpawnLocation." + key + ".XCoord");
+                        spawnlocationy = plugin.getConfig().getDouble("SpawnLocation." + key + ".YCoord");
+                        spawnlocationz = plugin.getConfig().getDouble("SpawnLocation." + key + ".ZCoord");
+                        spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation." + key + ".Yaw");
+                        spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation." + key + ".Pitch");
+                        spawnlocationenable = true;
+                        break;
+                    }
+                }
+            }
+            spawnlocationenable = plugin.getConfig().getBoolean("SpawnLocation." + "default" + ".Enabled");
+            spawnlocationworld = plugin.getConfig().getString("SpawnLocation." + "default" + ".World");
+            spawnlocationx = plugin.getConfig().getDouble("SpawnLocation." + "default" + ".XCoord");
+            spawnlocationy = plugin.getConfig().getDouble("SpawnLocation." + "default" + ".YCoord");
+            spawnlocationz = plugin.getConfig().getDouble("SpawnLocation." + "default" + ".ZCoord");
+            spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation." + "default" + ".Yaw");
+            spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation." + "default" + ".Pitch");
+
+        } catch(Exception ex) {
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the spawnvalues"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            ex.printStackTrace();
         }
     }
 }

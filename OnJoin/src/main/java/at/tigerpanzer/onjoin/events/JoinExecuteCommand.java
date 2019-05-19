@@ -9,9 +9,12 @@
 package at.tigerpanzer.onjoin.events;
 
 import at.tigerpanzer.onjoin.Main;
+import at.tigerpanzer.onjoin.handlers.LanguageManager;
+import at.tigerpanzer.onjoin.util.MessageUtils;
 import at.tigerpanzer.onjoin.util.Storage;
 import at.tigerpanzer.onjoin.util.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,6 +25,8 @@ import java.util.List;
 public class JoinExecuteCommand implements Listener {
 
     private Main plugin;
+    private List<String> commands;
+    private boolean commandsenable;
 
     public JoinExecuteCommand(Main plugin) {
         this.plugin = plugin;
@@ -31,23 +36,9 @@ public class JoinExecuteCommand implements Listener {
     @EventHandler
     public void onJoinExecuteCommand(final PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        List<String> commands;
-        if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
-            if(!p.hasPermission("OnJoin.FirstJoin.ExecuteCommand")) {
-                return;
-            }
-            if(!plugin.getConfig().getBoolean("FirstJoin.ExecuteCommand.CommandOn")) {
-                return;
-            }
-            commands = plugin.getConfig().getStringList("FirstJoin.ExecuteCommand.Commands");
-        } else {
-            if(!p.hasPermission("OnJoin.ExecuteCommand")) {
-                return;
-            }
-            if(!plugin.getConfig().getBoolean("ExecuteCommand.CommandOn")) {
-                return;
-            }
-            commands = plugin.getConfig().getStringList("ExecuteCommand.Commands");
+        commandvalues(p);
+        if(!commandsenable) {
+            return;
         }
         Utils.debugmessage("Trying to execute commands" + commands);
         for(String command : commands) {
@@ -66,4 +57,35 @@ public class JoinExecuteCommand implements Listener {
             }
         }
     }
+
+    private void commandvalues(Player player) {
+        try {
+            ConfigurationSection section = plugin.getConfig().getConfigurationSection("ExecuteCommand");
+            for(String key : section.getKeys(false)) {
+                if(!key.equals("default")) {
+                    if(key.equals("firstjoin")) {
+                        if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            commandsenable = plugin.getConfig().getBoolean("ExecuteCommand." + key + ".Enabled");
+                            commands = plugin.getConfig().getStringList("ExecuteCommand." + key + ".Commands");
+                            break;
+                        }
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("SpawnLocation." + key + ".Permission"))) {
+                        commands = plugin.getConfig().getStringList("ExecuteCommand." + key + ".Commands");
+                        commandsenable = true;
+                        break;
+                    }
+                }
+            }
+            commandsenable = plugin.getConfig().getBoolean("ExecuteCommand." + "default" + ".Enabled");
+            commands = plugin.getConfig().getStringList("ExecuteCommand." + "default" + ".Commands");
+        }catch(Exception ex) {
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the commandvalues"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            ex.printStackTrace();
+        }
+
+    }
+
 }
