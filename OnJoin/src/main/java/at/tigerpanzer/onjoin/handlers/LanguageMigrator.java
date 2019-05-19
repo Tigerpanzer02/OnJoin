@@ -28,8 +28,8 @@ import java.util.List;
 public class LanguageMigrator {
 
 
-    private static final int LANGUAGE_FILE_VERSION = 1;
-    private static final int CONFIG_FILE_VERSION = 3;
+    private static final int LANGUAGE_FILE_VERSION = 5;
+    private static final int CONFIG_FILE_VERSION = 5;
     private static Main plugin = JavaPlugin.getPlugin(Main.class);
     private static List<String> migratable = Arrays.asList("config", "language");
 
@@ -47,17 +47,6 @@ public class LanguageMigrator {
         for(int i = version; i < CONFIG_FILE_VERSION; i++) {
             switch(version) {
                 case 1:
-                    Utils.insertAfterLine(file, "MySQL:", "    #Should the MySQL connection after 45 minutes reconnected?\n" +
-                            "    AutoReconnect: false");
-                    break;
-                case 2:
-                    Utils.removeLineFromFile(file, "  #Should the MySQL connection after 45 minutes reconnected?");
-                    Utils.insertAfterLine(file, "MySQL:\n" +
-                            "  Enabled:", "  #Should the MySQL connection reconnect after amount of time?");
-                    Utils.insertAfterLine(file, "AutoReconnect:", "    #Time in Minutes\n" +
-                            "    ReconnectCoolDown: 45");
-                    Utils.insertAfterLine(file, "locale:", "# Should the plugin send debug messages into console? | This mode can be good to find bugs!\n" +
-                            "debug: false");
                     break;
             }
 
@@ -102,7 +91,7 @@ public class LanguageMigrator {
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Don't worry! Old files will be renamed not overridden!");
         for(String file : migratable) {
             if(Utils.getFile(plugin, file).exists()) {
-                Utils.getFile(plugin, file).renameTo(new File(plugin.getDataFolder(), "ONJOIN_" + file + ".yml"));
+                Utils.getFile(plugin, file).renameTo(new File(plugin.getDataFolder(), "old_" + file + ".yml"));
                 Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Renamed file " + file + ".yml");
             }
         }
