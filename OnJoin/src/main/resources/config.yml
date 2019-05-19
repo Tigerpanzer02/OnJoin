@@ -23,7 +23,8 @@ debug: false
 MySQL:
   Enabled: false
   #Should the MySQL connection reconnect after amount of time?
-  AutoReconnect: false
+  AutoReconnect:
+    Enabled: false
     #Time in Minutes
     ReconnectCoolDown: 45
   Username: accountname
@@ -53,41 +54,10 @@ FirstJoin:
     UpdateMessageOn: true
     #Should the chat be cleaned up by the player at the beginning?
     ChatClearOn: true
-    #Should the Player with Permission OnJoin.* or OnJoin.Firework have a Firework when he joins?
-    FireworkOn: true
-    Firework:
-      InstantExplode: false
-      Amount: 3
-      FireworkHeight: 3
-      Power: 1
-      Type: BALL
-      Flicker: false
-      Trail: false
-      Colors:
-      - YELLOW
-      Fade:
-      - WHITE
     JoinMessageOn: true
     #Should there be a sound
     JoinSoundOn: false
     JoinSound: FIREWORK_LAUNCH
-  #Should the Player that join heal
-  Heal:
-    HealOn: true
-    Health: 20
-    FoodLevel: 20
-    ClearPotionEffects: true
-    #Should the Player that join with Permission heal
-    HealOnWithPermission: true
-    HealthWithPermission: 20
-    FoodLevelWithPermission: 20
-    ClearPotionEffectsWithPermission: true
-  #Execute Commands after Join
-  ExecuteCommand:
-    CommandOn: false
-    Commands:
-    - 'console;say %player% Hello! Change this in Config!'
-    - 'player;help'
   #Message on the actionbar
   Actionbar:
     ActionbarOnJoin: true
@@ -97,15 +67,6 @@ FirstJoin:
     #Should there be a sound
     QuitSoundOn: false
     QuitSound: BAT_DEATH
-  #Should Players that join be teleported to a location
-  SpawnLocation:
-    SpawnLocationEnable: false
-    World: world
-    XCoord: 0
-    YCoord: 0
-    ZCoord: 0
-    Yaw: 0
-    Pitch: 0
 
 
 ########################
@@ -129,9 +90,16 @@ Join:
   UpdateMessageOn: true
   #Should the chat be cleaned up by the player at the beginning?
   ChatClearOn: true
-  #Should the Player with Permission OnJoin.* or OnJoin.Firework have a Firework when he joins?
-  FireworkOn: true
-  Firework:
+  JoinMessageOn: true
+  #Should there be a sound
+  JoinSoundOn: false
+  JoinSound: FIREWORK_LAUNCH
+
+#Firework section
+Firework:
+  #Should a player have a Firework when he joins?
+  'default':
+    Enabled: true
     InstantExplode: false
     Amount: 3
     FireworkHeight: 3
@@ -140,35 +108,73 @@ Join:
     Flicker: false
     Trail: false
     Colors:
-    - YELLOW
+      - YELLOW
     Fade:
-    - WHITE
-  JoinMessageOn: true
-  #Should there be a sound
-  JoinSoundOn: false
-  JoinSound: FIREWORK_LAUNCH
-
+      - WHITE
+  'firstjoin':
+    Enabled: true
+    InstantExplode: false
+    Amount: 3
+    FireworkHeight: 3
+    Power: 1
+    Type: BALL
+    Flicker: false
+    Trail: false
+    Colors:
+      - YELLOW
+    Fade:
+      - WHITE
+  #Should a player with custom permission have a Firework when he joins?
+  '1':
+    Permission: OnJoin.Firework.1
+    InstantExplode: false
+    Amount: 3
+    FireworkHeight: 3
+    Power: 1
+    Type: BALL
+    Flicker: false
+    Trail: false
+    Colors:
+      - YELLOW
+    Fade:
+      - WHITE
 
 #Should the Player that join heal
 Heal:
-  HealOn: true
-  Health: 20
-  FoodLevel: 20
-  ClearPotionEffects: true
-#Should the Player that join with Permission heal
-  HealOnWithPermission: true
-  HealthWithPermission: 20
-  FoodLevelWithPermission: 20
-  ClearPotionEffectsWithPermission: true
+  'default':
+    Enabled: true
+    Health: 20
+    FoodLevel: 20
+    ClearPotionEffects: true
+  'firstjoin':
+    Enabled: true
+    Health: 20
+    FoodLevel: 20
+    ClearPotionEffects: true
+  '1':
+    Permission: OnJoin.Heal.1
+    Health: 20
+    FoodLevel: 20
+    ClearPotionEffects: true
 
 
-#Execute Commands after Join
+#Execute commands after join
 ExecuteCommand:
-  CommandOn: false
-  Commands:
-    - 'console;say %player% Hello! Change this in Config!'
-    - 'player;help'
-
+  'default':
+    Enabled: false
+    Commands:
+      - 'console;say %player% Hello! Change this in Config!'
+      - 'player;help'
+  'firstjoin':
+    Enabled: false
+    Commands:
+      - 'console;say %player% Hello! Change this in Config!'
+      - 'player;help'
+  '1':
+    Permission: OnJoin.ExecuteCommand
+    Commands:
+      - 'console;say %player% Hello! Change this in Config!'
+      - 'player;help'
 
 #Message on the actionbar
 Actionbar:
@@ -185,13 +191,30 @@ Quit:
 
 #Should Players that join be teleported to a location
 SpawnLocation:
-  SpawnLocationEnable: false
-  World: world
-  XCoord: 0
-  YCoord: 0
-  ZCoord: 0
-  Yaw: 0
-  Pitch: 0
+  'default':
+    Enabled: false
+    World: world
+    XCoord: 0
+    YCoord: 0
+    ZCoord: 0
+    Yaw: 0
+    Pitch: 0
+  'firstjoin':
+    Enabled: false
+    World: world
+    XCoord: 0
+    YCoord: 0
+    ZCoord: 0
+    Yaw: 0
+    Pitch: 0
+  '1':
+    Permission: OnJoin.Spawn.1
+    World: world
+    XCoord: 0
+    YCoord: 0
+    ZCoord: 0
+    Yaw: 0
+    Pitch: 0
 
 
 ##########################
@@ -200,6 +223,7 @@ SpawnLocation:
 
 
 # Don't modify.
-Version: 3
+Version: 5
+
 
 # No way! You've reached the end! Let us join!?
