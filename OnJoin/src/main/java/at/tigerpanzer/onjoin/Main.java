@@ -31,25 +31,30 @@ public class Main extends JavaPlugin {
     private boolean placeholderAPI;
     private boolean mySQLEnabled;
     private boolean firstJoinEnabled;
-    private boolean usedbefore2;
-    private String consolePrefix;
+    public boolean oldversion;
+    public String consolePrefix;
     public static MySQL mysql;
 
     @Override
     public void onEnable() {
-        //check if using releases before 2.0.0
+        //check if using releases before 2.1.0
+        if(Utils.getConfig(this, "config").getInt("Version") <= 4) {
+            LanguageMigrator.migrateToNewFormat();
+            oldversion = true;
+        }
         if((Utils.getConfig(this, "config").isSet("PlaceholderAPI") && Utils.getConfig(this, "config").isSet("Help.HelpText"))) {
             LanguageMigrator.migrateToNewFormat();
-            usedbefore2 = true;
+            oldversion = true;
         }
-        LanguageManager.init(this);
         saveDefaultConfig();
+        LanguageManager.init(this);
         LanguageMigrator.configUpdate();
         LanguageMigrator.languageFileUpdate();
         consolePrefix = Utils.color(LanguageManager.getLanguageMessage("Console.PrefixConsole"));
         needUpdateJoin = false;
         mySQLEnabled = false;
         firstJoinEnabled = false;
+        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cWird &aGESTARTET &7| &cis &aSTARTING"));
         register();
         if(getConfig().getBoolean("MySQL.Enabled", false)) {
@@ -62,10 +67,9 @@ public class Main extends JavaPlugin {
         if(getConfig().getBoolean("FirstJoin.Enabled", false)) {
             firstJoinEnabled = true;
         }
-        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
-        if(usedbefore2) {
+        if(oldversion) {
             MessageUtils.info();
-            Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cWe detected that you have used a version before 2.0.0 before! Please have a look on the &dUpdateChanges"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cWe detected that you have used a version before 2.1.0! Please have a look on the &dUpdateChanges"));
         }
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin version: &e" + getDescription().getVersion()));
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin author: &e" + getDescription().getAuthors()));
@@ -130,7 +134,7 @@ public class Main extends JavaPlugin {
 
     private void connectMySQL() {
         Main.mysql = new MySQL(getConfig().getString("MySQL.Host"), getConfig().getString("MySQL.Database"), getConfig().getString("MySQL.Username"), getConfig().getString("MySQL.Password"), getConfig().getInt("MySQL.Port", 3306));
-        if(getConfig().getBoolean("MySQL.AutoReconnect")) {
+        if(getConfig().getBoolean("MySQL.AutoReconnect.Enabled")) {
             Bukkit.getScheduler().runTaskTimer(this, () -> {
                 if(mySQLEnabled)
                     mysql.Reconnect();
