@@ -38,7 +38,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         //check if using releases before 2.1.0
-        if(Utils.getConfig(this, "config").getInt("Version") <= 4) {
+        if(Utils.getConfig(this, "config").getInt("Version") <= 5) {
             LanguageMigrator.migrateToNewFormat();
             oldversion = true;
         }
