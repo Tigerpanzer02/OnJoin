@@ -201,21 +201,21 @@ public class JoinQuitListener implements Listener {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
                             Utils.debugmessage("Send Firstjoin welcome");
                             chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "ChatClear");
-                            chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "Enabled");
+                            welcomemessageon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "Enabled");
                             return LanguageManager.getLanguageList("WelcomeMessage.firstjoin.Text");
                         }
                         Utils.debugmessage("FirstJoin is disabled or the player joined has already joined");
                     } else if(player.hasPermission(LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission"))) {
                         Utils.debugmessage("Player permission " + LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission") + " = " + player.hasPermission(LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission")));
                         chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "ChatClear");
-                        chatclearon = true;
+                        welcomemessageon = true;
                         return LanguageManager.getLanguageList("WelcomeMessage." + key + ".Text");
                     }
                 }
             }
             Utils.debugmessage("Send default welcome");
             chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + "default" + "ChatClear");
-            chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + "default" + "Enabled");
+            welcomemessageon = LanguageManager.getLanguageBoolean("WelcomeMessage" + "default" + "Enabled");
             return LanguageManager.getLanguageList("WelcomeMessage.default.Text");
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
