@@ -68,6 +68,23 @@ Title:
   SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
 
 
+#Message on the actionbar
+Actionbar:
+  Actionbar1: '&7Welcome %player%!'
+  Actionbar2: '&7 CC-SW Network'
+
+
+#Should Players that join be teleported to a location
+SpawnLocation:
+  SetSpawnMessageSetTo: '&aSpawn set to&7: '
+  SetSpawnMessageYaw: '&2Yaw&7: '
+  SetSpawnMessagePitch: '&2Pitch&7: '
+
+############################
+##    Welcome Message     ##
+############################
+
+
 #Welcome Message in the Chat
 WelcomeMessage:
   #You can add and remove as many lines as you like!
@@ -128,6 +145,11 @@ WelcomeMessage:
       - '&e------------------------------------'
 
 
+#####################
+##    Messages     ##
+#####################
+
+
 #Should there be a message to all players when a player enters the server
 Messages:
   UpdateMessageText:
@@ -157,17 +179,7 @@ Messages:
       Permission: OnJoin.QuitMessage.1
       Message: '%player% pro left'
 
-#Message on the actionbar
-Actionbar:
-  Actionbar1: '&7Welcome %player%!'
-  Actionbar2: '&7 CC-SW Network'
 
-
-#Should Players that join be teleported to a location
-SpawnLocation:
-  SetSpawnMessageSetTo: '&aSpawn set to&7: '
-  SetSpawnMessageYaw: '&2Yaw&7: '
-  SetSpawnMessagePitch: '&2Pitch&7: '
 
 
 ##########################

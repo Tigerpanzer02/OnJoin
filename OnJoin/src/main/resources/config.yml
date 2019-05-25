@@ -54,19 +54,39 @@ FirstJoin:
 ##    Join Settings     ##
 ##########################
 
-#Titel in the middle of the screen
+
+#Enable titel in the middle of the screen
 Title:
   TitleOnJoin: true
 
-#Should there be a message to all players when a player enters the server
+#Enable join update message (only with the update permission)
 Join:
-  #Should it sends a message to Player with the Permission
   UpdateMessageOn: true
 
-#Message on the actionbar
+#Enable message on the actionbar
 Actionbar:
   ActionbarOnJoin: true
 
+
+####################################
+##     Additional Information     ##
+####################################
+
+
+#For better understanding I will try to explain the following configuration parts!
+#In every section you can add 'default' and 'firstjoin'
+#They will be the ground function: firstjoin for firstjoin and default for default
+#The categories default and firstjoin you can Enable with true
+#The other categories that you can self add like you want become the option to set a Permission
+#If you don´t need more than default and firstjoin feel free to remove the category '1'
+#You can add as much categories as you like! But please keep in mind to order it in the right way:
+#It should be default and firstjoin first after that the highest permission because the plugin is checking the
+#permissions. It will search for every permission that the user have, so it would only work right if you
+#add the category with the highest rank above the others that you add
+#Possible questions:
+#Why is there no Enable function for self added categories?
+# - You don´t need an enable function because the added categories will automatically enabled
+# - If you not need one of your categories you can remove them to disable or give a permission that no one has
 
 ###################
 ##     Spawn     ##
@@ -153,8 +173,9 @@ Heal:
 ##     Firework     ##
 ######################
 
+
 Firework:
-  #Should a player have a Firework when he joins?
+  #Should a player spawn a Firework when he joins?
   'default':
     Enabled: true
     InstantExplode: false
@@ -181,7 +202,7 @@ Firework:
       - YELLOW
     Fade:
       - WHITE
-  #Should a player with custom permission have a Firework when he joins?
+  #Should a player with custom permission spawn a Firework when he joins?
   '1':
     Permission: OnJoin.Firework.1
     InstantExplode: false
@@ -200,6 +221,7 @@ Firework:
 ####################
 ##     Sounds     ##
 ####################
+
 
 Sounds:
   Join:
@@ -234,6 +256,7 @@ Sounds:
       Sound: BAT_DEATH
       Volume: 1
       Pitch: 1
+
 
 
 
