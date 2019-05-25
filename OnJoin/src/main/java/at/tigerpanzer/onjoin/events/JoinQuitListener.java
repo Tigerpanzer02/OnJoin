@@ -158,24 +158,23 @@ public class JoinQuitListener implements Listener {
         }
     }
 
+    private boolean quitsoundon;
+    private String quitsound;
+    private Integer quitvolume;
+    private Integer quitpitch;
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
-        boolean quitsoundon;
-        String quitsound;
         boolean quitmessageon;
         String quitmessage;
+        quitsoundvalues(p);
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
             Utils.debugmessage("Loading FirstQuit for " + p.getName());
-            quitsoundon = plugin.getConfig().getBoolean("FirstJoin.Quit.QuitSoundOn");
-            quitsound = plugin.getConfig().getString("FirstJoin.Quit.QuitSound");
             quitmessageon = plugin.getConfig().getBoolean("FirstJoin.Quit.QuitMessageOn");
             quitmessage = Utils.colorMessage("FirstJoin.Quit.QuitMessage");
             Storage.setFirstJoin(p, false);
         } else {
             Utils.debugmessage("Loading NormalQuit for " + p.getName());
-            quitsoundon = plugin.getConfig().getBoolean("Quit.QuitSoundOn");
-            quitsound = plugin.getConfig().getString("Quit.QuitSound");
             quitmessageon = plugin.getConfig().getBoolean("Quit.QuitMessageOn");
             quitmessage = Utils.colorMessage("Quit.QuitMessage");
         }
@@ -184,7 +183,7 @@ public class JoinQuitListener implements Listener {
             Storage.DataOnQuit(p);
         }
         if(quitsoundon) {
-            p.playSound(p.getLocation(), Sound.valueOf(quitsound), 3, 1);
+            p.playSound(p.getLocation(), Sound.valueOf(quitsound), quitvolume, quitpitch);
             Utils.debugmessage("Send Sound to " + p.getName());
         }
         if(quitmessageon) {
@@ -326,7 +325,7 @@ public class JoinQuitListener implements Listener {
                             joinpitch = plugin.getConfig().getInt("Sounds.Join." + key + ".Pitch");
                             break;
                         }
-                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("SpawnLocation." + key + ".Permission"))) {
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("Sounds.Join." + key + ".Permission"))) {
                         joinsound = plugin.getConfig().getString("Sounds.Join." + key + ".Sound");
                         joinvolume = plugin.getConfig().getInt("Sounds.Join." + key + ".Volume");
                         joinpitch = plugin.getConfig().getInt("Sounds.Join." + key + ".Pitch");
@@ -339,6 +338,41 @@ public class JoinQuitListener implements Listener {
             joinsound = plugin.getConfig().getString("Sounds.Join." + "default" + ".Sound");
             joinvolume = plugin.getConfig().getInt("Sounds.Join." + "default" + ".Volume");
             joinpitch = plugin.getConfig().getInt("Sounds.Join." + "default" + ".Pitch");
+
+        } catch(Exception ex) {
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the soundvalues"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            ex.printStackTrace();
+        }
+    }
+    private void quitsoundvalues(Player player) {
+        try {
+            ConfigurationSection section = plugin.getConfig().getConfigurationSection("Sounds.Quit");
+            for(String key : section.getKeys(false)) {
+                if(!key.equals("default")) {
+                    if(key.equals("firstjoin")) {
+                        if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            quitsoundon = plugin.getConfig().getBoolean("Sounds.Quit." + key + ".Enabled");
+                            quitsound = plugin.getConfig().getString("Sounds.Quit." + key + ".Sound");
+                            quitvolume = plugin.getConfig().getInt("Sounds.Quit." + key + ".Volume");
+                            quitpitch = plugin.getConfig().getInt("Sounds.Quit." + key + ".Pitch");
+                            break;
+                        }
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("Sounds.Quit." + key + ".Permission"))) {
+                        quitsound = plugin.getConfig().getString("Sounds.Quit." + key + ".Sound");
+                        quitvolume = plugin.getConfig().getInt("Sounds.Quit." + key + ".Volume");
+                        quitpitch = plugin.getConfig().getInt("Sounds.Quit." + key + ".Pitch");
+                        quitsoundon = true;
+                        break;
+                    }
+                }
+            }
+            quitsoundon = plugin.getConfig().getBoolean("Sounds.Quit." + "default" + ".Enabled");
+            quitsound = plugin.getConfig().getString("Sounds.Quit." + "default" + ".Sound");
+            quitvolume = plugin.getConfig().getInt("Sounds.Quit." + "default" + ".Volume");
+            quitpitch = plugin.getConfig().getInt("Sounds.Quit." + "default" + ".Pitch");
 
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
