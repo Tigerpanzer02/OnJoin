@@ -34,9 +34,9 @@ MySQL:
   Port: '3306'
 
 
-########################
-##     First Join     ##
-########################
+################################
+##     First Join Settings    ##
+################################
 
 
 #Here you can enable FirstJoin stuff
@@ -60,41 +60,10 @@ FirstJoin:
   Quit:
     QuitMessageOn: true
 
-##############################
 
-Sounds:
-  Join:
-    'default':
-      Enabled: true
-      Sound: FIREWORK_LAUNCH
-      Volume: 1
-      Pitch: 1
-    'firstjoin':
-      Enabled: true
-      Sound: FIREWORK_LAUNCH
-      Volume: 1
-      Pitch: 1
-    '1':
-      Permission: OnJoin.JoinSound.1
-      Sound: FIREWORK_LAUNCH
-      Volume: 1
-      Pitch: 1
-  Quit:
-    'default':
-      Enabled: true
-      Sound: BAT_DEATH
-      Volume: 1
-      Pitch: 1
-    'firstjoin':
-      Enabled: true
-      Sound: BAT_DEATH
-      Volume: 1
-      Pitch: 1
-    '1':
-      Permission: OnJoin.QuitSound.1
-      Sound: BAT_DEATH
-      Volume: 1
-      Pitch: 1
+##########################
+##    Join Settings     ##
+##########################
 
 #Titel in the middle of the screen
 Title:
@@ -114,7 +83,101 @@ Join:
   ChatClearOn: true
   JoinMessageOn: true
 
-#Firework section
+#Message on the actionbar
+Actionbar:
+  ActionbarOnJoin: true
+
+
+#Should there be a message to all players when a player leaves the server
+Quit:
+  QuitMessageOn: true
+
+
+###################
+##     Spawn     ##
+###################
+
+
+#Should Players that join be teleported to a location
+SpawnLocation:
+  'default':
+    Enabled: false
+    World: world
+    XCoord: 0
+    YCoord: 0
+    ZCoord: 0
+    Yaw: 0
+    Pitch: 0
+  'firstjoin':
+    Enabled: false
+    World: world
+    XCoord: 0
+    YCoord: 0
+    ZCoord: 0
+    Yaw: 0
+    Pitch: 0
+  '1':
+    Permission: OnJoin.Spawn.1
+    World: world
+    XCoord: 0
+    YCoord: 0
+    ZCoord: 0
+    Yaw: 0
+    Pitch: 0
+
+
+######################
+##     Commands     ##
+######################
+
+
+#Execute commands after join
+ExecuteCommand:
+  'default':
+    Enabled: false
+    Commands:
+      - 'console;say %player% Hello! Change this in Config!'
+      - 'player;help'
+  'firstjoin':
+    Enabled: false
+    Commands:
+      - 'console;say %player% Hello! Change this in Config!'
+      - 'player;help'
+  '1':
+    Permission: OnJoin.ExecuteCommand
+    Commands:
+      - 'console;say %player% Hello! Change this in Config!'
+      - 'player;help'
+
+
+##################
+##     Heal     ##
+##################
+
+
+#Should the Player that join heal
+Heal:
+  'default':
+    Enabled: true
+    Health: 20
+    FoodLevel: 20
+    ClearPotionEffects: true
+  'firstjoin':
+    Enabled: true
+    Health: 20
+    FoodLevel: 20
+    ClearPotionEffects: true
+  '1':
+    Permission: OnJoin.Heal.1
+    Health: 20
+    FoodLevel: 20
+    ClearPotionEffects: true
+
+
+######################
+##     Firework     ##
+######################
+
 Firework:
   #Should a player have a Firework when he joins?
   'default':
@@ -158,79 +221,45 @@ Firework:
     Fade:
       - WHITE
 
-#Should the Player that join heal
-Heal:
-  'default':
-    Enabled: true
-    Health: 20
-    FoodLevel: 20
-    ClearPotionEffects: true
-  'firstjoin':
-    Enabled: true
-    Health: 20
-    FoodLevel: 20
-    ClearPotionEffects: true
-  '1':
-    Permission: OnJoin.Heal.1
-    Health: 20
-    FoodLevel: 20
-    ClearPotionEffects: true
 
+####################
+##     Sounds     ##
+####################
 
-#Execute commands after join
-ExecuteCommand:
-  'default':
-    Enabled: false
-    Commands:
-      - 'console;say %player% Hello! Change this in Config!'
-      - 'player;help'
-  'firstjoin':
-    Enabled: false
-    Commands:
-      - 'console;say %player% Hello! Change this in Config!'
-      - 'player;help'
-  '1':
-    Permission: OnJoin.ExecuteCommand
-    Commands:
-      - 'console;say %player% Hello! Change this in Config!'
-      - 'player;help'
+Sounds:
+  Join:
+    'default':
+      Enabled: true
+      Sound: FIREWORK_LAUNCH
+      Volume: 1
+      Pitch: 1
+    'firstjoin':
+      Enabled: true
+      Sound: FIREWORK_LAUNCH
+      Volume: 1
+      Pitch: 1
+    '1':
+      Permission: OnJoin.JoinSound.1
+      Sound: FIREWORK_LAUNCH
+      Volume: 1
+      Pitch: 1
+  Quit:
+    'default':
+      Enabled: true
+      Sound: BAT_DEATH
+      Volume: 1
+      Pitch: 1
+    'firstjoin':
+      Enabled: true
+      Sound: BAT_DEATH
+      Volume: 1
+      Pitch: 1
+    '1':
+      Permission: OnJoin.QuitSound.1
+      Sound: BAT_DEATH
+      Volume: 1
+      Pitch: 1
 
-#Message on the actionbar
-Actionbar:
-  ActionbarOnJoin: true
-
-
-#Should there be a message to all players when a player leaves the server
-Quit:
-  QuitMessageOn: true
-
-
-#Should Players that join be teleported to a location
-SpawnLocation:
-  'default':
-    Enabled: false
-    World: world
-    XCoord: 0
-    YCoord: 0
-    ZCoord: 0
-    Yaw: 0
-    Pitch: 0
-  'firstjoin':
-    Enabled: false
-    World: world
-    XCoord: 0
-    YCoord: 0
-    ZCoord: 0
-    Yaw: 0
-    Pitch: 0
-  '1':
-    Permission: OnJoin.Spawn.1
-    World: world
-    XCoord: 0
-    YCoord: 0
-    ZCoord: 0
-    Yaw: 0
-    Pitch: 0
 
 
 ##########################
@@ -239,7 +268,7 @@ SpawnLocation:
 
 
 # Don't modify.
-Version: 5
+Version: 6
 
 
 # No way! You've reached the end! Let us join!?

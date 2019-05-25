@@ -50,16 +50,10 @@ FirstJoin:
     Title1: '&bCC&3SW'
     SubTitle1: '&eFirstJoin'
     SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
-  #Should there be a message to all players when a player enters the server
-  Join:
-    JoinMessage: '&7%player% has joined the Server'
   #Message on the actionbar
   Actionbar:
     Actionbar1: '&7Welcome %player%!'
     Actionbar2: '&7 CC-SW Network'
-  #Should there be a message to all players when a player leaves the server
-  Quit:
-    QuitMessage: '&7%player% has left the Server'
 
 
 ########################
@@ -130,25 +124,38 @@ WelcomeMessage:
 
 
 #Should there be a message to all players when a player enters the server
-Join:
+Messages:
   UpdateMessageText:
     - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
     - '&c|  New Update is avaible! You can'
     - '&c|  download at SpigotMC!'
     - '&c|  https://www.spigotmc.org/resources/56907/'
     - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
-  JoinMessage: '&7%player% has joined the Server'
-
+  Join:
+    'default':
+      Enabled: true
+      Message: '%player% joined the server'
+    'firstjoin':
+      Enabled: true
+      Message: '%player% joined the first time'
+    '1':
+      Permission: OnJoin.JoinMessage.1
+      Message: '%player% the owner joined'
+  Quit:
+    'default':
+      Enabled: true
+      Message: '%player% left the server'
+    'firstjoin':
+      Enabled: true
+      Message: '%player% left the first time'
+    '1':
+      Permission: OnJoin.QuitMessage.1
+      Message: '%player% pro left'
 
 #Message on the actionbar
 Actionbar:
   Actionbar1: '&7Welcome %player%!'
   Actionbar2: '&7 CC-SW Network'
-
-
-#Should there be a message to all players when a player leaves the server
-Quit:
-  QuitMessage: '&7%player% has left the Server'
 
 
 #Should Players that join be teleported to a location
@@ -165,4 +172,4 @@ SpawnLocation:
 
 # Don't edit it. But who's stopping you? It's your server!
 # Really, don't edit ;p
-File-Version-Do-Not-Edit: 5
+File-Version-Do-Not-Edit: 6
