@@ -35,6 +35,11 @@ public class JoinQuitListener implements Listener {
     private double spawnlocationz;
     private int spawnlocationyaw;
     private int spawnlocationpitch;
+    private String joinsound;
+    private Integer joinvolume;
+    private Integer joinpitch;
+    private boolean joinsoundon;
+
 
     public JoinQuitListener(Main plugin) {
         this.plugin = plugin;
@@ -46,8 +51,6 @@ public class JoinQuitListener implements Listener {
         Player p = e.getPlayer();
         Storage.DataOnJoin(p);
         boolean chatclearon;
-        boolean joinsoundon;
-        String joinsound;
         boolean joinmessageon;
         String joinmessage;
         boolean titleonjoin;
@@ -62,11 +65,10 @@ public class JoinQuitListener implements Listener {
         WelcomeMessageText = welcomeMessage(p);
         healthvalues(p);
         spawnvalues(p);
+        joinsoundvalues(p);
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
             Utils.debugmessage("Loading First join for " + p.getName());
             chatclearon = plugin.getConfig().getBoolean("FirstJoin.Join.ChatClearOn");
-            joinsoundon = plugin.getConfig().getBoolean("FirstJoin.Join.JoinSoundOn");
-            joinsound = plugin.getConfig().getString("FirstJoin.Join.JoinSound");
             joinmessageon = plugin.getConfig().getBoolean("FirstJoin.Join.JoinMessageOn");
             joinmessage = Utils.colorMessage("FirstJoin.Join.JoinMessage");
             titleonjoin = plugin.getConfig().getBoolean("FirstJoin.Title.TitleOnJoin");
@@ -80,8 +82,6 @@ public class JoinQuitListener implements Listener {
         } else {
             Utils.debugmessage("Loading normal join for " + p.getName());
             chatclearon = plugin.getConfig().getBoolean("Join.ChatClearOn");
-            joinsoundon = plugin.getConfig().getBoolean("Join.JoinSoundOn");
-            joinsound = plugin.getConfig().getString("Join.JoinSound");
             joinmessageon = plugin.getConfig().getBoolean("Join.JoinMessageOn");
             joinmessage = Utils.colorMessage("Join.JoinMessage");
             titleonjoin = plugin.getConfig().getBoolean("Title.TitleOnJoin");
@@ -104,7 +104,7 @@ public class JoinQuitListener implements Listener {
             p.teleport(SpawnLocation);
         }
         if(joinsoundon) {
-            p.playSound(p.getLocation(), Sound.valueOf(joinsound), 3, 1);
+            p.playSound(p.getLocation(), Sound.valueOf(joinsound), joinvolume, joinpitch);
             Utils.debugmessage("Send sound to " + p.getName());
         }
         if(joinmessageon) {
@@ -308,6 +308,42 @@ public class JoinQuitListener implements Listener {
             MessageUtils.errorOccurred();
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the spawnvalues"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            ex.printStackTrace();
+        }
+    }
+
+    private void joinsoundvalues(Player player) {
+        try {
+            ConfigurationSection section = plugin.getConfig().getConfigurationSection("Sounds.Join");
+            for(String key : section.getKeys(false)) {
+                if(!key.equals("default")) {
+                    if(key.equals("firstjoin")) {
+                        if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            joinsoundon = plugin.getConfig().getBoolean("Sounds.Join." + key + ".Enabled");
+                            joinsound = plugin.getConfig().getString("Sounds.Join." + key + ".Sound");
+                            joinvolume = plugin.getConfig().getInt("Sounds.Join." + key + ".Volume");
+                            joinpitch = plugin.getConfig().getInt("Sounds.Join." + key + ".Pitch");
+                            break;
+                        }
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("SpawnLocation." + key + ".Permission"))) {
+                        joinsound = plugin.getConfig().getString("Sounds.Join." + key + ".Sound");
+                        joinvolume = plugin.getConfig().getInt("Sounds.Join." + key + ".Volume");
+                        joinpitch = plugin.getConfig().getInt("Sounds.Join." + key + ".Pitch");
+                        joinsoundon = true;
+                        break;
+                    }
+                }
+            }
+            joinsoundon = plugin.getConfig().getBoolean("Sounds.Join." + "default" + ".Enabled");
+            joinsound = plugin.getConfig().getString("Sounds.Join." + "default" + ".Sound");
+            joinvolume = plugin.getConfig().getInt("Sounds.Join." + "default" + ".Volume");
+            joinpitch = plugin.getConfig().getInt("Sounds.Join." + "default" + ".Pitch");
+
+        } catch(Exception ex) {
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the soundvalues"));
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
             ex.printStackTrace();
         }

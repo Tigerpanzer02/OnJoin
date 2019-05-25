@@ -53,24 +53,48 @@ FirstJoin:
     #Should the chat be cleaned up by the player at the beginning?
     ChatClearOn: true
     JoinMessageOn: true
-    #Should there be a sound
-    JoinSoundOn: false
-    JoinSound: FIREWORK_LAUNCH
   #Message on the actionbar
   Actionbar:
     ActionbarOnJoin: true
   #Should there be a message to all players when a player leaves the server
   Quit:
     QuitMessageOn: true
-    #Should there be a sound
-    QuitSoundOn: false
-    QuitSound: BAT_DEATH
 
+##############################
 
-########################
-##    Normal Join     ##
-########################
-
+Sounds:
+  Join:
+    'default':
+      Enabled: true
+      Sound: FIREWORK_LAUNCH
+      Volume: 1
+      Pitch: 1
+    'firstjoin':
+      Enabled: true
+      Sound: FIREWORK_LAUNCH
+      Volume: 1
+      Pitch: 1
+    '1':
+      Permission: OnJoin.JoinSound.1
+      Sound: FIREWORK_LAUNCH
+      Volume: 1
+      Pitch: 1
+  Quit:
+    'default':
+      Enabled: true
+      Sound: BAT_DEATH
+      Volume: 1
+      Pitch: 1
+    'firstjoin':
+      Enabled: true
+      Sound: BAT_DEATH
+      Volume: 1
+      Pitch: 1
+    '1':
+      Permission: OnJoin.QuitSound.1
+      Sound: BAT_DEATH
+      Volume: 1
+      Pitch: 1
 
 #Titel in the middle of the screen
 Title:
@@ -89,9 +113,6 @@ Join:
   #Should the chat be cleaned up by the player at the beginning?
   ChatClearOn: true
   JoinMessageOn: true
-  #Should there be a sound
-  JoinSoundOn: false
-  JoinSound: FIREWORK_LAUNCH
 
 #Firework section
 Firework:
@@ -182,9 +203,6 @@ Actionbar:
 #Should there be a message to all players when a player leaves the server
 Quit:
   QuitMessageOn: true
-  #Should there be a sound
-  QuitSoundOn: false
-  QuitSound: BAT_DEATH
 
 
 #Should Players that join be teleported to a location
