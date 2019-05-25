@@ -72,6 +72,8 @@ Title:
 WelcomeMessage:
   #You can add and remove as many lines as you like!
   'default':
+    Enabled: true
+    ChatClear: true
     Text:
       - '&e------------------------------------'
       - '&e|  '
@@ -84,6 +86,8 @@ WelcomeMessage:
       - '&e|  '
       - '&e------------------------------------'
   'firstjoin':
+    Enabled: true
+    ChatClear: true
     Text:
       - '&e------------------------------------'
       - '&e|  '
@@ -96,7 +100,8 @@ WelcomeMessage:
       - '&e|  '
       - '&e------------------------------------'
   '1':
-    Permission: OnJoin.welcomemessage.default
+    Permission: OnJoin.welcomemessage.first
+    ChatClear: true
     Text:
       - '&e------------------------------------'
       - '&e|  '

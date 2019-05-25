@@ -41,6 +41,8 @@ public class JoinQuitListener implements Listener {
     private boolean joinsoundon;
     private boolean joinmessageon;
     private String joinmessage;
+    private boolean chatclearon;
+    private boolean welcomemessageon;
 
     public JoinQuitListener(Main plugin) {
         this.plugin = plugin;
@@ -51,7 +53,6 @@ public class JoinQuitListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         Storage.DataOnJoin(p);
-        boolean chatclearon;
         boolean titleonjoin;
         String title1;
         String subtitle1;
@@ -59,7 +60,6 @@ public class JoinQuitListener implements Listener {
         boolean actionbaronjoin;
         String actionbar1;
         String actionbar2;
-        boolean welcomemessageon;
         List<String> WelcomeMessageText;
         WelcomeMessageText = welcomeMessage(p);
         healthvalues(p);
@@ -68,7 +68,6 @@ public class JoinQuitListener implements Listener {
         messagesvalues(p, true);
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
             Utils.debugmessage("Loading First join for " + p.getName());
-            chatclearon = plugin.getConfig().getBoolean("FirstJoin.Join.ChatClearOn");
             titleonjoin = plugin.getConfig().getBoolean("FirstJoin.Title.TitleOnJoin");
             title1 = Utils.colorMessage("FirstJoin.Title.Title1");
             subtitle1 = Utils.colorMessage("FirstJoin.Title.SubTitle1");
@@ -76,10 +75,8 @@ public class JoinQuitListener implements Listener {
             actionbaronjoin = plugin.getConfig().getBoolean("FirstJoin.Actionbar.ActionbarOnJoin");
             actionbar1 = Utils.colorMessage("FirstJoin.Actionbar.Actionbar1");
             actionbar2 = Utils.colorMessage("FirstJoin.Actionbar.Actionbar2");
-            welcomemessageon = plugin.getConfig().getBoolean("FirstJoin.WelcomeMessage.WelcomeMessageOn");
         } else {
             Utils.debugmessage("Loading normal join for " + p.getName());
-            chatclearon = plugin.getConfig().getBoolean("Join.ChatClearOn");
             titleonjoin = plugin.getConfig().getBoolean("Title.TitleOnJoin");
             title1 = Utils.colorMessage("Title.Title1");
             subtitle1 = Utils.colorMessage("Title.SubTitle1");
@@ -87,7 +84,6 @@ public class JoinQuitListener implements Listener {
             actionbaronjoin = plugin.getConfig().getBoolean("Actionbar.ActionbarOnJoin");
             actionbar1 = Utils.colorMessage("Actionbar.Actionbar1");
             actionbar2 = Utils.colorMessage("Actionbar.Actionbar2");
-            welcomemessageon = plugin.getConfig().getBoolean("WelcomeMessage.WelcomeMessageOn");
         }
         if(chatclearon) {
             for(int i = 0; i < 200; i++) {
@@ -197,16 +193,22 @@ public class JoinQuitListener implements Listener {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
                             Utils.debugmessage("Send Firstjoin welcome");
+                            chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "ChatClear");
+                            chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "Enabled");
                             return LanguageManager.getLanguageList("WelcomeMessage.firstjoin.Text");
                         }
                         Utils.debugmessage("FirstJoin is disabled or the player joined has already joined");
                     } else if(player.hasPermission(LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission"))) {
                         Utils.debugmessage("Player permission " + LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission") + " = " + player.hasPermission(LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission")));
+                        chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "ChatClear");
+                        chatclearon = true;
                         return LanguageManager.getLanguageList("WelcomeMessage." + key + ".Text");
                     }
                 }
             }
             Utils.debugmessage("Send default welcome");
+            chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + "default" + "ChatClear");
+            chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + "default" + "Enabled");
             return LanguageManager.getLanguageList("WelcomeMessage.default.Text");
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
