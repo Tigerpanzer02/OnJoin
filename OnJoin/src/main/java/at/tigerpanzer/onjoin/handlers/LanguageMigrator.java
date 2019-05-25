@@ -28,8 +28,8 @@ import java.util.List;
 public class LanguageMigrator {
 
 
-    private static final int LANGUAGE_FILE_VERSION = 5;
-    private static final int CONFIG_FILE_VERSION = 5;
+    private static final int LANGUAGE_FILE_VERSION = 6;
+    private static final int CONFIG_FILE_VERSION = 6;
     private static Main plugin = JavaPlugin.getPlugin(Main.class);
     private static List<String> migratable = Arrays.asList("config", "language");
 
