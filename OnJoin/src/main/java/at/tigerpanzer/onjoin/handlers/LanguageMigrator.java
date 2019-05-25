@@ -91,7 +91,7 @@ public class LanguageMigrator {
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Don't worry! Old files will be renamed not overridden!");
         for(String file : migratable) {
             if(Utils.getFile(plugin, file).exists()) {
-                Utils.getFile(plugin, file).renameTo(new File(plugin.getDataFolder(), "old_" + file + ".yml"));
+                Utils.getFile(plugin, file).renameTo(new File(plugin.getDataFolder(), "before210_" + file + ".yml"));
                 Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Renamed file " + file + ".yml");
             }
         }
