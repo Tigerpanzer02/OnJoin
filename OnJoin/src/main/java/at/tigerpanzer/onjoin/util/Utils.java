@@ -58,6 +58,7 @@ public class Utils {
             ex.printStackTrace();
             Bukkit.getConsoleSender().sendMessage("Cannot load file " + filename + ".yml!");
             Bukkit.getConsoleSender().sendMessage("Create blank file " + filename + ".yml or restart the server!");
+            Bukkit.getPluginManager().disablePlugin(plugin);
         }
         return config;
     }
@@ -106,7 +107,7 @@ public class Utils {
     }
 
     public static void debugmessage(String message) {
-        if(plugin.getConfig().getBoolean("debug")) {
+        if(plugin.getConfig().getBoolean("debug", false)) {
             String consolePrefix = "[OnJoin | Debug] ";
             Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + message));
         }

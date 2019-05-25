@@ -50,30 +50,10 @@ FirstJoin:
     Title1: '&bCC&3SW'
     SubTitle1: '&eFirstJoin'
     SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
-  #Welcome Message in the Chat
-  WelcomeMessage:
-    #You can add and remove as many lines as you like!
-    WelcomeMessageText:
-      - '&e------------------------------------'
-      - '&e|  '
-      - '&e|  Heey, &a%player%&7!'
-      - '&e|  &eWelcome to our Server!'
-      - '&e|  '
-      - '&e|  &eOnJoin &8- &7Your Join Plugin'
-      - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Your Network @CC-SW'
-      - '&e|  '
-      - '&e------------------------------------'
-  #Should there be a message to all players when a player enters the server
-  Join:
-    JoinMessage: '&7%player% has joined the Server'
   #Message on the actionbar
   Actionbar:
     Actionbar1: '&7Welcome %player%!'
     Actionbar2: '&7 CC-SW Network'
-  #Should there be a message to all players when a player leaves the server
-  Quit:
-    QuitMessage: '&7%player% has left the Server'
 
 
 ########################
@@ -88,42 +68,10 @@ Title:
   SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
 
 
-#Welcome Message in the Chat
-WelcomeMessage:
-  #You can add and remove as many lines as you like!
-  WelcomeMessageText:
-    - '&e------------------------------------'
-    - '&e|  '
-    - '&e|  Heey, &a%player%&7!'
-    - '&e|  &eWelcome to our Server!'
-    - '&e|  '
-    - '&e|  &eOnJoin &8- &7Your Join Plugin'
-    - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-    - '&e|  &7Your Network @CC-SW'
-    - '&e|  '
-    - '&e------------------------------------'
-
-
-#Should there be a message to all players when a player enters the server
-Join:
-  UpdateMessageText:
-    - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
-    - '&c|  New Update is avaible! You can'
-    - '&c|  download at SpigotMC!'
-    - '&c|  https://www.spigotmc.org/resources/56907/'
-    - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
-  JoinMessage: '&7%player% has joined the Server'
-
-
 #Message on the actionbar
 Actionbar:
   Actionbar1: '&7Welcome %player%!'
   Actionbar2: '&7 CC-SW Network'
-
-
-#Should there be a message to all players when a player leaves the server
-Quit:
-  QuitMessage: '&7%player% has left the Server'
 
 
 #Should Players that join be teleported to a location
@@ -131,6 +79,107 @@ SpawnLocation:
   SetSpawnMessageSetTo: '&aSpawn set to&7: '
   SetSpawnMessageYaw: '&2Yaw&7: '
   SetSpawnMessagePitch: '&2Pitch&7: '
+
+############################
+##    Welcome Message     ##
+############################
+
+
+#Welcome Message in the Chat
+WelcomeMessage:
+  #You can add and remove as many lines as you like!
+  'default':
+    Enabled: true
+    ChatClear: true
+    Text:
+      - '&e------------------------------------'
+      - '&e|  '
+      - '&e|  Heey, &a%player%&7!'
+      - '&e|  &eWelcome to our Server!'
+      - '&e|  Default'
+      - '&e|  &eOnJoin &8- &7Your Join Plugin'
+      - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
+      - '&e|  &7Your Network @CC-SW'
+      - '&e|  '
+      - '&e------------------------------------'
+  'firstjoin':
+    Enabled: true
+    ChatClear: true
+    Text:
+      - '&e------------------------------------'
+      - '&e|  '
+      - '&e|  Heey, &a%player%&7!'
+      - '&e|  &eWelcome to our Server!'
+      - '&e|  Firstjoin'
+      - '&e|  &eOnJoin &8- &7Your Join Plugin'
+      - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
+      - '&e|  &7Your Network @CC-SW'
+      - '&e|  '
+      - '&e------------------------------------'
+  '1':
+    Permission: OnJoin.welcomemessage.first
+    ChatClear: true
+    Text:
+      - '&e------------------------------------'
+      - '&e|  '
+      - '&e|  Heey, &a%player%&7!'
+      - '&e|  &eWelcome to our Server!'
+      - '&e|  1'
+      - '&e|  &eOnJoin &8- &7Your Join Plugin'
+      - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
+      - '&e|  &7Your Network @CC-SW'
+      - '&e|  '
+      - '&e------------------------------------'
+  '2':
+    Permission: OnJoin.welcomemessage.example
+    Text:
+      - '&e------------------------------------'
+      - '&e|  Message with permission OnJoin.welcomemessage.example'
+      - '&e|  Heey, &a%player%&7!'
+      - '&e|  &eWelcome to our Server!'
+      - '&e|  2'
+      - '&e|  &eOnJoin &8- &7Your Join Plugin'
+      - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
+      - '&e|  &7Your Network @CC-SW'
+      - '&e|  '
+      - '&e------------------------------------'
+
+
+#####################
+##    Messages     ##
+#####################
+
+
+#Should there be a message to all players when a player enters the server
+Messages:
+  UpdateMessageText:
+    - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
+    - '&c|  New Update is avaible! You can'
+    - '&c|  download at SpigotMC!'
+    - '&c|  https://www.spigotmc.org/resources/56907/'
+    - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
+  Join:
+    'default':
+      Enabled: true
+      Message: '%player% joined the server'
+    'firstjoin':
+      Enabled: true
+      Message: '%player% joined the first time'
+    '1':
+      Permission: OnJoin.JoinMessage.1
+      Message: '%player% the owner joined'
+  Quit:
+    'default':
+      Enabled: true
+      Message: '%player% left the server'
+    'firstjoin':
+      Enabled: true
+      Message: '%player% left the first time'
+    '1':
+      Permission: OnJoin.QuitMessage.1
+      Message: '%player% pro left'
+
+
 
 
 ##########################
@@ -140,4 +189,4 @@ SpawnLocation:
 
 # Don't edit it. But who's stopping you? It's your server!
 # Really, don't edit ;p
-File-Version-Do-Not-Edit: 1
+File-Version-Do-Not-Edit: 6

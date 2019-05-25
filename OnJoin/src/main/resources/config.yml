@@ -23,7 +23,8 @@ debug: false
 MySQL:
   Enabled: false
   #Should the MySQL connection reconnect after amount of time?
-  AutoReconnect: false
+  AutoReconnect:
+    Enabled: false
     #Time in Minutes
     ReconnectCoolDown: 45
   Username: accountname
@@ -33,9 +34,9 @@ MySQL:
   Port: '3306'
 
 
-########################
-##     First Join     ##
-########################
+################################
+##     First Join Settings    ##
+################################
 
 
 #Here you can enable FirstJoin stuff
@@ -44,62 +45,74 @@ FirstJoin:
   #Titel in the middle of the screen
   Title:
     TitleOnJoin: true
-  #Welcome Message in the Chat
-  WelcomeMessage:
-    WelcomeMessageOn: true
-  #Should there be a message to all players when a player enters the server
-  Join:
-    #Should it sends a message to Player with the Permission
-    UpdateMessageOn: true
-    #Should the chat be cleaned up by the player at the beginning?
-    ChatClearOn: true
-    #Should the Player with Permission OnJoin.* or OnJoin.Firework have a Firework when he joins?
-    FireworkOn: true
-    Firework:
-      InstantExplode: false
-      Amount: 3
-      FireworkHeight: 3
-      Power: 1
-      Type: BALL
-      Flicker: false
-      Trail: false
-      Colors:
-      - YELLOW
-      Fade:
-      - WHITE
-    JoinMessageOn: true
-    #Should there be a sound
-    JoinSoundOn: false
-    JoinSound: FIREWORK_LAUNCH
-  #Should the Player that join heal
-  Heal:
-    HealOn: true
-    Health: 20
-    FoodLevel: 20
-    ClearPotionEffects: true
-    #Should the Player that join with Permission heal
-    HealOnWithPermission: true
-    HealthWithPermission: 20
-    FoodLevelWithPermission: 20
-    ClearPotionEffectsWithPermission: true
-  #Execute Commands after Join
-  ExecuteCommand:
-    CommandOn: false
-    Commands:
-    - 'console;say %player% Hello! Change this in Config!'
-    - 'player;help'
   #Message on the actionbar
   Actionbar:
     ActionbarOnJoin: true
-  #Should there be a message to all players when a player leaves the server
-  Quit:
-    QuitMessageOn: true
-    #Should there be a sound
-    QuitSoundOn: false
-    QuitSound: BAT_DEATH
-  #Should Players that join be teleported to a location
-  SpawnLocation:
-    SpawnLocationEnable: false
+
+
+##########################
+##    Join Settings     ##
+##########################
+
+
+#Enable titel in the middle of the screen
+Title:
+  TitleOnJoin: true
+
+#Enable join update message (only with the update permission)
+Join:
+  UpdateMessageOn: true
+
+#Enable message on the actionbar
+Actionbar:
+  ActionbarOnJoin: true
+
+
+####################################
+##     Additional Information     ##
+####################################
+
+
+#For better understanding I will try to explain the following configuration parts!
+#In every section you can add 'default' and 'firstjoin'
+#They will be the ground function: firstjoin for firstjoin and default for default
+#The categories default and firstjoin you can Enable with true
+#The other categories that you can self add like you want become the option to set a Permission
+#If you don´t need more than default and firstjoin feel free to remove the category '1'
+#You can add as much categories as you like! But please keep in mind to order it in the right way:
+#It should be default and firstjoin first after that the highest permission because the plugin is checking the
+#permissions. It will search for every permission that the user have, so it would only work right if you
+#add the category with the highest rank above the others that you add
+#Possible questions:
+#Why is there no Enable function for self added categories?
+# - You don´t need an enable function because the added categories will automatically enabled
+# - If you not need one of your categories you can remove them to disable or give a permission that no one has
+
+###################
+##     Spawn     ##
+###################
+
+
+#Should Players that join be teleported to a location
+SpawnLocation:
+  'default':
+    Enabled: false
+    World: world
+    XCoord: 0
+    YCoord: 0
+    ZCoord: 0
+    Yaw: 0
+    Pitch: 0
+  'firstjoin':
+    Enabled: false
+    World: world
+    XCoord: 0
+    YCoord: 0
+    ZCoord: 0
+    Yaw: 0
+    Pitch: 0
+  '1':
+    Permission: OnJoin.Spawn.1
     World: world
     XCoord: 0
     YCoord: 0
@@ -108,30 +121,63 @@ FirstJoin:
     Pitch: 0
 
 
-########################
-##    Normal Join     ##
-########################
+######################
+##     Commands     ##
+######################
 
 
-#Titel in the middle of the screen
-Title:
-  TitleOnJoin: true
+#Execute commands after join
+ExecuteCommand:
+  'default':
+    Enabled: false
+    Commands:
+      - 'console;say %player% Hello! Change this in Config!'
+      - 'player;help'
+  'firstjoin':
+    Enabled: false
+    Commands:
+      - 'console;say %player% Hello! Change this in Config!'
+      - 'player;help'
+  '1':
+    Permission: OnJoin.ExecuteCommand
+    Commands:
+      - 'console;say %player% Hello! Change this in Config!'
+      - 'player;help'
 
 
-#Welcome Message in the Chat
-WelcomeMessage:
-  WelcomeMessageOn: true
+##################
+##     Heal     ##
+##################
 
 
-#Should there be a message to all players when a player enters the server
-Join:
-  #Should it sends a message to Player with the Permission
-  UpdateMessageOn: true
-  #Should the chat be cleaned up by the player at the beginning?
-  ChatClearOn: true
-  #Should the Player with Permission OnJoin.* or OnJoin.Firework have a Firework when he joins?
-  FireworkOn: true
-  Firework:
+#Should the Player that join heal
+Heal:
+  'default':
+    Enabled: true
+    Health: 20
+    FoodLevel: 20
+    ClearPotionEffects: true
+  'firstjoin':
+    Enabled: true
+    Health: 20
+    FoodLevel: 20
+    ClearPotionEffects: true
+  '1':
+    Permission: OnJoin.Heal.1
+    Health: 20
+    FoodLevel: 20
+    ClearPotionEffects: true
+
+
+######################
+##     Firework     ##
+######################
+
+
+Firework:
+  #Should a player spawn a Firework when he joins?
+  'default':
+    Enabled: true
     InstantExplode: false
     Amount: 3
     FireworkHeight: 3
@@ -140,58 +186,78 @@ Join:
     Flicker: false
     Trail: false
     Colors:
-    - YELLOW
+      - YELLOW
     Fade:
-    - WHITE
-  JoinMessageOn: true
-  #Should there be a sound
-  JoinSoundOn: false
-  JoinSound: FIREWORK_LAUNCH
+      - WHITE
+  'firstjoin':
+    Enabled: true
+    InstantExplode: false
+    Amount: 3
+    FireworkHeight: 3
+    Power: 1
+    Type: BALL
+    Flicker: false
+    Trail: false
+    Colors:
+      - YELLOW
+    Fade:
+      - WHITE
+  #Should a player with custom permission spawn a Firework when he joins?
+  '1':
+    Permission: OnJoin.Firework.1
+    InstantExplode: false
+    Amount: 3
+    FireworkHeight: 3
+    Power: 1
+    Type: BALL
+    Flicker: false
+    Trail: false
+    Colors:
+      - YELLOW
+    Fade:
+      - WHITE
 
 
-#Should the Player that join heal
-Heal:
-  HealOn: true
-  Health: 20
-  FoodLevel: 20
-  ClearPotionEffects: true
-#Should the Player that join with Permission heal
-  HealOnWithPermission: true
-  HealthWithPermission: 20
-  FoodLevelWithPermission: 20
-  ClearPotionEffectsWithPermission: true
+####################
+##     Sounds     ##
+####################
 
 
-#Execute Commands after Join
-ExecuteCommand:
-  CommandOn: false
-  Commands:
-    - 'console;say %player% Hello! Change this in Config!'
-    - 'player;help'
+Sounds:
+  Join:
+    'default':
+      Enabled: true
+      Sound: ENTITY_FIREWORK_BLAST
+      Volume: 1
+      Pitch: 1
+    'firstjoin':
+      Enabled: true
+      Sound: ENTITY_FIREWORK_BLAST
+      Volume: 1
+      Pitch: 1
+    '1':
+      Permission: OnJoin.JoinSound.1
+      Sound: ENTITY_FIREWORK_BLAST
+      Volume: 1
+      Pitch: 1
+  Quit:
+    'default':
+      Enabled: true
+      Sound: ENTITY_BAT_DEATH
+      Volume: 1
+      Pitch: 1
+    'firstjoin':
+      Enabled: true
+      Sound: ENTITY_BAT_DEATH
+      Volume: 1
+      Pitch: 1
+    '1':
+      Permission: OnJoin.QuitSound.1
+      Sound: ENTITY_BAT_DEATH
+      Volume: 1
+      Pitch: 1
 
 
-#Message on the actionbar
-Actionbar:
-  ActionbarOnJoin: true
-
-
-#Should there be a message to all players when a player leaves the server
-Quit:
-  QuitMessageOn: true
-  #Should there be a sound
-  QuitSoundOn: false
-  QuitSound: BAT_DEATH
-
-
-#Should Players that join be teleported to a location
-SpawnLocation:
-  SpawnLocationEnable: false
-  World: world
-  XCoord: 0
-  YCoord: 0
-  ZCoord: 0
-  Yaw: 0
-  Pitch: 0
 
 
 ##########################
@@ -200,6 +266,7 @@ SpawnLocation:
 
 
 # Don't modify.
-Version: 3
+Version: 6
+
 
 # No way! You've reached the end! Let us join!?
