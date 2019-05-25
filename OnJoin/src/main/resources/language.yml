@@ -84,7 +84,7 @@ SpawnLocation:
 ##    Welcome Message     ##
 ############################
 
-
+#If you don´t understand this parts of config have a look on the config.yml under section Additional Informations
 #Welcome Message in the Chat
 WelcomeMessage:
   #You can add and remove as many lines as you like!
