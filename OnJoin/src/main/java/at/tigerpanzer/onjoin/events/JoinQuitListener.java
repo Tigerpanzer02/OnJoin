@@ -144,8 +144,8 @@ public class JoinQuitListener implements Listener {
         }, 65L);
         if(plugin.needUpdateJoin()) {
             Utils.debugmessage("Plugin needs update ");
-            if((p.hasPermission("OnJoin.UpdateMessage"))) {
-                if(plugin.getConfig().getBoolean("Join.UpdateMessageOn")) {
+            if(plugin.getConfig().getBoolean("Join.UpdateMessageOn")) {
+                if((p.hasPermission("OnJoin.UpdateMessage"))) {
                     List<String> UpdateMessageText = LanguageManager.getLanguageList("Join.UpdateMessageText");
                     for(String msg : UpdateMessageText) {
                         p.sendMessage(Utils.setPlaceholders(p, msg));
