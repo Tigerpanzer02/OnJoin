@@ -95,10 +95,6 @@ public class JoinQuitListener implements Listener {
             Utils.debugmessage("Teleporting " + p.getName() + " to " + SpawnLocation);
             p.teleport(SpawnLocation);
         }
-        if(joinsoundon) {
-            p.playSound(p.getLocation(), Sound.valueOf(joinsound), joinvolume, joinpitch);
-            Utils.debugmessage("Send sound to " + p.getName());
-        }
         if(joinmessageon) {
             e.setJoinMessage(Utils.setPlaceholders(p, joinmessage));
             Utils.debugmessage("Join messaged send to all for " + p.getName());
@@ -148,6 +144,17 @@ public class JoinQuitListener implements Listener {
         if(plugin.oldversion) {
             p.sendMessage(Utils.color("&e--------- &7[&4UPGRADE &7| &eOnJoin&7]&e --------- \n" + "&eThis update offers new customisations. Please check your configs!!!\n" + "&cWe detected that you have used a version before 2.1.0! Please have a look on the &dUpdateChanges" + "\n&e--------- &7[&4UPGRADE &7| &eOnJoin&7]&e ---------"));
         }
+        try {
+            if(joinsoundon) {
+                p.playSound(p.getLocation(), Sound.valueOf(joinsound), joinvolume, joinpitch);
+                Utils.debugmessage("Send sound to " + p.getName());
+            }
+        } catch(Exception ex) {
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the sounds | Check your sounds for the server version that you using!"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+        }
     }
 
     private boolean quitsoundon;
@@ -172,15 +179,15 @@ public class JoinQuitListener implements Listener {
             Utils.debugmessage("Saved data to mysql for " + p.getName());
             Storage.DataOnQuit(p);
         }
-        if(quitsoundon) {
-            p.playSound(p.getLocation(), Sound.valueOf(quitsound), quitvolume, quitpitch);
-            Utils.debugmessage("Send Sound to " + p.getName());
-        }
         if(quitmessageon) {
             Utils.debugmessage("Send quitmessage to " + p.getName());
             e.setQuitMessage(Utils.setPlaceholders(p, quitmessage));
         } else {
             e.setQuitMessage("");
+        }
+        if(quitsoundon) {
+            p.playSound(p.getLocation(), Sound.valueOf(quitsound), quitvolume, quitpitch);
+            Utils.debugmessage("Send Sound to " + p.getName());
         }
     }
 

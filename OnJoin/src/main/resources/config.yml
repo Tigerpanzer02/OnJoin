@@ -227,33 +227,33 @@ Sounds:
   Join:
     'default':
       Enabled: true
-      Sound: FIREWORK_LAUNCH
+      Sound: ENTITY_FIREWORK_BLAST
       Volume: 1
       Pitch: 1
     'firstjoin':
       Enabled: true
-      Sound: FIREWORK_LAUNCH
+      Sound: ENTITY_FIREWORK_BLAST
       Volume: 1
       Pitch: 1
     '1':
       Permission: OnJoin.JoinSound.1
-      Sound: FIREWORK_LAUNCH
+      Sound: ENTITY_FIREWORK_BLAST
       Volume: 1
       Pitch: 1
   Quit:
     'default':
       Enabled: true
-      Sound: BAT_DEATH
+      Sound: ENTITY_BAT_DEATH
       Volume: 1
       Pitch: 1
     'firstjoin':
       Enabled: true
-      Sound: BAT_DEATH
+      Sound: ENTITY_BAT_DEATH
       Volume: 1
       Pitch: 1
     '1':
       Permission: OnJoin.QuitSound.1
-      Sound: BAT_DEATH
+      Sound: ENTITY_BAT_DEATH
       Volume: 1
       Pitch: 1
 
