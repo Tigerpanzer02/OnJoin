@@ -47,7 +47,7 @@ public class LanguageManager {
 
 
     private static FileConfiguration getLocaleFile() {
-        if(!plugin.getConfig().get("locale").toString().equalsIgnoreCase("de") && !plugin.getConfig().get("locale").toString().equalsIgnoreCase("en") && !plugin.getConfig().get("locale").toString().equalsIgnoreCase("hu")) {
+        if(!plugin.getConfig().get("locale").toString().equalsIgnoreCase("de") && !plugin.getConfig().get("locale").toString().equalsIgnoreCase("default") && !plugin.getConfig().get("locale").toString().equalsIgnoreCase("hu")) {
             try {
                 return Utils.getConfig(plugin, "language_" + plugin.getConfig().get("locale").toString());
             } catch(Exception ex) {

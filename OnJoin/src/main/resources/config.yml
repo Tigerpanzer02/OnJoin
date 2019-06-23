@@ -7,6 +7,9 @@
 # Available locales:
 #    default - English language. Uses 'language.yml'.
 #    de - Deutsch
+#    hu - hungarian (magyar)
+
+# You can use your own file when you use here ihasdasjdlkal then create a language file in the language folder with the name language_ihasdasjdlkal.yml
 locale: default
 
 
