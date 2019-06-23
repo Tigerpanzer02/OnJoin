@@ -45,9 +45,6 @@ FirstJoin:
   #Titel in the middle of the screen
   Title:
     TitleOnJoin: true
-  #Message on the actionbar
-  Actionbar:
-    ActionbarOnJoin: true
 
 
 ##########################
@@ -62,10 +59,6 @@ Title:
 #Enable join update message (only with the update permission)
 Join:
   UpdateMessageOn: true
-
-#Enable message on the actionbar
-Actionbar:
-  ActionbarOnJoin: true
 
 
 ####################################
@@ -266,7 +259,7 @@ Sounds:
 
 
 # Don't modify.
-Version: 6
+Version: 7
 
 
 # No way! You've reached the end! Let us join!?

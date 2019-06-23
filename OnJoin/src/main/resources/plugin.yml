@@ -16,6 +16,3 @@ permissions:
       OnJoin.UpdateMessage: true
       OnJoin.ExecuteCommand: true
       OnJoin.Heal: true
-      OnJoin.FirstJoin.Firework: true
-      OnJoin.FirstJoin.ExecuteCommand: true
-      OnJoin.FirstJoin.Heal: true

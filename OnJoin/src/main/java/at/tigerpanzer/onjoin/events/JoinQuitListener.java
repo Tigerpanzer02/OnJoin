@@ -43,6 +43,9 @@ public class JoinQuitListener implements Listener {
     private String joinmessage;
     private boolean chatclearon;
     private boolean welcomemessageon;
+    private boolean actionbaronjoin;
+    private String actionbar1;
+    private String actionbar2;
 
     public JoinQuitListener(Main plugin) {
         this.plugin = plugin;
@@ -57,34 +60,28 @@ public class JoinQuitListener implements Listener {
         String title1;
         String subtitle1;
         String subtitle2;
-        boolean actionbaronjoin;
-        String actionbar1;
-        String actionbar2;
-        List<String> WelcomeMessageText;
-        WelcomeMessageText = welcomeMessage(p);
-        healthvalues(p);
-        spawnvalues(p);
-        joinsoundvalues(p);
-        messagesvalues(p, true);
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
             Utils.debugmessage("Loading First join for " + p.getName());
             titleonjoin = plugin.getConfig().getBoolean("FirstJoin.Title.TitleOnJoin");
             title1 = Utils.colorMessage("FirstJoin.Title.Title1");
             subtitle1 = Utils.colorMessage("FirstJoin.Title.SubTitle1");
             subtitle2 = Utils.colorMessage("FirstJoin.Title.SubTitle2");
-            actionbaronjoin = plugin.getConfig().getBoolean("FirstJoin.Actionbar.ActionbarOnJoin");
-            actionbar1 = Utils.colorMessage("FirstJoin.Actionbar.Actionbar1");
-            actionbar2 = Utils.colorMessage("FirstJoin.Actionbar.Actionbar2");
         } else {
             Utils.debugmessage("Loading normal join for " + p.getName());
             titleonjoin = plugin.getConfig().getBoolean("Title.TitleOnJoin");
             title1 = Utils.colorMessage("Title.Title1");
             subtitle1 = Utils.colorMessage("Title.SubTitle1");
             subtitle2 = Utils.colorMessage("Title.SubTitle2");
-            actionbaronjoin = plugin.getConfig().getBoolean("Actionbar.ActionbarOnJoin");
-            actionbar1 = Utils.colorMessage("Actionbar.Actionbar1");
-            actionbar2 = Utils.colorMessage("Actionbar.Actionbar2");
         }
+        //load values
+        List<String> WelcomeMessageText;
+        WelcomeMessageText = welcomeMessage(p);
+        healthvalues(p);
+        spawnvalues(p);
+        joinsoundvalues(p);
+        messagesvalues(p, true);
+        actionbarvalues(p);
+
         if(chatclearon) {
             for(int i = 0; i < 200; i++) {
                 p.sendMessage(" ");
@@ -438,4 +435,37 @@ public class JoinQuitListener implements Listener {
             ex.printStackTrace();
         }
     }
+
+    private void actionbarvalues(Player player) {
+        try {
+            ConfigurationSection section = LanguageManager.getLanguageSection("Actionbar");
+            String firstpath = "Actionbar.";
+            for(String key : section.getKeys(false)) {
+                if(!key.equals("default")) {
+                    if(key.equals("firstjoin")) {
+                        if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            actionbaronjoin = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled");
+                            actionbar1 = Utils.colorMessage(firstpath + key + ".Actionbar1");
+                            actionbar2 = Utils.colorMessage(firstpath + key + ".Actionbar2");
+                            break;
+                        }
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
+                        actionbar1 = Utils.colorMessage(firstpath + key + ".Actionbar1");
+                        actionbar2 = Utils.colorMessage(firstpath + key + ".Actionbar2");
+                        actionbaronjoin = true;
+                        break;
+                    }
+                }
+            }
+            actionbar1 = Utils.colorMessage(firstpath + "default" + ".Actionbar1");
+            actionbar2 = Utils.colorMessage(firstpath + "default" + ".Actionbar2");
+        } catch(Exception ex) {
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the actionbarvalues"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            ex.printStackTrace();
+        }
+    }
+
 }
