@@ -160,7 +160,7 @@ Actionbar:
     Actionbar2: '&7 CC-SW Network'
   'firstjoin':
     Enabled: true
-    Actionbar1: '&7Welcome %player%!'
+    Actionbar1: '&7Welcome firstjoin %player%!'
     Actionbar2: '&7 CC-SW Network'
   '1':
     Permission: OnJoin.Actionbar.1
@@ -183,7 +183,7 @@ Title:
   'firstjoin':
     Enabled: true
     Title1: '&bCC&3SW'
-    SubTitle1: '&eOnJoin'
+    SubTitle1: '&eOnJoin firstjoin'
     SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
   '1':
     Permission: OnJoin.Title.1
