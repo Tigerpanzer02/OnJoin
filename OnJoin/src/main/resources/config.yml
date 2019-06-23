@@ -42,19 +42,12 @@ MySQL:
 #Here you can enable FirstJoin stuff
 FirstJoin:
   Enabled: false
-  #Titel in the middle of the screen
-  Title:
-    TitleOnJoin: true
 
 
 ##########################
 ##    Join Settings     ##
 ##########################
 
-
-#Enable titel in the middle of the screen
-Title:
-  TitleOnJoin: true
 
 #Enable join update message (only with the update permission)
 Join:
