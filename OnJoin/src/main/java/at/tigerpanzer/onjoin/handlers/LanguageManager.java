@@ -11,8 +11,11 @@
 package at.tigerpanzer.onjoin.handlers;
 
 import at.tigerpanzer.onjoin.Main;
+import at.tigerpanzer.onjoin.util.MessageUtils;
 import at.tigerpanzer.onjoin.util.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
 import java.util.List;
@@ -22,41 +25,55 @@ public class LanguageManager {
 
     private static Main plugin;
 
-    public static void init(Main pl) {
-        plugin = pl;
-        if(!new File(plugin.getDataFolder() + File.separator + "language.yml").exists()) {
-            plugin.saveResource("language.yml", false);
-        }
-        if(!new File(plugin.getDataFolder() + File.separator + "language_de.yml").exists()) {
-            plugin.saveResource("language_de.yml", false);
-        }
+    public LanguageManager(Main main) {
+        plugin = main;
     }
 
     public static List<String> getLanguageList(String list) {
-        if(plugin.getConfig().get("locale").equals("de")) {
-            return Utils.getConfig(plugin, "language_de").getStringList(list);
-        }
-        return Utils.getConfig(plugin, "language").getStringList(list);
+        return getLocaleFile().getStringList(list);
     }
 
     public static String getLanguageMessage(String message) {
-        if(plugin.getConfig().get("locale").equals("de")) {
-            return Utils.getConfig(plugin, "language_de").getString(message, "ERR_MESSAGE_NOT_FOUND");
-        }
-        return Utils.getConfig(plugin, "language").getString(message, "ERR_MESSAGE_NOT_FOUND");
+        return getLocaleFile().getString(message, "ERR_MESSAGE_NOT_FOUND");
     }
 
     public static boolean getLanguageBoolean(String message) {
-        if(plugin.getConfig().get("locale").equals("de")) {
-            return Utils.getConfig(plugin, "language_de").getBoolean(message, false);
-        }
-        return Utils.getConfig(plugin, "language").getBoolean(message, false);
+        return getLocaleFile().getBoolean(message, false);
     }
 
     public static ConfigurationSection getLanguageSection(String section) {
-        if(plugin.getConfig().get("locale").equals("de")) {
-            return Utils.getConfig(plugin, "language_de").getConfigurationSection(section);
+        return getLocaleFile().getConfigurationSection(section);
+    }
+
+
+    private static FileConfiguration getLocaleFile() {
+        if(!plugin.getConfig().get("locale").toString().equalsIgnoreCase("de") && !plugin.getConfig().get("locale").toString().equalsIgnoreCase("en") && !plugin.getConfig().get("locale").toString().equalsIgnoreCase("hu")) {
+            try {
+                return Utils.getConfig(plugin, "language_" + plugin.getConfig().get("locale").toString());
+            } catch(Exception ex) {
+                MessageUtils.errorOccurred();
+                ex.printStackTrace();
+                Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Returning with language.yml because the defined does not exist: " + "language_" + plugin.getConfig().get("locale").toString()));
+                return Utils.getConfig(plugin, "language");
+            }
+        } else {
+            switch(plugin.getConfig().get("locale").toString()) {
+                case "de":
+                    if(!new File(plugin.getDataFolder() + File.separator + "language_de.yml").exists()) {
+                        plugin.saveResource("language_de.yml", false);
+                    }
+                    return Utils.getConfig(plugin, "language_de");
+                case "hu":
+                    if(!new File(plugin.getDataFolder() + File.separator + "language_hu.yml").exists()) {
+                        plugin.saveResource("language_hu.yml", false);
+                    }
+                    return Utils.getConfig(plugin, "language_hu");
+                default:
+                    if(!new File(plugin.getDataFolder() + File.separator + "language.yml").exists()) {
+                        plugin.saveResource("language.yml", false);
+                    }
+                    return Utils.getConfig(plugin, "language");
+            }
         }
-        return Utils.getConfig(plugin, "language").getConfigurationSection(section);
     }
 }

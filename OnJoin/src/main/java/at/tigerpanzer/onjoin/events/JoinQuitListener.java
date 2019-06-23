@@ -46,6 +46,10 @@ public class JoinQuitListener implements Listener {
     private boolean actionbaronjoin;
     private String actionbar1;
     private String actionbar2;
+    private boolean titleonjoin;
+    private String title1;
+    private String subtitle1;
+    private String subtitle2;
 
     public JoinQuitListener(Main plugin) {
         this.plugin = plugin;
@@ -56,22 +60,10 @@ public class JoinQuitListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         Storage.DataOnJoin(p);
-        boolean titleonjoin;
-        String title1;
-        String subtitle1;
-        String subtitle2;
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
             Utils.debugmessage("Loading First join for " + p.getName());
-            titleonjoin = plugin.getConfig().getBoolean("FirstJoin.Title.TitleOnJoin");
-            title1 = Utils.colorMessage("FirstJoin.Title.Title1");
-            subtitle1 = Utils.colorMessage("FirstJoin.Title.SubTitle1");
-            subtitle2 = Utils.colorMessage("FirstJoin.Title.SubTitle2");
         } else {
             Utils.debugmessage("Loading normal join for " + p.getName());
-            titleonjoin = plugin.getConfig().getBoolean("Title.TitleOnJoin");
-            title1 = Utils.colorMessage("Title.Title1");
-            subtitle1 = Utils.colorMessage("Title.SubTitle1");
-            subtitle2 = Utils.colorMessage("Title.SubTitle2");
         }
         //load values
         List<String> WelcomeMessageText;
@@ -81,6 +73,7 @@ public class JoinQuitListener implements Listener {
         joinsoundvalues(p);
         messagesvalues(p, true);
         actionbarvalues(p);
+        titlevalues(p);
 
         if(chatclearon) {
             for(int i = 0; i < 200; i++) {
@@ -468,4 +461,38 @@ public class JoinQuitListener implements Listener {
         }
     }
 
+    private void titlevalues(Player player) {
+        try {
+            ConfigurationSection section = LanguageManager.getLanguageSection("Title");
+            String firstpath = "Title.";
+            for(String key : section.getKeys(false)) {
+                if(!key.equals("default")) {
+                    if(key.equals("firstjoin")) {
+                        if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            titleonjoin = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled");
+                            title1 = Utils.colorMessage(firstpath + key + ".Title1");
+                            subtitle1 = Utils.colorMessage(firstpath + key + ".SubTitle1");
+                            subtitle2 = Utils.colorMessage(firstpath + key + ".SubTitle2");
+                            break;
+                        }
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
+                        title1 = Utils.colorMessage(firstpath + key + ".Title1");
+                        subtitle1 = Utils.colorMessage(firstpath + key + ".SubTitle1");
+                        subtitle2 = Utils.colorMessage(firstpath + key + ".SubTitle2");
+                        titleonjoin = true;
+                        break;
+                    }
+                }
+            }
+            title1 = Utils.colorMessage(firstpath + "default" + ".Title1");
+            subtitle1 = Utils.colorMessage(firstpath + "default" + ".SubTitle1");
+            subtitle2 = Utils.colorMessage(firstpath + "default" + ".SubTitle2");
+        } catch(Exception ex) {
+            MessageUtils.errorOccurred();
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the titlevalues"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            ex.printStackTrace();
+        }
+    }
 }
