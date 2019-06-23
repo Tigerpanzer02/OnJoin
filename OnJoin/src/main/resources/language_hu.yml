@@ -87,7 +87,6 @@ SpawnLocation:
 
 #Üdvözlő üzenetek a chaten
 WelcomeMessage:
-  #You can add and remove as many lines as you like!
   #Annyi sort adhatsz hozzá és törölhetsz, amennyit csak szeretnél!
   'default':
     Enabled: true
