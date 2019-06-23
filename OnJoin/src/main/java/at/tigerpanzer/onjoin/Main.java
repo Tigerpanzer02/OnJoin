@@ -59,9 +59,7 @@ public class Main extends JavaPlugin {
             if(Utils.getConfig(this, "config").getInt("Version", 9999999) != 9999999) {
                 LanguageMigrator.migrateToNewFormat();
             }
-            LanguageManager.init(this);
         } else {
-            LanguageManager.init(this);
             LanguageMigrator.configUpdate();
             LanguageMigrator.languageFileUpdate();
         }
@@ -155,6 +153,7 @@ public class Main extends JavaPlugin {
         new JoinQuitListener(this);
         new JoinFirework(this);
         new JoinExecuteCommand(this);
+        new LanguageManager(this);
     }
 
     private void connectMySQL() {
