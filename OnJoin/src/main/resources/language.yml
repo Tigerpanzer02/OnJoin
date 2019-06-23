@@ -44,6 +44,7 @@ SpawnLocation:
   SetSpawnMessageSetTo: '&aSpawn set to&7: '
   SetSpawnMessageYaw: '&2Yaw&7: '
   SetSpawnMessagePitch: '&2Pitch&7: '
+  Help: '%prefix% Keep in mind to do /onjoin setspawn <default, firstjoin, or you choose one that you defined fo example 1>'
 
 
 ############################

@@ -46,6 +46,20 @@ public class JoinCommand implements CommandExecutor {
             }
             return true;
         } else if(args.length == 2) {
+            if(args[0].equalsIgnoreCase("setspawn")) {
+                player.sendMessage(Utils.setPlaceholders(player, Utils.colorMessage("SpawnLocation.Help")));
+                plugin.getConfig().set("SpawnLocation." + args[1] + ".World", player.getLocation().getWorld().getName());
+                plugin.getConfig().set("SpawnLocation." + args[1] + ".XCoord", player.getLocation().getX());
+                plugin.getConfig().set("SpawnLocation." + args[1] + ".YCoord", player.getLocation().getY());
+                plugin.getConfig().set("SpawnLocation." + args[1] + ".ZCoord", player.getLocation().getZ());
+                plugin.getConfig().set("SpawnLocation." + args[1] + ".Yaw", player.getLocation().getYaw());
+                plugin.getConfig().set("SpawnLocation." + args[1] + ".Pitch", player.getLocation().getPitch());
+                plugin.getConfig().set("SpawnLocation." + args[1] + ".Enabled", true);
+                player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessageSetTo") + player.getLocation().getWorld().getName() + ", " + player.getLocation().getBlockX() + ", " + player.getLocation().getBlockY() + ", " + player.getLocation().getBlockZ());
+                player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessageYaw") + player.getLocation().getYaw());
+                player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessagePitch") + player.getLocation().getPitch());
+                plugin.saveConfig();
+            }
             if(args[0].equalsIgnoreCase("locale")) {
                 if(args[1].equalsIgnoreCase("de")) {
                     plugin.getConfig().set("locale", "de");
@@ -62,32 +76,6 @@ public class JoinCommand implements CommandExecutor {
             if(args[0].equalsIgnoreCase("reloadconfig")) {
                 plugin.reloadConfig();
                 player.sendMessage(Utils.setPlaceholders(player, Utils.colorMessage("Prefix") + Utils.colorMessage("Help.OutConfigLoad")));
-            }
-            if(args[0].equalsIgnoreCase("setspawn")) {
-                plugin.getConfig().set("SpawnLocation.default.World", player.getLocation().getWorld().getName());
-                plugin.getConfig().set("SpawnLocation.default.XCoord", player.getLocation().getX());
-                plugin.getConfig().set("SpawnLocation.default.YCoord", player.getLocation().getY());
-                plugin.getConfig().set("SpawnLocation.default.ZCoord", player.getLocation().getZ());
-                plugin.getConfig().set("SpawnLocation.default.Yaw", player.getLocation().getYaw());
-                plugin.getConfig().set("SpawnLocation.default.Pitch", player.getLocation().getPitch());
-                plugin.getConfig().set("SpawnLocation.default.Enabled", true);
-                player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessageSetTo") + player.getLocation().getWorld().getName() + ", " + player.getLocation().getBlockX() + ", " + player.getLocation().getBlockY() + ", " + player.getLocation().getBlockZ());
-                player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessageYaw") + player.getLocation().getYaw());
-                player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessagePitch") + player.getLocation().getPitch());
-                plugin.saveConfig();
-            }
-            if(args[0].equalsIgnoreCase("setfirstspawn")) {
-                plugin.getConfig().set("SpawnLocation.firstjoin.World", player.getLocation().getWorld().getName());
-                plugin.getConfig().set("SpawnLocation.firstjoin.XCoord", player.getLocation().getX());
-                plugin.getConfig().set("SpawnLocation.firstjoin.YCoord", player.getLocation().getY());
-                plugin.getConfig().set("SpawnLocation.firstjoin.ZCoord", player.getLocation().getZ());
-                plugin.getConfig().set("SpawnLocation.firstjoin.Yaw", player.getLocation().getYaw());
-                plugin.getConfig().set("SpawnLocation.firstjoin.Pitch", player.getLocation().getPitch());
-                plugin.getConfig().set("SpawnLocation.firstjoin.Enabled", true);
-                player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessageSetTo") + player.getLocation().getWorld().getName() + ", " + player.getLocation().getBlockX() + ", " + player.getLocation().getBlockY() + ", " + player.getLocation().getBlockZ());
-                player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessageYaw") + player.getLocation().getYaw());
-                player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessagePitch") + player.getLocation().getPitch());
-                plugin.saveConfig();
             }
             return true;
         } else {
