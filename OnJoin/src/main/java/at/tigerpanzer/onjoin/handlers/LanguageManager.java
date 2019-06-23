@@ -30,11 +30,17 @@ public class LanguageManager {
         if(!new File(plugin.getDataFolder() + File.separator + "language_de.yml").exists()) {
             plugin.saveResource("language_de.yml", false);
         }
+        if(!new File(plugin.getDataFolder() + File.separator + "language_hu.yml").exists()) {
+            plugin.saveResource("language_hu.yml", false);
+        }
     }
 
     public static List<String> getLanguageList(String list) {
         if(plugin.getConfig().get("locale").equals("de")) {
             return Utils.getConfig(plugin, "language_de").getStringList(list);
+        }
+        if(plugin.getConfig().get("locale").equals("hu")) {
+            return Utils.getConfig(plugin, "language_hu").getStringList(list);
         }
         return Utils.getConfig(plugin, "language").getStringList(list);
     }
@@ -43,6 +49,9 @@ public class LanguageManager {
         if(plugin.getConfig().get("locale").equals("de")) {
             return Utils.getConfig(plugin, "language_de").getString(message, "ERR_MESSAGE_NOT_FOUND");
         }
+        if(plugin.getConfig().get("locale").equals("hu")) {
+            return Utils.getConfig(plugin, "language_hu").getString(message, "ERR_MESSAGE_NOT_FOUND");
+        }
         return Utils.getConfig(plugin, "language").getString(message, "ERR_MESSAGE_NOT_FOUND");
     }
 
@@ -50,12 +59,18 @@ public class LanguageManager {
         if(plugin.getConfig().get("locale").equals("de")) {
             return Utils.getConfig(plugin, "language_de").getBoolean(message, false);
         }
+        if(plugin.getConfig().get("locale").equals("hu")) {
+            return Utils.getConfig(plugin, "language_hu").getBoolean(message, false);
+        }
         return Utils.getConfig(plugin, "language").getBoolean(message, false);
     }
 
     public static ConfigurationSection getLanguageSection(String section) {
         if(plugin.getConfig().get("locale").equals("de")) {
             return Utils.getConfig(plugin, "language_de").getConfigurationSection(section);
+        }
+        if(plugin.getConfig().get("locale").equals("hu")) {
+            return Utils.getConfig(plugin, "language_hu").getConfigurationSection(section);
         }
         return Utils.getConfig(plugin, "language").getConfigurationSection(section);
     }
