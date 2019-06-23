@@ -64,26 +64,26 @@ public class JoinCommand implements CommandExecutor {
                 player.sendMessage(Utils.setPlaceholders(player, Utils.colorMessage("Prefix") + Utils.colorMessage("Help.OutConfigLoad")));
             }
             if(args[0].equalsIgnoreCase("setspawn")) {
-                plugin.getConfig().set("SpawnLocation.World", player.getLocation().getWorld().getName());
-                plugin.getConfig().set("SpawnLocation.XCoord", player.getLocation().getX());
-                plugin.getConfig().set("SpawnLocation.YCoord", player.getLocation().getY());
-                plugin.getConfig().set("SpawnLocation.ZCoord", player.getLocation().getZ());
-                plugin.getConfig().set("SpawnLocation.Yaw", player.getLocation().getYaw());
-                plugin.getConfig().set("SpawnLocation.Pitch", player.getLocation().getPitch());
-                plugin.getConfig().set("SpawnLocation.SpawnLocationEnable", true);
+                plugin.getConfig().set("SpawnLocation.default.World", player.getLocation().getWorld().getName());
+                plugin.getConfig().set("SpawnLocation.default.XCoord", player.getLocation().getX());
+                plugin.getConfig().set("SpawnLocation.default.YCoord", player.getLocation().getY());
+                plugin.getConfig().set("SpawnLocation.default.ZCoord", player.getLocation().getZ());
+                plugin.getConfig().set("SpawnLocation.default.Yaw", player.getLocation().getYaw());
+                plugin.getConfig().set("SpawnLocation.default.Pitch", player.getLocation().getPitch());
+                plugin.getConfig().set("SpawnLocation.default.Enabled", true);
                 player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessageSetTo") + player.getLocation().getWorld().getName() + ", " + player.getLocation().getBlockX() + ", " + player.getLocation().getBlockY() + ", " + player.getLocation().getBlockZ());
                 player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessageYaw") + player.getLocation().getYaw());
                 player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessagePitch") + player.getLocation().getPitch());
                 plugin.saveConfig();
             }
             if(args[0].equalsIgnoreCase("setfirstspawn")) {
-                plugin.getConfig().set("FirstJoin.SpawnLocation.World", player.getLocation().getWorld().getName());
-                plugin.getConfig().set("FirstJoin.SpawnLocation.XCoord", player.getLocation().getX());
-                plugin.getConfig().set("FirstJoin.SpawnLocation.YCoord", player.getLocation().getY());
-                plugin.getConfig().set("FirstJoin.SpawnLocation.ZCoord", player.getLocation().getZ());
-                plugin.getConfig().set("FirstJoin.SpawnLocation.Yaw", player.getLocation().getYaw());
-                plugin.getConfig().set("FirstJoin.SpawnLocation.Pitch", player.getLocation().getPitch());
-                plugin.getConfig().set("FirstJoin.SpawnLocation.SpawnLocationEnable", true);
+                plugin.getConfig().set("SpawnLocation.firstjoin.World", player.getLocation().getWorld().getName());
+                plugin.getConfig().set("SpawnLocation.firstjoin.XCoord", player.getLocation().getX());
+                plugin.getConfig().set("SpawnLocation.firstjoin.YCoord", player.getLocation().getY());
+                plugin.getConfig().set("SpawnLocation.firstjoin.ZCoord", player.getLocation().getZ());
+                plugin.getConfig().set("SpawnLocation.firstjoin.Yaw", player.getLocation().getYaw());
+                plugin.getConfig().set("SpawnLocation.firstjoin.Pitch", player.getLocation().getPitch());
+                plugin.getConfig().set("SpawnLocation.firstjoin.Enabled", true);
                 player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessageSetTo") + player.getLocation().getWorld().getName() + ", " + player.getLocation().getBlockX() + ", " + player.getLocation().getBlockY() + ", " + player.getLocation().getBlockZ());
                 player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessageYaw") + player.getLocation().getYaw());
                 player.sendMessage(Utils.colorMessage("SpawnLocation.SetSpawnMessagePitch") + player.getLocation().getPitch());

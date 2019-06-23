@@ -38,7 +38,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         //check if using releases before 2.1.0
-        if(Utils.getConfig(this, "config").getInt("Version") <= 5) {
+        if(Utils.getConfig(this, "config").getInt("Version", 0) <= 5) {
             LanguageMigrator.migrateToNewFormat();
             oldversion = true;
         }
@@ -47,9 +47,24 @@ public class Main extends JavaPlugin {
             oldversion = true;
         }
         saveDefaultConfig();
-        LanguageManager.init(this);
-        LanguageMigrator.configUpdate();
-        LanguageMigrator.languageFileUpdate();
+        //check for pre version
+        if(getDescription().getVersion().contains("PRE")) {
+            MessageUtils.info();
+            Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] You are using a pre release version! Config & Language Checker disabled! No language support!"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] That mean the configurations are only temporary! When the plugin is ready to"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] be a normal release the configurations will be migrating!"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] So you will get new ones which are fully working with the normal update checking"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] You can always see the config.yml & language.yml here that is working with latest pre release https://github.com/Tigerpanzer02/OnJoin/tree/development/OnJoin/src/main/resources!"));
+            Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+            if(Utils.getConfig(this, "config").getInt("Version", 9999999) != 9999999) {
+                LanguageMigrator.migrateToNewFormat();
+            }
+            LanguageManager.init(this);
+        } else {
+            LanguageManager.init(this);
+            LanguageMigrator.configUpdate();
+            LanguageMigrator.languageFileUpdate();
+        }
         consolePrefix = Utils.color(LanguageManager.getLanguageMessage("Console.PrefixConsole"));
         needUpdateJoin = false;
         mySQLEnabled = false;
@@ -104,6 +119,16 @@ public class Main extends JavaPlugin {
     private void update() {
         UpdateChecker.init(this, 56907).requestUpdateCheck().whenComplete((result, exception) -> {
             if(result.requiresUpdate()) {
+                if(result.getNewestVersion().contains("PRE")) {
+                    if(getConfig().getBoolean("Update-Notifier.Notify-Beta-Versions", true)) {
+                        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[OnJoin] Your software is ready for update! However it's a PRE RELEASE VERSION. Proceed with caution.");
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[OnJoin] Current version %old%, latest version %new%".replace("%old%", getDescription().getVersion()).replace("%new%",
+                                result.getNewestVersion()));
+                        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
+                    }
+                    return;
+                }
                 if(result.getNewestVersion().contains("b")) {
                     if(getConfig().getBoolean("Update-Notifier.Notify-Beta-Versions", true)) {
                         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));

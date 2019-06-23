@@ -28,8 +28,8 @@ import java.util.List;
 public class LanguageMigrator {
 
 
-    private static final int LANGUAGE_FILE_VERSION = 6;
-    private static final int CONFIG_FILE_VERSION = 6;
+    private static final int LANGUAGE_FILE_VERSION = 7;
+    private static final int CONFIG_FILE_VERSION = 7;
     private static Main plugin = JavaPlugin.getPlugin(Main.class);
     private static List<String> migratable = Arrays.asList("config", "language");
 
@@ -46,7 +46,7 @@ public class LanguageMigrator {
 
         for(int i = version; i < CONFIG_FILE_VERSION; i++) {
             switch(version) {
-                case 1:
+                case 6:
                     break;
             }
 
@@ -74,7 +74,7 @@ public class LanguageMigrator {
 
         for(int i = version; i < LANGUAGE_FILE_VERSION; i++) {
             switch(version) {
-                case 1:
+                case 6:
                     break;
             }
             version++;
@@ -91,7 +91,7 @@ public class LanguageMigrator {
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Don't worry! Old files will be renamed not overridden!");
         for(String file : migratable) {
             if(Utils.getFile(plugin, file).exists()) {
-                Utils.getFile(plugin, file).renameTo(new File(plugin.getDataFolder(), "before210_" + file + ".yml"));
+                Utils.getFile(plugin, file).renameTo(new File(plugin.getDataFolder(), "before_" + plugin.getDescription().getVersion() + "_" + file + ".yml"));
                 Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Renamed file " + file + ".yml");
             }
         }

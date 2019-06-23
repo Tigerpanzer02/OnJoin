@@ -39,52 +39,19 @@ TargetFalse: "&cPlayer is not online or doesn't exist"
 NoPlayer: 'Only players can do that!'
 
 
-########################
-##     First Join     ##
-########################
-
-
-FirstJoin:
-  #Titel in the middle of the screen
-  Title:
-    Title1: '&bCC&3SW'
-    SubTitle1: '&eFirstJoin'
-    SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
-  #Message on the actionbar
-  Actionbar:
-    Actionbar1: '&7Welcome %player%!'
-    Actionbar2: '&7 CC-SW Network'
-
-
-########################
-##    Normal Join     ##
-########################
-
-
-#Titel in the middle of the screen
-Title:
-  Title1: '&bCC&3SW'
-  SubTitle1: '&eOnJoin'
-  SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
-
-
-#Message on the actionbar
-Actionbar:
-  Actionbar1: '&7Welcome %player%!'
-  Actionbar2: '&7 CC-SW Network'
-
-
 #Should Players that join be teleported to a location
 SpawnLocation:
   SetSpawnMessageSetTo: '&aSpawn set to&7: '
   SetSpawnMessageYaw: '&2Yaw&7: '
   SetSpawnMessagePitch: '&2Pitch&7: '
 
+
 ############################
 ##    Welcome Message     ##
 ############################
 
 
+#If you don´t understand this parts of config have a look on the config.yml under section Additional Informations
 #Welcome Message in the Chat
 WelcomeMessage:
   #You can add and remove as many lines as you like!
@@ -180,6 +147,50 @@ Messages:
       Message: '%player% pro left'
 
 
+######################
+##    Actionbar     ##
+######################
+
+
+#Message on the actionbar
+Actionbar:
+  'default':
+    Enabled: true
+    Actionbar1: '&7Welcome %player%!'
+    Actionbar2: '&7 CC-SW Network'
+  'firstjoin':
+    Enabled: true
+    Actionbar1: '&7Welcome firstjoin %player%!'
+    Actionbar2: '&7 CC-SW Network'
+  '1':
+    Permission: OnJoin.Actionbar.1
+    Actionbar1: '&7Welcome %player%!'
+    Actionbar2: '&7 CC-SW Network'
+
+
+##################
+##    Title     ##
+##################
+
+
+#Titel in the middle of the screen
+Title:
+  'default':
+    Enabled: true
+    Title1: '&bCC&3SW'
+    SubTitle1: '&eOnJoin'
+    SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
+  'firstjoin':
+    Enabled: true
+    Title1: '&bCC&3SW'
+    SubTitle1: '&eOnJoin firstjoin'
+    SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
+  '1':
+    Permission: OnJoin.Title.1
+    Title1: '&bCC&3SW'
+    SubTitle1: '&eOnJoin'
+    SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
+
 
 
 ##########################
@@ -189,4 +200,4 @@ Messages:
 
 # Don't edit it. But who's stopping you? It's your server!
 # Really, don't edit ;p
-File-Version-Do-Not-Edit: 6
+File-Version-Do-Not-Edit: 9999999

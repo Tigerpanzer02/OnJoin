@@ -42,12 +42,6 @@ MySQL:
 #Here you can enable FirstJoin stuff
 FirstJoin:
   Enabled: false
-  #Titel in the middle of the screen
-  Title:
-    TitleOnJoin: true
-  #Message on the actionbar
-  Actionbar:
-    ActionbarOnJoin: true
 
 
 ##########################
@@ -55,17 +49,9 @@ FirstJoin:
 ##########################
 
 
-#Enable titel in the middle of the screen
-Title:
-  TitleOnJoin: true
-
 #Enable join update message (only with the update permission)
 Join:
   UpdateMessageOn: true
-
-#Enable message on the actionbar
-Actionbar:
-  ActionbarOnJoin: true
 
 
 ####################################
@@ -266,7 +252,7 @@ Sounds:
 
 
 # Don't modify.
-Version: 6
+Version: 9999999
 
 
 # No way! You've reached the end! Let us join!?
