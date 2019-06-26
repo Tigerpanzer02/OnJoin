@@ -41,6 +41,10 @@ public class LanguageManager {
         return getLocaleFile().getBoolean(message, false);
     }
 
+    public static boolean getLanguageBoolean(String message, boolean trueorfalse) {
+        return getLocaleFile().getBoolean(message, trueorfalse);
+    }
+
     public static ConfigurationSection getLanguageSection(String section) {
         return getLocaleFile().getConfigurationSection(section);
     }
