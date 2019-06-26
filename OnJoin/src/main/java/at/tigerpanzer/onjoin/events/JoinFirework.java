@@ -97,7 +97,7 @@ public class JoinFirework implements Listener {
                             fireworkftype = plugin.getConfig().getString("Firework." + key + ".Type");
                             fireworkinstantexplode = plugin.getConfig().getBoolean("Firework." + key + ".InstantExplode");
                             fireworkpower = plugin.getConfig().getInt("Firework." + key + ".Power");
-                            break;
+                            return;
                         }
                     } else if(player.hasPermission(LanguageManager.getLanguageMessage("Firework." + key + ".Permission"))) {
                         fireworkamount = plugin.getConfig().getInt("Firework." + key + ".Amount");
@@ -109,8 +109,8 @@ public class JoinFirework implements Listener {
                         fireworkftype = plugin.getConfig().getString("Firework." + key + ".Type");
                         fireworkinstantexplode = plugin.getConfig().getBoolean("Firework." + key + ".InstantExplode");
                         fireworkpower = plugin.getConfig().getInt("Firework." + key + ".Power");
-                        fireworkenable = true;
-                        break;
+                        fireworkenable = plugin.getConfig().getBoolean("Firework." + key + ".Enabled", true);
+                        return;
                     }
                 }
             }
@@ -124,7 +124,7 @@ public class JoinFirework implements Listener {
             fireworkftype = plugin.getConfig().getString("Firework." + "default" + ".Type");
             fireworkinstantexplode = plugin.getConfig().getBoolean("Firework." + "default" + ".InstantExplode");
             fireworkpower = plugin.getConfig().getInt("Firework." + "default" + ".Power");
-        }catch(Exception ex) {
+        } catch(Exception ex) {
             MessageUtils.errorOccurred();
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7Error in the fireworkvalues"));

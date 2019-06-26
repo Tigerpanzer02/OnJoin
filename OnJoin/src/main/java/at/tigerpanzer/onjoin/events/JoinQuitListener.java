@@ -198,7 +198,7 @@ public class JoinQuitListener implements Listener {
                     } else if(player.hasPermission(LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission"))) {
                         Utils.debugmessage("Player permission " + LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission") + " = " + player.hasPermission(LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission")));
                         chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "ChatClear");
-                        welcomemessageon = true;
+                        welcomemessageon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "Enabled", true);
                         return LanguageManager.getLanguageList("WelcomeMessage." + key + ".Text");
                     }
                 }
@@ -225,20 +225,24 @@ public class JoinQuitListener implements Listener {
                 if(!key.equals("default")) {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            if(plugin.getConfig().getBoolean("Heal." + key + ".Enabled")) {
+                                player.setHealth(plugin.getConfig().getInt("Heal." + key + ".Health"));
+                                player.setFoodLevel(plugin.getConfig().getInt("Heal." + key + ".FoodLevel"));
+                                if(plugin.getConfig().getBoolean("Heal." + key + ".ClearPotionEffects")) {
+                                    player.getActivePotionEffects().clear();
+                                }
+                            }
+                            return;
+                        }
+                    } else if(player.hasPermission(plugin.getConfig().getString("Heal." + key + ".Permission"))) {
+                        if(plugin.getConfig().getBoolean("Heal." + key + ".Enabled", true)) {
                             player.setHealth(plugin.getConfig().getInt("Heal." + key + ".Health"));
                             player.setFoodLevel(plugin.getConfig().getInt("Heal." + key + ".FoodLevel"));
                             if(plugin.getConfig().getBoolean("Heal." + key + ".ClearPotionEffects")) {
                                 player.getActivePotionEffects().clear();
                             }
-                            break;
                         }
-                    } else if(player.hasPermission(plugin.getConfig().getString("Heal." + key + ".Permission"))) {
-                        player.setHealth(plugin.getConfig().getInt("Heal." + key + ".Health"));
-                        player.setFoodLevel(plugin.getConfig().getInt("Heal." + key + ".FoodLevel"));
-                        if(plugin.getConfig().getBoolean("Heal." + key + ".ClearPotionEffects")) {
-                            player.getActivePotionEffects().clear();
-                        }
-                        break;
+                        return;
                     }
                 }
             }
@@ -274,7 +278,7 @@ public class JoinQuitListener implements Listener {
                             spawnlocationz = plugin.getConfig().getDouble("SpawnLocation." + key + ".ZCoord");
                             spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation." + key + ".Yaw");
                             spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation." + key + ".Pitch");
-                            break;
+                            return;
                         }
                     } else if(player.hasPermission(plugin.getConfig().getString("SpawnLocation." + key + ".Permission"))) {
                         spawnlocationworld = plugin.getConfig().getString("SpawnLocation." + key + ".World");
@@ -283,8 +287,8 @@ public class JoinQuitListener implements Listener {
                         spawnlocationz = plugin.getConfig().getDouble("SpawnLocation." + key + ".ZCoord");
                         spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation." + key + ".Yaw");
                         spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation." + key + ".Pitch");
-                        spawnlocationenable = true;
-                        break;
+                        spawnlocationenable = plugin.getConfig().getBoolean("SpawnLocation." + key + ".Enabled", true);
+                        return;
                     }
                 }
             }
@@ -316,14 +320,14 @@ public class JoinQuitListener implements Listener {
                             joinsound = plugin.getConfig().getString("Sounds.Join." + key + ".Sound");
                             joinvolume = plugin.getConfig().getInt("Sounds.Join." + key + ".Volume");
                             joinpitch = plugin.getConfig().getInt("Sounds.Join." + key + ".Pitch");
-                            break;
+                            return;
                         }
                     } else if(player.hasPermission(plugin.getConfig().getString("Sounds.Join." + key + ".Permission"))) {
                         joinsound = plugin.getConfig().getString("Sounds.Join." + key + ".Sound");
                         joinvolume = plugin.getConfig().getInt("Sounds.Join." + key + ".Volume");
                         joinpitch = plugin.getConfig().getInt("Sounds.Join." + key + ".Pitch");
-                        joinsoundon = true;
-                        break;
+                        joinsoundon = plugin.getConfig().getBoolean("Sounds.Join." + key + ".Enabled", true);
+                        return;
                     }
                 }
             }
@@ -352,14 +356,14 @@ public class JoinQuitListener implements Listener {
                             quitsound = plugin.getConfig().getString("Sounds.Quit." + key + ".Sound");
                             quitvolume = plugin.getConfig().getInt("Sounds.Quit." + key + ".Volume");
                             quitpitch = plugin.getConfig().getInt("Sounds.Quit." + key + ".Pitch");
-                            break;
+                            return;
                         }
                     } else if(player.hasPermission(plugin.getConfig().getString("Sounds.Quit." + key + ".Permission"))) {
                         quitsound = plugin.getConfig().getString("Sounds.Quit." + key + ".Sound");
                         quitvolume = plugin.getConfig().getInt("Sounds.Quit." + key + ".Volume");
                         quitpitch = plugin.getConfig().getInt("Sounds.Quit." + key + ".Pitch");
-                        quitsoundon = true;
-                        break;
+                        quitsoundon = plugin.getConfig().getBoolean("Sounds.Quit." + key + ".Enabled", true);
+                        return;
                     }
                 }
             }
@@ -388,12 +392,12 @@ public class JoinQuitListener implements Listener {
                             if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
                                 joinmessageon = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled");
                                 joinmessage = Utils.colorMessage(firstpath + key + ".Message");
-                                break;
+                                return;
                             }
                         } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
                             joinmessage = Utils.colorMessage(firstpath + key + ".Message");
-                            joinmessageon = true;
-                            break;
+                            joinmessageon = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", true);
+                            return;
                         }
                     }
                 }
@@ -408,12 +412,12 @@ public class JoinQuitListener implements Listener {
                             if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
                                 quitmessageon = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled");
                                 quitmessage = Utils.colorMessage(firstpath + key + ".Message");
-                                break;
+                                return;
                             }
                         } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
                             quitmessage = Utils.colorMessage(firstpath + key + ".Message");
-                            quitmessageon = true;
-                            break;
+                            quitmessageon = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", true);
+                            return;
                         }
                     }
                 }
@@ -440,13 +444,13 @@ public class JoinQuitListener implements Listener {
                             actionbaronjoin = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled");
                             actionbar1 = Utils.colorMessage(firstpath + key + ".Actionbar1");
                             actionbar2 = Utils.colorMessage(firstpath + key + ".Actionbar2");
-                            break;
+                            return;
                         }
                     } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
                         actionbar1 = Utils.colorMessage(firstpath + key + ".Actionbar1");
                         actionbar2 = Utils.colorMessage(firstpath + key + ".Actionbar2");
-                        actionbaronjoin = true;
-                        break;
+                        actionbaronjoin = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", true);
+                        return;
                     }
                 }
             }
@@ -473,14 +477,14 @@ public class JoinQuitListener implements Listener {
                             title1 = Utils.colorMessage(firstpath + key + ".Title1");
                             subtitle1 = Utils.colorMessage(firstpath + key + ".SubTitle1");
                             subtitle2 = Utils.colorMessage(firstpath + key + ".SubTitle2");
-                            break;
+                            return;
                         }
                     } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
                         title1 = Utils.colorMessage(firstpath + key + ".Title1");
                         subtitle1 = Utils.colorMessage(firstpath + key + ".SubTitle1");
                         subtitle2 = Utils.colorMessage(firstpath + key + ".SubTitle2");
-                        titleonjoin = true;
-                        break;
+                        titleonjoin = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", true);
+                        return;
                     }
                 }
             }
