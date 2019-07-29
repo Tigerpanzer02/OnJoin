@@ -77,6 +77,8 @@ Join:
 # - You don´t need an enable function because the added categories will automatically enabled
 # - If you not need one of your categories you can remove them to disable or give a permission that no one has
 
+#Don´t forget to structure your order logical - that means you need to order it in this sequence default, firstjoin, permission with lowest power, ..., permission with highest power
+
 ###################
 ##     Spawn     ##
 ###################
@@ -102,6 +104,7 @@ SpawnLocation:
     Pitch: 0
   '1':
     Permission: OnJoin.Spawn.1
+    Enabled: false
     World: world
     XCoord: 0
     YCoord: 0
@@ -129,6 +132,7 @@ ExecuteCommand:
       - 'player;help'
   '1':
     Permission: OnJoin.ExecuteCommand
+    Enabled: false
     Commands:
       - 'console;say %player% Hello! Change this in Config!'
       - 'player;help'
@@ -153,6 +157,7 @@ Heal:
     ClearPotionEffects: true
   '1':
     Permission: OnJoin.Heal.1
+    Enabled: false
     Health: 20
     FoodLevel: 20
     ClearPotionEffects: true
@@ -194,6 +199,7 @@ Firework:
   #Should a player with custom permission spawn a Firework when he joins?
   '1':
     Permission: OnJoin.Firework.1
+    Enabled: false
     InstantExplode: false
     Amount: 3
     FireworkHeight: 3
@@ -226,6 +232,7 @@ Sounds:
       Pitch: 1
     '1':
       Permission: OnJoin.JoinSound.1
+      Enabled: false
       Sound: ENTITY_FIREWORK_BLAST
       Volume: 1
       Pitch: 1
@@ -242,6 +249,7 @@ Sounds:
       Pitch: 1
     '1':
       Permission: OnJoin.QuitSound.1
+      Enabled: false
       Sound: ENTITY_BAT_DEATH
       Volume: 1
       Pitch: 1
@@ -255,7 +263,7 @@ Sounds:
 
 
 # Don't modify.
-Version: 9999999
+Version: 9999998
 
 
 # No way! You've reached the end! Let us join!?

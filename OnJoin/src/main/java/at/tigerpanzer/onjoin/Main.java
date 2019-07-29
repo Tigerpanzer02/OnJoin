@@ -56,7 +56,7 @@ public class Main extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] So you will get new ones which are fully working with the normal update checking"));
             Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] You can always see the config.yml & language.yml here that is working with latest pre release https://github.com/Tigerpanzer02/OnJoin/tree/development/OnJoin/src/main/resources!"));
             Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
-            if(Utils.getConfig(this, "config").getInt("Version", 9999999) != 9999999) {
+            if(Utils.getConfig(this, "config").getInt("Version", 9999998) != 9999998) {
                 LanguageMigrator.migrateToNewFormat();
             }
         } else {

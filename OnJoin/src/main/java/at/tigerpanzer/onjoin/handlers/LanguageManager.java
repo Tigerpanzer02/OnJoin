@@ -49,6 +49,13 @@ public class LanguageManager {
         return getLocaleFile().getConfigurationSection(section);
     }
 
+    public static Integer getLanguageInt(String integer) {
+        return getLocaleFile().getInt(integer);
+    }
+
+    public static Integer getLanguageInt(String integer, Integer defaultint) {
+        return getLocaleFile().getInt(integer, defaultint);
+    }
 
     private static FileConfiguration getLocaleFile() {
         if(!plugin.getConfig().get("locale").toString().equalsIgnoreCase("de") && !plugin.getConfig().get("locale").toString().equalsIgnoreCase("default") && !plugin.getConfig().get("locale").toString().equalsIgnoreCase("hu")) {
