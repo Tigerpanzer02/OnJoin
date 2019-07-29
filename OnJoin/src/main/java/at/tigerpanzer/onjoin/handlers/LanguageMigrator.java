@@ -96,6 +96,7 @@ public class LanguageMigrator {
             }
         }
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Done! Enabling OnJoin...");
+        plugin.saveDefaultConfig();
         Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
     }
 
