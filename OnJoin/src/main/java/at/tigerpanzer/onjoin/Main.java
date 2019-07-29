@@ -47,6 +47,7 @@ public class Main extends JavaPlugin {
             oldversion = true;
         }
         saveDefaultConfig();
+        new LanguageManager(this);
         //check for pre version
         if(getDescription().getVersion().contains("PRE")) {
             MessageUtils.info();
@@ -153,7 +154,6 @@ public class Main extends JavaPlugin {
         new JoinQuitListener(this);
         new JoinFirework(this);
         new JoinExecuteCommand(this);
-        new LanguageManager(this);
     }
 
     private void connectMySQL() {
