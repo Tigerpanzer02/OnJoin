@@ -51,7 +51,7 @@ FirstJoin:
     SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
   Actionbar:
     Actionbar1: '&7Welcome %player%!'
-    Actionbar2: '&7 CC-SW Network'
+    Actionbar2: '&7Another bar'
 
 
 ########################
@@ -67,7 +67,7 @@ Title:
 
 Actionbar:
   Actionbar1: '&7Welcome %player%!'
-  Actionbar2: '&7 CC-SW Network'
+  Actionbar2: '&7Another bar'
 
 
 SpawnLocation:
@@ -94,7 +94,7 @@ WelcomeMessage:
       - '&e|  '
       - '&e|  &eOnJoin &8- &7Dein Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Dein Netzwerk @CC-SW'
+      - '&e|  &7Dein Netzwerk'
       - '&e|  '
       - '&e------------------------------------'
   'firstjoin':
@@ -108,7 +108,7 @@ WelcomeMessage:
       - '&e|  '
       - '&e|  &eOnJoin &8- &7Dein Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Dein Netzwerk @CC-SW'
+      - '&e|  &7Dein Netzwerk'
       - '&e|  '
       - '&e------------------------------------'
   '1':
@@ -122,7 +122,7 @@ WelcomeMessage:
       - '&e|  '
       - '&e|  &eOnJoin &8- &7Dein Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Dein Netzwerk @CC-SW'
+      - '&e|  &7Dein Netzwerk'
       - '&e|  '
       - '&e------------------------------------'
   '2':
@@ -135,7 +135,7 @@ WelcomeMessage:
       - '&e|  '
       - '&e|  &eOnJoin &8- &7Dein Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Dein Netzwerk @CC-SW'
+      - '&e|  &7Dein Netzwerk'
       - '&e|  '
       - '&e------------------------------------'
 

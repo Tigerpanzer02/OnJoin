@@ -66,7 +66,7 @@ WelcomeMessage:
       - '&e|  Default'
       - '&e|  &eOnJoin &8- &7Your Join Plugin'
       - '&e|  &7Készítette: &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Your Network @CC-SW'
+      - '&e|  &7Your Network'
       - '&e|  '
       - '&e------------------------------------'
   'firstjoin':
@@ -80,7 +80,7 @@ WelcomeMessage:
       - '&e|  Firstjoin'
       - '&e|  &eOnJoin &8- &7Your Join Plugin'
       - '&e|  &7Készítette: &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Your Network @CC-SW'
+      - '&e|  &7Your Network'
       - '&e|  '
       - '&e------------------------------------'
   '1':
@@ -94,7 +94,7 @@ WelcomeMessage:
       - '&e|  1'
       - '&e|  &eOnJoin &8- &7Your Join Plugin'
       - '&e|  &7Készítette: &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Your Network @CC-SW'
+      - '&e|  &7Your Network'
       - '&e|  '
       - '&e------------------------------------'
   '2':
@@ -107,7 +107,7 @@ WelcomeMessage:
       - '&e|  2'
       - '&e|  &eOnJoin &8- &7Your Join Plugin'
       - '&e|  &7Készítette: &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Your Network @CC-SW'
+      - '&e|  &7Your Network'
       - '&e|  '
       - '&e------------------------------------'
 
@@ -157,15 +157,15 @@ Actionbar:
   'default':
     Enabled: true
     Actionbar1: '&7Üdvözöljük %player%!'
-    Actionbar2: '&7 CC-SW Network'
+    Actionbar2: '&7 Another Bar'
   'firstjoin':
     Enabled: true
     Actionbar1: '&7Üdvözöljük első csatlakozásánál %player%!'
-    Actionbar2: '&7 CC-SW Network'
+    Actionbar2: '&7 Another Bar'
   '1':
     Permission: OnJoin.Actionbar.1
     Actionbar1: '&7Üdvözöljük %player%!'
-    Actionbar2: '&7 CC-SW Network'
+    Actionbar2: '&7 Another Bar'
 
 
 ################

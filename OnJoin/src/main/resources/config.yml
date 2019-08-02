@@ -17,6 +17,9 @@ locale: default
 debug: false
 
 
+#Enable to get update notifications for beta versions
+UpdateNotifier: false
+
 ########################
 ##        MySQL       ##
 ########################
@@ -263,7 +266,7 @@ Sounds:
 
 
 # Don't modify.
-Version: 9999998
+Version: 9999997
 
 
 # No way! You've reached the end! Let us join!?

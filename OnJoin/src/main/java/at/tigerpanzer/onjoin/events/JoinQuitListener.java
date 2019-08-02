@@ -45,11 +45,9 @@ public class JoinQuitListener implements Listener {
     private String joinmessage;
     private boolean chatclearon;
     private boolean welcomemessageon;
-    private boolean actionbaronjoin;
-    private String actionbar1;
-    private String actionbar2;
 
-    private Map<Player, Object> playertask = new HashMap<>();
+    private Map<Player, Object> titletask = new HashMap<>();
+    private Map<Player, Object> actionbartask = new HashMap<>();
 
     public JoinQuitListener(Main plugin) {
         this.plugin = plugin;
@@ -60,7 +58,8 @@ public class JoinQuitListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         Storage.DataOnJoin(p);
-        playertask.put(p, 0);
+        titletask.put(p, 0);
+        actionbartask.put(p, 0);
         if(plugin.firstJoin() && Storage.getFirstJoin(p)) {
             Utils.debugmessage("Loading First join for " + p.getName());
         } else {
@@ -93,10 +92,6 @@ public class JoinQuitListener implements Listener {
             e.setJoinMessage("");
         }
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            if(actionbaronjoin) {
-                Utils.sendActionBar(p, Utils.setPlaceholders(p, actionbar1));
-                Utils.debugmessage("Actionbar for " + p.getName());
-            }
             if(welcomemessageon) {
                 Utils.debugmessage("Welcome message for " + p.getName());
                 for(String msg : WelcomeMessageText) {
@@ -105,13 +100,6 @@ public class JoinQuitListener implements Listener {
             }
         }, 2L);
 
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            if(actionbaronjoin) {
-                Utils.debugmessage("Actionbar 2 for " + p.getName());
-                Utils.sendActionBar(p, Utils.setPlaceholders(p, actionbar2));
-
-            }
-        }, 65L);
         if(plugin.needUpdateJoin()) {
             Utils.debugmessage("Plugin needs update ");
             if(plugin.getConfig().getBoolean("Join.UpdateMessageOn")) {
@@ -433,21 +421,62 @@ public class JoinQuitListener implements Listener {
                 if(!key.equals("default")) {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
-                            actionbaronjoin = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled");
-                            actionbar1 = Utils.colorMessage(firstpath + key + ".Actionbar1");
-                            actionbar2 = Utils.colorMessage(firstpath + key + ".Actionbar2");
+                            if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled")) {
+                                return;
+                            }
+                            ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Actionbars");
+                            String secondpath = firstpath + key + ".Actionbars.";
+                            for(String titleskey : titlesection.getKeys(false)) {
+                                if(Integer.parseInt(actionbartask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0)) {
+                                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                                        Utils.sendActionBar(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Actionbar")));
+                                        Utils.debugmessage("Actionbar on join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + "RunTaskLater", 0));
+                                        actionbarvalues(player);
+                                    }, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0) - Integer.parseInt(actionbartask.get(player).toString()));
+                                    actionbartask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0));
+                                    return;
+                                }
+                            }
                             return;
                         }
                     } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
-                        actionbar1 = Utils.colorMessage(firstpath + key + ".Actionbar1");
-                        actionbar2 = Utils.colorMessage(firstpath + key + ".Actionbar2");
-                        actionbaronjoin = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", true);
+                        if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled")) {
+                            return;
+                        }
+                        ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Actionbars");
+                        String secondpath = firstpath + key + ".Actionbars.";
+                        for(String titleskey : titlesection.getKeys(false)) {
+                            if(Integer.parseInt(actionbartask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0)) {
+                                Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                                    Utils.sendActionBar(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Actionbar")));
+                                    Utils.debugmessage("Actionbar on join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + "RunTaskLater", 0));
+                                    actionbarvalues(player);
+                                }, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0) - Integer.parseInt(actionbartask.get(player).toString()));
+                                actionbartask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0));
+                                return;
+                            }
+                        }
                         return;
                     }
                 }
             }
-            actionbar1 = Utils.colorMessage(firstpath + "default" + ".Actionbar1");
-            actionbar2 = Utils.colorMessage(firstpath + "default" + ".Actionbar2");
+            String key = "default";
+            if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled")) {
+                return;
+            }
+            ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Actionbars");
+            String secondpath = firstpath + key + ".Actionbars.";
+            for(String titleskey : titlesection.getKeys(false)) {
+                if(Integer.parseInt(actionbartask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0)) {
+                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                        Utils.sendActionBar(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Actionbar")));
+                        Utils.debugmessage("Actionbar on join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + "RunTaskLater", 0));
+                        actionbarvalues(player);
+                    }, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0) - Integer.parseInt(actionbartask.get(player).toString()));
+                    actionbartask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0));
+                    return;
+                }
+            }
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
@@ -456,7 +485,6 @@ public class JoinQuitListener implements Listener {
             ex.printStackTrace();
         }
     }
-
 
     private void titlevalues(Player player) {
         try {
@@ -472,14 +500,14 @@ public class JoinQuitListener implements Listener {
                             ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Titles");
                             String secondpath = firstpath + key + ".Titles.";
                             for(String titleskey : titlesection.getKeys(false)) {
-                                if(Integer.parseInt(playertask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0)) {
+                                if(Integer.parseInt(titletask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0)) {
                                     Bukkit.getScheduler().runTaskLater(plugin, () -> {
                                         Utils.sendTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Title")), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.TitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.TitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.TitleFadeOutTime", 0));
                                         Utils.sendSubTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".SubTitle")), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.SubTitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.SubTitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.SubTitleFadeOutTime", 0));
                                         Utils.debugmessage("Title join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.RunTaskLater", 0));
                                         titlevalues(player);
-                                    }, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0) - Integer.parseInt(playertask.get(player).toString()));
-                                    playertask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
+                                    }, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0) - Integer.parseInt(titletask.get(player).toString()));
+                                    titletask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
                                     return;
                                 }
                             }
@@ -492,14 +520,14 @@ public class JoinQuitListener implements Listener {
                         ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Titles");
                         String secondpath = firstpath + key + ".Titles.";
                         for(String titleskey : titlesection.getKeys(false)) {
-                            if(Integer.parseInt(playertask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0)) {
+                            if(Integer.parseInt(titletask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0)) {
                                 Bukkit.getScheduler().runTaskLater(plugin, () -> {
                                     Utils.sendTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Title")), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleFadeOutTime", 0));
                                     Utils.sendSubTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".SubTitle")), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleFadeOutTime", 0));
                                     Utils.debugmessage("Title join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
                                     titlevalues(player);
-                                }, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0) - Integer.parseInt(playertask.get(player).toString()));
-                                playertask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
+                                }, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0) - Integer.parseInt(titletask.get(player).toString()));
+                                titletask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
                                 return;
                             }
                         }
@@ -514,18 +542,17 @@ public class JoinQuitListener implements Listener {
             ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Titles");
             String secondpath = firstpath + key + ".Titles.";
             for(String titleskey : titlesection.getKeys(false)) {
-                if(Integer.parseInt(playertask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0)) {
+                if(Integer.parseInt(titletask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0)) {
                     Bukkit.getScheduler().runTaskLater(plugin, () -> {
                         Utils.sendTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Title")), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleFadeOutTime", 0));
                         Utils.sendSubTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".SubTitle")), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleFadeOutTime", 0));
                         Utils.debugmessage("Title join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
                         titlevalues(player);
-                    }, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0) - Integer.parseInt(playertask.get(player).toString()));
-                    playertask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
+                    }, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0) - Integer.parseInt(titletask.get(player).toString()));
+                    titletask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
                     return;
                 }
             }
-            return;
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
