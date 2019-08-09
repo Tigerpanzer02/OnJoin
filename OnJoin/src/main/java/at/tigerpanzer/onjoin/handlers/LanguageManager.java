@@ -15,12 +15,10 @@ import at.tigerpanzer.onjoin.util.MessageUtils;
 import at.tigerpanzer.onjoin.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 
@@ -44,8 +42,8 @@ public class LanguageManager {
         return getLocaleFile().getBoolean(message, false);
     }
 
-    public static boolean getLanguageBoolean(String message, boolean trueorfalse) {
-        return getLocaleFile().getBoolean(message, trueorfalse);
+    public static boolean getLanguageBoolean(String message, boolean def) {
+        return getLocaleFile().getBoolean(message, def);
     }
 
     public static ConfigurationSection getLanguageSection(String section) {
@@ -56,8 +54,8 @@ public class LanguageManager {
         return getLocaleFile().getInt(integer);
     }
 
-    public static Integer getLanguageInt(String integer, Integer defaultint) {
-        return getLocaleFile().getInt(integer, defaultint);
+    public static Integer getLanguageInt(String integer, Integer def) {
+        return getLocaleFile().getInt(integer, def);
     }
 
     private static FileConfiguration getLocaleFile() {

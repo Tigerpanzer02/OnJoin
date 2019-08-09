@@ -37,14 +37,14 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        //check if using releases before 2.1.0
-        if(Utils.getConfig(this, "config").getInt("Version", 0) <= 5) {
+        //check if using releases before 2.3.0
+        if(Utils.getConfig(this, "config").getInt("Version", 0) <= 7 || Utils.getConfig(this, "config").getInt("Version", 0) > 9999997) {
             LanguageMigrator.migrateToNewFormat();
             oldversion = true;
         }
-        if((Utils.getConfig(this, "config").isSet("PlaceholderAPI") && Utils.getConfig(this, "config").isSet("Help.HelpText"))) {
-            LanguageMigrator.migrateToNewFormat();
-            oldversion = true;
+        //after a pre/beta and no config changes, they can use there config anyway
+        if(Utils.getConfig(this, "config").getInt("Version", 0) == 9999997) {
+            Utils.getConfig(this, "config").set("Version", 230);
         }
         saveDefaultConfig();
         new LanguageManager(this);
@@ -57,7 +57,7 @@ public class Main extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] So you will get new ones which are fully working with the normal update checking"));
             Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] You can always see the config.yml & language.yml here that is working with latest pre release https://github.com/Tigerpanzer02/OnJoin/tree/development/OnJoin/src/main/resources!"));
             Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
-            if(Utils.getConfig(this, "config").getInt("Version", 9999997) != 9999997) {
+            if(Utils.getConfig(this, "config").getInt("Version", 9999996) != 9999996) {
                 LanguageMigrator.migrateToNewFormat();
             }
         } else {

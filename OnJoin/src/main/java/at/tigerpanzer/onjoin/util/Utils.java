@@ -44,6 +44,28 @@ public class Utils {
         return new File(plugin.getDataFolder() + File.separator + filename + ".yml");
     }
 
+    /*public static Boolean checkPlayerWorldOptionConfigFile(Player player, String path) {
+        if(plugin.getConfig().getBoolean(path + ".Worldsupport.Enabled", false)) {
+            for(String world : plugin.getConfig().getStringList(path + ".Worldsupport.Worlds")) {
+                if(player.getWorld().getName().equals(world)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static Boolean checkPlayerWorldOptionLanguageFile(Player player, String path) {
+        if(LanguageManager.getLanguageBoolean(path + ".Worldsupport.Enabled", false)) {
+            for(String world : LanguageManager.getLanguageList(path + ".Worldsupport.Worlds")) {
+                if(player.getWorld().getName().equals(world)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }*/
+
     public static FileConfiguration getConfig(JavaPlugin plugin, String filename) {
         File file = new File(plugin.getDataFolder() + File.separator + filename + ".yml");
         if(!file.exists()) {

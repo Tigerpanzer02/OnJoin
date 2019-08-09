@@ -112,7 +112,7 @@ public class JoinQuitListener implements Listener {
             }
         }
         if(plugin.oldversion) {
-            p.sendMessage(Utils.color("&e--------- &7[&4UPGRADE &7| &eOnJoin&7]&e --------- \n" + "&eThis update offers new customisations. Please check your configs!!!\n" + "&cWe detected that you have used a version before 2.1.0! Please have a look on the &dUpdateChanges" + "\n&e--------- &7[&4UPGRADE &7| &eOnJoin&7]&e ---------"));
+            p.sendMessage(Utils.color("&e--------- &7[&4UPGRADE &7| &eOnJoin&7]&e --------- \n" + "&eThis update offers new customisations. Please check your configs!!!\n" + "&cWe detected that you have used a version before 2.3.0! Please have a look on the &dUpdateChanges (View it on SpigotMC)" + "\n&e--------- &7[&4UPGRADE &7| &eOnJoin&7]&e ---------"));
         }
         try {
             if(joinsoundon) {
@@ -161,6 +161,11 @@ public class JoinQuitListener implements Listener {
         }
     }
 
+    private void getwelcomeMessagevalues(String key) {
+        chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "ChatClear");
+        welcomemessageon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "Enabled", false);
+    }
+
     private List<String> welcomeMessage(Player player) {
         try {
             ConfigurationSection section = LanguageManager.getLanguageSection("WelcomeMessage");
@@ -170,22 +175,19 @@ public class JoinQuitListener implements Listener {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
                             Utils.debugmessage("Send Firstjoin welcome");
-                            chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "ChatClear");
-                            welcomemessageon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "Enabled");
+                            getwelcomeMessagevalues(key);
                             return LanguageManager.getLanguageList("WelcomeMessage.firstjoin.Text");
                         }
                         Utils.debugmessage("FirstJoin is disabled or the player joined has already joined");
                     } else if(player.hasPermission(LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission"))) {
                         Utils.debugmessage("Player permission " + LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission") + " = " + player.hasPermission(LanguageManager.getLanguageMessage("WelcomeMessage." + key + ".Permission")));
-                        chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "ChatClear", false);
-                        welcomemessageon = LanguageManager.getLanguageBoolean("WelcomeMessage" + key + "Enabled", true);
+                        getwelcomeMessagevalues(key);
                         return LanguageManager.getLanguageList("WelcomeMessage." + key + ".Text");
                     }
                 }
             }
             Utils.debugmessage("Send default welcome");
-            chatclearon = LanguageManager.getLanguageBoolean("WelcomeMessage" + "default" + "ChatClear");
-            welcomemessageon = LanguageManager.getLanguageBoolean("WelcomeMessage" + "default" + "Enabled");
+            getwelcomeMessagevalues("default");
             return LanguageManager.getLanguageList("WelcomeMessage.default.Text");
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
@@ -198,6 +200,16 @@ public class JoinQuitListener implements Listener {
         return LanguageManager.getLanguageList("WelcomeMessage.default.Text");
     }
 
+    private void gethealthvalues(Player player, String key) {
+        if(plugin.getConfig().getBoolean("Heal." + key + ".Enabled", false)) {
+            player.setHealth(plugin.getConfig().getInt("Heal." + key + ".Health"));
+            player.setFoodLevel(plugin.getConfig().getInt("Heal." + key + ".FoodLevel"));
+            if(plugin.getConfig().getBoolean("Heal." + key + ".ClearPotionEffects")) {
+                player.getActivePotionEffects().clear();
+            }
+        }
+    }
+
     private void healthvalues(Player player) {
         try {
             ConfigurationSection section = plugin.getConfig().getConfigurationSection("Heal");
@@ -205,34 +217,16 @@ public class JoinQuitListener implements Listener {
                 if(!key.equals("default")) {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
-                            if(plugin.getConfig().getBoolean("Heal." + key + ".Enabled")) {
-                                player.setHealth(plugin.getConfig().getInt("Heal." + key + ".Health"));
-                                player.setFoodLevel(plugin.getConfig().getInt("Heal." + key + ".FoodLevel"));
-                                if(plugin.getConfig().getBoolean("Heal." + key + ".ClearPotionEffects")) {
-                                    player.getActivePotionEffects().clear();
-                                }
-                            }
+                            gethealthvalues(player, key);
                             return;
                         }
                     } else if(player.hasPermission(plugin.getConfig().getString("Heal." + key + ".Permission"))) {
-                        if(plugin.getConfig().getBoolean("Heal." + key + ".Enabled", true)) {
-                            player.setHealth(plugin.getConfig().getInt("Heal." + key + ".Health"));
-                            player.setFoodLevel(plugin.getConfig().getInt("Heal." + key + ".FoodLevel"));
-                            if(plugin.getConfig().getBoolean("Heal." + key + ".ClearPotionEffects")) {
-                                player.getActivePotionEffects().clear();
-                            }
-                        }
+                        gethealthvalues(player, key);
                         return;
                     }
                 }
             }
-            if(plugin.getConfig().getBoolean("Heal.default.Enabled")) {
-                player.setHealth(plugin.getConfig().getInt("Heal." + "default" + ".Health"));
-                player.setFoodLevel(plugin.getConfig().getInt("Heal." + "default" + ".FoodLevel"));
-                if(plugin.getConfig().getBoolean("Heal." + "default" + ".ClearPotionEffects")) {
-                    player.getActivePotionEffects().clear();
-                }
-            }
+            gethealthvalues(player, "default");
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
@@ -243,43 +237,45 @@ public class JoinQuitListener implements Listener {
 
     }
 
+    private void getspawnvalues(String key) {
+        spawnlocationenable = plugin.getConfig().getBoolean("SpawnLocation." + key + ".Enabled", false);
+        spawnlocationworld = plugin.getConfig().getString("SpawnLocation." + key + ".World");
+        spawnlocationx = plugin.getConfig().getDouble("SpawnLocation." + key + ".XCoord");
+        spawnlocationy = plugin.getConfig().getDouble("SpawnLocation." + key + ".YCoord");
+        spawnlocationz = plugin.getConfig().getDouble("SpawnLocation." + key + ".ZCoord");
+        spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation." + key + ".Yaw");
+        spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation." + key + ".Pitch");
+    }
 
     private void spawnvalues(Player player) {
         try {
             ConfigurationSection section = plugin.getConfig().getConfigurationSection("SpawnLocation");
             for(String key : section.getKeys(false)) {
+                /*if(key.startsWith("w:") || key.startsWith("world:") || key.startsWith("firstjoin-w:") || key.startsWith("firstjoin-world:") || key.startsWith("fj-world:")) {
+                    if(player.getWorld().getName().equals(key.split(":")[1])) {
+                        if(key.startsWith("f") && plugin.firstJoin() && Storage.getFirstJoin(player)) {
+                            getspawnvalues(key);
+                            return;
+                        } else {
+                            getspawnvalues(key);
+                            return;
+                        }
+                    }
+                }*/
+
                 if(!key.equals("default")) {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
-                            spawnlocationenable = plugin.getConfig().getBoolean("SpawnLocation." + key + ".Enabled");
-                            spawnlocationworld = plugin.getConfig().getString("SpawnLocation." + key + ".World");
-                            spawnlocationx = plugin.getConfig().getDouble("SpawnLocation." + key + ".XCoord");
-                            spawnlocationy = plugin.getConfig().getDouble("SpawnLocation." + key + ".YCoord");
-                            spawnlocationz = plugin.getConfig().getDouble("SpawnLocation." + key + ".ZCoord");
-                            spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation." + key + ".Yaw");
-                            spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation." + key + ".Pitch");
+                            getspawnvalues(key);
                             return;
                         }
                     } else if(player.hasPermission(plugin.getConfig().getString("SpawnLocation." + key + ".Permission"))) {
-                        spawnlocationworld = plugin.getConfig().getString("SpawnLocation." + key + ".World");
-                        spawnlocationx = plugin.getConfig().getDouble("SpawnLocation." + key + ".XCoord");
-                        spawnlocationy = plugin.getConfig().getDouble("SpawnLocation." + key + ".YCoord");
-                        spawnlocationz = plugin.getConfig().getDouble("SpawnLocation." + key + ".ZCoord");
-                        spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation." + key + ".Yaw");
-                        spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation." + key + ".Pitch");
-                        spawnlocationenable = plugin.getConfig().getBoolean("SpawnLocation." + key + ".Enabled", true);
+                        getspawnvalues(key);
                         return;
                     }
                 }
             }
-            spawnlocationenable = plugin.getConfig().getBoolean("SpawnLocation." + "default" + ".Enabled");
-            spawnlocationworld = plugin.getConfig().getString("SpawnLocation." + "default" + ".World");
-            spawnlocationx = plugin.getConfig().getDouble("SpawnLocation." + "default" + ".XCoord");
-            spawnlocationy = plugin.getConfig().getDouble("SpawnLocation." + "default" + ".YCoord");
-            spawnlocationz = plugin.getConfig().getDouble("SpawnLocation." + "default" + ".ZCoord");
-            spawnlocationyaw = plugin.getConfig().getInt("SpawnLocation." + "default" + ".Yaw");
-            spawnlocationpitch = plugin.getConfig().getInt("SpawnLocation." + "default" + ".Pitch");
-
+            getspawnvalues("default");
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
@@ -289,6 +285,13 @@ public class JoinQuitListener implements Listener {
         }
     }
 
+    private void getjoinsoundvalues(String key) {
+        joinsoundon = plugin.getConfig().getBoolean("Sounds.Join." + key + ".Enabled", false);
+        joinsound = plugin.getConfig().getString("Sounds.Join." + key + ".Sound");
+        joinvolume = plugin.getConfig().getInt("Sounds.Join." + key + ".Volume");
+        joinpitch = plugin.getConfig().getInt("Sounds.Join." + key + ".Pitch");
+    }
+
     private void joinsoundvalues(Player player) {
         try {
             ConfigurationSection section = plugin.getConfig().getConfigurationSection("Sounds.Join");
@@ -296,26 +299,16 @@ public class JoinQuitListener implements Listener {
                 if(!key.equals("default")) {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
-                            joinsoundon = plugin.getConfig().getBoolean("Sounds.Join." + key + ".Enabled");
-                            joinsound = plugin.getConfig().getString("Sounds.Join." + key + ".Sound");
-                            joinvolume = plugin.getConfig().getInt("Sounds.Join." + key + ".Volume");
-                            joinpitch = plugin.getConfig().getInt("Sounds.Join." + key + ".Pitch");
+                            getjoinsoundvalues(key);
                             return;
                         }
                     } else if(player.hasPermission(plugin.getConfig().getString("Sounds.Join." + key + ".Permission"))) {
-                        joinsound = plugin.getConfig().getString("Sounds.Join." + key + ".Sound");
-                        joinvolume = plugin.getConfig().getInt("Sounds.Join." + key + ".Volume");
-                        joinpitch = plugin.getConfig().getInt("Sounds.Join." + key + ".Pitch");
-                        joinsoundon = plugin.getConfig().getBoolean("Sounds.Join." + key + ".Enabled", true);
+                        getjoinsoundvalues(key);
                         return;
                     }
                 }
             }
-            joinsoundon = plugin.getConfig().getBoolean("Sounds.Join." + "default" + ".Enabled");
-            joinsound = plugin.getConfig().getString("Sounds.Join." + "default" + ".Sound");
-            joinvolume = plugin.getConfig().getInt("Sounds.Join." + "default" + ".Volume");
-            joinpitch = plugin.getConfig().getInt("Sounds.Join." + "default" + ".Pitch");
-
+            getjoinsoundvalues("default");
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
@@ -323,6 +316,13 @@ public class JoinQuitListener implements Listener {
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
             ex.printStackTrace();
         }
+    }
+
+    private void getquitsoundvalues(String key) {
+        quitsoundon = plugin.getConfig().getBoolean("Sounds.Quit." + key + ".Enabled", false);
+        quitsound = plugin.getConfig().getString("Sounds.Quit." + key + ".Sound");
+        quitvolume = plugin.getConfig().getInt("Sounds.Quit." + key + ".Volume");
+        quitpitch = plugin.getConfig().getInt("Sounds.Quit." + key + ".Pitch");
     }
 
     private void quitsoundvalues(Player player) {
@@ -332,25 +332,16 @@ public class JoinQuitListener implements Listener {
                 if(!key.equals("default")) {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
-                            quitsoundon = plugin.getConfig().getBoolean("Sounds.Quit." + key + ".Enabled");
-                            quitsound = plugin.getConfig().getString("Sounds.Quit." + key + ".Sound");
-                            quitvolume = plugin.getConfig().getInt("Sounds.Quit." + key + ".Volume");
-                            quitpitch = plugin.getConfig().getInt("Sounds.Quit." + key + ".Pitch");
+                            getquitsoundvalues(key);
                             return;
                         }
                     } else if(player.hasPermission(plugin.getConfig().getString("Sounds.Quit." + key + ".Permission"))) {
-                        quitsound = plugin.getConfig().getString("Sounds.Quit." + key + ".Sound");
-                        quitvolume = plugin.getConfig().getInt("Sounds.Quit." + key + ".Volume");
-                        quitpitch = plugin.getConfig().getInt("Sounds.Quit." + key + ".Pitch");
-                        quitsoundon = plugin.getConfig().getBoolean("Sounds.Quit." + key + ".Enabled", true);
+                        getquitsoundvalues(key);
                         return;
                     }
                 }
             }
-            quitsoundon = plugin.getConfig().getBoolean("Sounds.Quit." + "default" + ".Enabled");
-            quitsound = plugin.getConfig().getString("Sounds.Quit." + "default" + ".Sound");
-            quitvolume = plugin.getConfig().getInt("Sounds.Quit." + "default" + ".Volume");
-            quitpitch = plugin.getConfig().getInt("Sounds.Quit." + "default" + ".Pitch");
+            getquitsoundvalues("default");
 
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
@@ -361,48 +352,53 @@ public class JoinQuitListener implements Listener {
         }
     }
 
+    private void getjoinmessagesvalues(String key) {
+        String firstpath = "Messages.Join.";
+        joinmessageon = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", false);
+        joinmessage = Utils.colorMessage(firstpath + key + ".Message");
+    }
+
+    private void getquitmessagesvalues(String key) {
+        String firstpath = "Messages.Quit.";
+        quitmessageon = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", false);
+        quitmessage = Utils.colorMessage(firstpath + key + ".Message");
+    }
+
     private void messagesvalues(Player player, boolean join) {
         try {
             if(join) {
                 ConfigurationSection section = LanguageManager.getLanguageSection("Messages.Join");
-                String firstpath = "Messages.Join.";
+
                 for(String key : section.getKeys(false)) {
                     if(!key.equals("default")) {
                         if(key.equals("firstjoin")) {
                             if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
-                                joinmessageon = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled");
-                                joinmessage = Utils.colorMessage(firstpath + key + ".Message");
+                                getjoinmessagesvalues(key);
                                 return;
                             }
-                        } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
-                            joinmessage = Utils.colorMessage(firstpath + key + ".Message");
-                            joinmessageon = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", true);
+                        } else if(player.hasPermission(LanguageManager.getLanguageMessage("Messages.Join." + key + ".Permission"))) {
+                            getjoinmessagesvalues(key);
                             return;
                         }
                     }
                 }
-                joinmessageon = LanguageManager.getLanguageBoolean(firstpath + "default" + ".Enabled");
-                joinmessage = Utils.colorMessage(firstpath + "default" + ".Message");
+                getjoinmessagesvalues("default");
             } else {
                 ConfigurationSection section = LanguageManager.getLanguageSection("Messages.Quit");
-                String firstpath = "Messages.Quit.";
                 for(String key : section.getKeys(false)) {
                     if(!key.equals("default")) {
                         if(key.equals("firstjoin")) {
                             if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
-                                quitmessageon = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled");
-                                quitmessage = Utils.colorMessage(firstpath + key + ".Message");
+                                getquitmessagesvalues(key);
                                 return;
                             }
-                        } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
-                            quitmessage = Utils.colorMessage(firstpath + key + ".Message");
-                            quitmessageon = LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", true);
+                        } else if(player.hasPermission(LanguageManager.getLanguageMessage("Messages.Quit." + key + ".Permission"))) {
+                            getquitmessagesvalues(key);
                             return;
                         }
                     }
                 }
-                quitmessageon = LanguageManager.getLanguageBoolean(firstpath + "default" + ".Enabled");
-                quitmessage = Utils.colorMessage(firstpath + "default" + ".Message");
+                getquitmessagesvalues("default");
             }
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
@@ -413,70 +409,44 @@ public class JoinQuitListener implements Listener {
         }
     }
 
+    private void getactionbarvalues(Player player, String key) {
+        String firstpath = "Actionbar.";
+        if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", false)) {
+            return;
+        }
+        ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Actionbars");
+        String secondpath = firstpath + key + ".Actionbars.";
+        for(String titleskey : titlesection.getKeys(false)) {
+            if(Integer.parseInt(actionbartask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0)) {
+                Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                    Utils.sendActionBar(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Actionbar")));
+                    Utils.debugmessage("Actionbar on join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + "RunTaskLater", 0));
+                    actionbarvalues(player);
+                }, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0) - Integer.parseInt(actionbartask.get(player).toString()));
+                actionbartask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0));
+                return;
+            }
+        }
+    }
+
     private void actionbarvalues(Player player) {
         try {
             ConfigurationSection section = LanguageManager.getLanguageSection("Actionbar");
-            String firstpath = "Actionbar.";
+
             for(String key : section.getKeys(false)) {
                 if(!key.equals("default")) {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
-                            if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled")) {
-                                return;
-                            }
-                            ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Actionbars");
-                            String secondpath = firstpath + key + ".Actionbars.";
-                            for(String titleskey : titlesection.getKeys(false)) {
-                                if(Integer.parseInt(actionbartask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0)) {
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                                        Utils.sendActionBar(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Actionbar")));
-                                        Utils.debugmessage("Actionbar on join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + "RunTaskLater", 0));
-                                        actionbarvalues(player);
-                                    }, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0) - Integer.parseInt(actionbartask.get(player).toString()));
-                                    actionbartask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0));
-                                    return;
-                                }
-                            }
+                            getactionbarvalues(player, key);
                             return;
                         }
-                    } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
-                        if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled")) {
-                            return;
-                        }
-                        ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Actionbars");
-                        String secondpath = firstpath + key + ".Actionbars.";
-                        for(String titleskey : titlesection.getKeys(false)) {
-                            if(Integer.parseInt(actionbartask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0)) {
-                                Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                                    Utils.sendActionBar(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Actionbar")));
-                                    Utils.debugmessage("Actionbar on join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + "RunTaskLater", 0));
-                                    actionbarvalues(player);
-                                }, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0) - Integer.parseInt(actionbartask.get(player).toString()));
-                                actionbartask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0));
-                                return;
-                            }
-                        }
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("Actionbar." + key + ".Permission"))) {
+                        getactionbarvalues(player, key);
                         return;
                     }
                 }
             }
-            String key = "default";
-            if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled")) {
-                return;
-            }
-            ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Actionbars");
-            String secondpath = firstpath + key + ".Actionbars.";
-            for(String titleskey : titlesection.getKeys(false)) {
-                if(Integer.parseInt(actionbartask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0)) {
-                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                        Utils.sendActionBar(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Actionbar")));
-                        Utils.debugmessage("Actionbar on join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + "RunTaskLater", 0));
-                        actionbarvalues(player);
-                    }, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0) - Integer.parseInt(actionbartask.get(player).toString()));
-                    actionbartask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".RunTaskLater", 0));
-                    return;
-                }
-            }
+            getactionbarvalues(player, "default");
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
@@ -486,73 +456,44 @@ public class JoinQuitListener implements Listener {
         }
     }
 
+    private void gettitlevalues(Player player, String key) {
+        String firstpath = "Title.";
+        if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled", false)) {
+            return;
+        }
+        ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Titles");
+        String secondpath = firstpath + key + ".Titles.";
+        for(String titleskey : titlesection.getKeys(false)) {
+            if(Integer.parseInt(titletask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0)) {
+                Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                    Utils.sendTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Title")), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.TitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.TitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.TitleFadeOutTime", 0));
+                    Utils.sendSubTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".SubTitle")), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.SubTitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.SubTitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.SubTitleFadeOutTime", 0));
+                    Utils.debugmessage("Title join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.RunTaskLater", 0));
+                    titlevalues(player);
+                }, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0) - Integer.parseInt(titletask.get(player).toString()));
+                titletask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
+                return;
+            }
+        }
+    }
+
     private void titlevalues(Player player) {
         try {
             ConfigurationSection section = LanguageManager.getLanguageSection("Title");
-            String firstpath = "Title.";
             for(String key : section.getKeys(false)) {
                 if(!key.equals("default")) {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
-                            if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled")) {
-                                return;
-                            }
-                            ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Titles");
-                            String secondpath = firstpath + key + ".Titles.";
-                            for(String titleskey : titlesection.getKeys(false)) {
-                                if(Integer.parseInt(titletask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0)) {
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                                        Utils.sendTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Title")), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.TitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.TitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.TitleFadeOutTime", 0));
-                                        Utils.sendSubTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".SubTitle")), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.SubTitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.SubTitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.SubTitleFadeOutTime", 0));
-                                        Utils.debugmessage("Title join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + "Timings.RunTaskLater", 0));
-                                        titlevalues(player);
-                                    }, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0) - Integer.parseInt(titletask.get(player).toString()));
-                                    titletask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
-                                    return;
-                                }
-                            }
+                            gettitlevalues(player, key);
                             return;
                         }
-                    } else if(player.hasPermission(LanguageManager.getLanguageMessage(firstpath + key + ".Permission"))) {
-                        if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled")) {
-                            return;
-                        }
-                        ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Titles");
-                        String secondpath = firstpath + key + ".Titles.";
-                        for(String titleskey : titlesection.getKeys(false)) {
-                            if(Integer.parseInt(titletask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0)) {
-                                Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                                    Utils.sendTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Title")), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleFadeOutTime", 0));
-                                    Utils.sendSubTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".SubTitle")), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleFadeOutTime", 0));
-                                    Utils.debugmessage("Title join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
-                                    titlevalues(player);
-                                }, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0) - Integer.parseInt(titletask.get(player).toString()));
-                                titletask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
-                                return;
-                            }
-                        }
+                    } else if(player.hasPermission(LanguageManager.getLanguageMessage("Title." + key + ".Permission"))) {
+                        gettitlevalues(player, key);
                         return;
                     }
                 }
             }
-            String key = "default";
-            if(!LanguageManager.getLanguageBoolean(firstpath + key + ".Enabled")) {
-                return;
-            }
-            ConfigurationSection titlesection = LanguageManager.getLanguageSection(firstpath + key + ".Titles");
-            String secondpath = firstpath + key + ".Titles.";
-            for(String titleskey : titlesection.getKeys(false)) {
-                if(Integer.parseInt(titletask.get(player).toString()) < LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0)) {
-                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                        Utils.sendTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".Title")), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.TitleFadeOutTime", 0));
-                        Utils.sendSubTitle(player, Utils.setPlaceholders(player, Utils.colorMessage(secondpath + titleskey + ".SubTitle")), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleFadeInTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleShowTime", 0), LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.SubTitleFadeOutTime", 0));
-                        Utils.debugmessage("Title join for " + player.getName() + " with runtasklater value " + LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
-                        titlevalues(player);
-                    }, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0) - Integer.parseInt(titletask.get(player).toString()));
-                    titletask.replace(player, LanguageManager.getLanguageInt(secondpath + titleskey + ".Timings.RunTaskLater", 0));
-                    return;
-                }
-            }
+            gettitlevalues(player, "default");
         } catch(Exception ex) {
             MessageUtils.errorOccurred();
             Bukkit.getConsoleSender().sendMessage(Utils.color(plugin.consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
