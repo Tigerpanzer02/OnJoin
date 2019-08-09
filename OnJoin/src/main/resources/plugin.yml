@@ -1,11 +1,12 @@
 name: OnJoin
-author: Tigerpanzer (SpigotMC Tigerkatze) [CC-SW Network]
+author: Tigerpanzer_02 (SpigotMC Tigerkatze)
 main: at.tigerpanzer.onjoin.Main
 version: ${project.version}
 description: With this plugin, joins are unique on your server
 softdepend: [PlaceholderAPI]
 commands:
-  onjoin:  
+  onjoin:
+    description: Main command
 
 permissions:
   OnJoin.*:

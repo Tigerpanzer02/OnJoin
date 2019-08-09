@@ -67,12 +67,12 @@ public class JoinExecuteCommand implements Listener {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {
                             commandsenable = plugin.getConfig().getBoolean("ExecuteCommand." + key + ".Enabled");
                             commands = plugin.getConfig().getStringList("ExecuteCommand." + key + ".Commands");
-                            break;
+                            return;
                         }
                     } else if(player.hasPermission(LanguageManager.getLanguageMessage("SpawnLocation." + key + ".Permission"))) {
                         commands = plugin.getConfig().getStringList("ExecuteCommand." + key + ".Commands");
-                        commandsenable = true;
-                        break;
+                        commandsenable = plugin.getConfig().getBoolean("ExecuteCommand." + key + ".Enabled", true);
+                        return;
                     }
                 }
             }

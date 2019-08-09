@@ -1,0 +1,202 @@
+############################
+##        Általános       ##
+############################
+
+
+#Összes konzol-üzenet
+Console:
+  PrefixConsole: '&7[&eOnJoin&7]'
+
+
+#A OnJoin parancs üzenetei
+Help:
+  HelpText:
+    - ''
+    - '&e--------- &7[&aSúgó &7| &eOnJoin&7]&e ---------'
+    - '&e|  '
+    - '&e|  &7/&eonjoin'
+    - '&e|    &c->  &7Áttekíntés'
+    - '&e|  '
+    - '&e|  &7/&eonjoin &areloadconfig'
+    - '&e|    &c->  &7Konfiguráció újratöltése'
+    - '&e|  '
+    - '&e|  &7/&eonjoin &asetspawn'
+    - '&e|    &c->  &7Spawnhely beállítása'
+    - '&e|  '
+    - '&e|  &7/&eonjoin &alocale <de/default>'
+    - '&e|    &c->  &7Váltás más nyelvre'
+    - '&e|  '
+    - '&e--------- &7[&aSúgó &7| &eOnJoin&7]&e ---------'
+    - ''
+  LanguageSwitch: 'A konfiguráció elmentve!'
+  OutConfigLoad: 'Az összes beállítás a konfigurációból sikeresen betöltve.'
+
+
+#Általános üzenetek
+Prefix: '&7[&eOnJoin&7] &7»&e '
+Permissionfail: "&cEhhez nem vagy jogosult!"
+TargetFalse: "&cA játékos offline vagy nem létezik."
+NoPlayer: 'Ez egy játékos parancs! Te nem vagy játékos.'
+
+
+#Játékos teleportálása a szerverhez való csatlakozáskor
+SpawnLocation:
+  SetSpawnMessageSetTo: '&aSpawnhely beállítva erre&7: '
+  SetSpawnMessageYaw: '&2Yaw&7: '
+  SetSpawnMessagePitch: '&2Pitch&7: '
+
+
+##############################
+##     Üdvözlő üzenetek     ##
+##############################
+
+
+#Ha nem érted ezeket az elemeket, nézd meg a config.yml Additional Informations szakasát angol nyelven.
+#Üdvözlő üzenetek a chaten
+WelcomeMessage:
+  #Annyi sort adhatsz hozzá és törölhetsz, amennyit csak szeretnél!
+  'default':
+    Enabled: true
+    ChatClear: true
+    Text:
+      - '&e------------------------------------'
+      - '&e|  '
+      - '&e|  Szia &a%player%&7!'
+      - '&e|  &eÜdvözöljük a szerveren'
+      - '&e|  Default'
+      - '&e|  &eOnJoin &8- &7Your Join Plugin'
+      - '&e|  &7Készítette: &bTigerpanzer_02/Tigerkatze'
+      - '&e|  &7Your Network'
+      - '&e|  '
+      - '&e------------------------------------'
+  'firstjoin':
+    Enabled: true
+    ChatClear: true
+    Text:
+      - '&e------------------------------------'
+      - '&e|  '
+      - '&e|  Szia &a%player%&7!'
+      - '&e|  &eÜdvözöljük a szerveren'
+      - '&e|  Firstjoin'
+      - '&e|  &eOnJoin &8- &7Your Join Plugin'
+      - '&e|  &7Készítette: &bTigerpanzer_02/Tigerkatze'
+      - '&e|  &7Your Network'
+      - '&e|  '
+      - '&e------------------------------------'
+  '1':
+    Permission: OnJoin.welcomemessage.first
+    ChatClear: true
+    Text:
+      - '&e------------------------------------'
+      - '&e|  '
+      - '&e|  Szia &a%player%&7!'
+      - '&e|  &eÜdvözöljük a szerveren'
+      - '&e|  1'
+      - '&e|  &eOnJoin &8- &7Your Join Plugin'
+      - '&e|  &7Készítette: &bTigerpanzer_02/Tigerkatze'
+      - '&e|  &7Your Network'
+      - '&e|  '
+      - '&e------------------------------------'
+  '2':
+    Permission: OnJoin.welcomemessage.example
+    Text:
+      - '&e------------------------------------'
+      - '&e|  Message with permission OnJoin.welcomemessage.example'
+      - '&e|  Szia &a%player%&7!'
+      - '&e|  &eÜdvözöljük a szerveren'
+      - '&e|  2'
+      - '&e|  &eOnJoin &8- &7Your Join Plugin'
+      - '&e|  &7Készítette: &bTigerpanzer_02/Tigerkatze'
+      - '&e|  &7Your Network'
+      - '&e|  '
+      - '&e------------------------------------'
+
+
+#####################
+##    Üzenetek     ##
+#####################
+
+
+#A szerverhez való csatlakozáskor illetve elhagyásánál megjelenő üzenetek
+Messages:
+  UpdateMessageText:
+    - '&e--------- &7[&aFRISSÍTÉS &7| &eOnJoin&7]&e ---------'
+    - '&c|  Új frissítés érhető el!'
+    - '&c|  Letölthető a SpigotMC oldalán!'
+    - '&c|  https://www.spigotmc.org/resources/56907/'
+    - '&e--------- &7[&aFRISSÍTÉS &7| &eOnJoin&7]&e ---------'
+  Join:
+    'default':
+      Enabled: true
+      Message: '%player% csatlakozott a szervere'
+    'firstjoin':
+      Enabled: true
+      Message: '%player% első alkalommal csatlakozott a szervere'
+    '1':
+      Permission: OnJoin.JoinMessage.1
+      Message: '%player% a tulajdonos csatlakozott'
+  Quit:
+    'default':
+      Enabled: true
+      Message: '%player% elhagyta a szervert'
+    'firstjoin':
+      Enabled: true
+      Message: '%player% első alkalommal elhagyta a szervert'
+    '1':
+      Permission: OnJoin.QuitMessage.1
+      Message: '%player% pro kilép'
+
+
+######################
+##    Actionbar     ##
+######################
+
+
+#Üzenetek az action bar-on alul
+Actionbar:
+  'default':
+    Enabled: true
+    Actionbar1: '&7Üdvözöljük %player%!'
+    Actionbar2: '&7 Another Bar'
+  'firstjoin':
+    Enabled: true
+    Actionbar1: '&7Üdvözöljük első csatlakozásánál %player%!'
+    Actionbar2: '&7 Another Bar'
+  '1':
+    Permission: OnJoin.Actionbar.1
+    Actionbar1: '&7Üdvözöljük %player%!'
+    Actionbar2: '&7 Another Bar'
+
+
+################
+##    Cím     ##
+################
+
+
+#Cím a képernyő közepén
+Title:
+  'default':
+    Enabled: true
+    Title1: '&bCC&3SW'
+    SubTitle1: '&eOnJoin'
+    SubTitle2: '&aCím&8 - &7Szerkeszthető az &8onjoin.yml &7fájlban'
+  'firstjoin':
+    Enabled: true
+    Title1: '&bCC&3SW'
+    SubTitle1: '&eOnJoin firstjoin'
+    SubTitle2: '&aCím&8 - &7Szerkeszthető az &8onjoin.yml &7fájlban'
+  '1':
+    Permission: OnJoin.Title.1
+    Title1: '&bCC&3SW'
+    SubTitle1: '&eOnJoin'
+    SubTitle2: '&aCím&8 - &7Szerkeszthető az &8onjoin.yml &7fájlban'
+
+
+###########################
+##     NE VÁLTOZTASD     ##
+###########################
+
+
+# Ezt ne szerkesd. Ki fog téged megállítani? Hát a szerver!
+# Valóban! Ne szerkesd! ;p
+File-Version-Do-Not-Edit: 9999999

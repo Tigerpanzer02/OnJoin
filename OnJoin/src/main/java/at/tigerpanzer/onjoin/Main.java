@@ -37,16 +37,17 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        //check if using releases before 2.1.0
-        if(Utils.getConfig(this, "config").getInt("Version", 0) <= 5) {
+        //check if using releases before 2.3.0
+        if(Utils.getConfig(this, "config").getInt("Version", 0) <= 7 || Utils.getConfig(this, "config").getInt("Version", 0) > 9999997) {
             LanguageMigrator.migrateToNewFormat();
             oldversion = true;
         }
-        if((Utils.getConfig(this, "config").isSet("PlaceholderAPI") && Utils.getConfig(this, "config").isSet("Help.HelpText"))) {
-            LanguageMigrator.migrateToNewFormat();
-            oldversion = true;
+        //after a pre/beta and no config changes, they can use there config anyway
+        if(Utils.getConfig(this, "config").getInt("Version", 0) == 9999997) {
+            Utils.getConfig(this, "config").set("Version", 230);
         }
         saveDefaultConfig();
+        new LanguageManager(this);
         //check for pre version
         if(getDescription().getVersion().contains("PRE")) {
             MessageUtils.info();
@@ -56,7 +57,7 @@ public class Main extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] So you will get new ones which are fully working with the normal update checking"));
             Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] You can always see the config.yml & language.yml here that is working with latest pre release https://github.com/Tigerpanzer02/OnJoin/tree/development/OnJoin/src/main/resources!"));
             Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
-            if(Utils.getConfig(this, "config").getInt("Version", 9999999) != 9999999) {
+            if(Utils.getConfig(this, "config").getInt("Version", 9999996) != 9999996) {
                 LanguageMigrator.migrateToNewFormat();
             }
         } else {
@@ -68,15 +69,13 @@ public class Main extends JavaPlugin {
         mySQLEnabled = false;
         firstJoinEnabled = false;
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
-        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cWird &aGESTARTET &7| &cis &aSTARTING"));
+        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &aSTARTING..."));
         register();
         if(getConfig().getBoolean("MySQL.Enabled", false)) {
             connectMySQL();
             mySQLEnabled = true;
         }
-        if(getConfig().getBoolean("Join.UpdateMessageOn", true)) {
-            update();
-        }
+        update();
         if(getConfig().getBoolean("FirstJoin.Enabled", false)) {
             firstJoinEnabled = true;
         }
@@ -86,7 +85,7 @@ public class Main extends JavaPlugin {
         }
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin version: &e" + getDescription().getVersion()));
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin author: &e" + getDescription().getAuthors()));
-        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin status: &aaktiviert &c| &aenabled"));
+        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin status: &aenabled"));
         if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " §a✔ §ePlaceholderAPI §7| §aVersion§7:§e " + PlaceholderAPIPlugin.getInstance().getDescription().getVersion()));
             placeholderAPI = true;
@@ -110,38 +109,30 @@ public class Main extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin version: &e" + getDescription().getVersion()));
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin author: &e" + getDescription().getAuthors()));
-        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin status: &4deaktiviert &c| &4disabled"));
+        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &cPlugin status: &4disabled"));
         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
     }
 
     private void update() {
         UpdateChecker.init(this, 56907).requestUpdateCheck().whenComplete((result, exception) -> {
             if(result.requiresUpdate()) {
-                if(result.getNewestVersion().contains("PRE")) {
-                    if(getConfig().getBoolean("Update-Notifier.Notify-Beta-Versions", true)) {
+                if(result.getNewestVersion().contains("PRE") || result.getNewestVersion().contains("b")) {
+                    if(getConfig().getBoolean("UpdateNotifier", true)) {
                         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
-                        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[OnJoin] Your software is ready for update! However it's a PRE RELEASE VERSION. Proceed with caution.");
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[OnJoin] Your software is ready for update! However it's a" + (result.getNewestVersion().contains("PRE") ? " PRE RELEASE VERSION" :  "BETA VERSION") + ". Proceed with caution.");
                         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[OnJoin] Current version %old%, latest version %new%".replace("%old%", getDescription().getVersion()).replace("%new%",
                                 result.getNewestVersion()));
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Disable this option in config.yml if you wish to disable pre/beta notifications.");
                         Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
                     }
                     return;
                 }
-                if(result.getNewestVersion().contains("b")) {
-                    if(getConfig().getBoolean("Update-Notifier.Notify-Beta-Versions", true)) {
-                        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
-                        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[OnJoin] Your software is ready for update! However it's a BETA VERSION. Proceed with caution.");
-                        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[OnJoin] Current version %old%, latest version %new%".replace("%old%", getDescription().getVersion()).replace("%new%",
-                                result.getNewestVersion()));
-                        Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
-                    }
-                    return;
+                if(getConfig().getBoolean("Join.UpdateMessageOn", true)) {
+                    needUpdateJoin = true;
                 }
-                needUpdateJoin = true;
                 Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
                 MessageUtils.updateIsHere();
                 Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Your OnJoin plugin is outdated! Download it to keep with latest changes and fixes.");
-                Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Disable this option in config.yml if you wish.");
                 Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "Current version: " + ChatColor.RED + getDescription().getVersion() + ChatColor.YELLOW + " Latest version: " + ChatColor.GREEN + result.getNewestVersion());
                 Bukkit.getConsoleSender().sendMessage(Utils.color(consolePrefix + " &7=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
             }
@@ -153,7 +144,6 @@ public class Main extends JavaPlugin {
         new JoinQuitListener(this);
         new JoinFirework(this);
         new JoinExecuteCommand(this);
-        new LanguageManager(this);
     }
 
     private void connectMySQL() {

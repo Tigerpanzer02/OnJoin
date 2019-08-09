@@ -67,7 +67,7 @@ WelcomeMessage:
       - '&e|  Default'
       - '&e|  &eOnJoin &8- &7Your Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Your Network @CC-SW'
+      - '&e|  &7Your Network'
       - '&e|  '
       - '&e------------------------------------'
   'firstjoin':
@@ -81,11 +81,12 @@ WelcomeMessage:
       - '&e|  Firstjoin'
       - '&e|  &eOnJoin &8- &7Your Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Your Network @CC-SW'
+      - '&e|  &7Your Network'
       - '&e|  '
       - '&e------------------------------------'
   '1':
     Permission: OnJoin.welcomemessage.first
+    Enabled: true
     ChatClear: true
     Text:
       - '&e------------------------------------'
@@ -95,11 +96,13 @@ WelcomeMessage:
       - '&e|  1'
       - '&e|  &eOnJoin &8- &7Your Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Your Network @CC-SW'
+      - '&e|  &7Your Network'
       - '&e|  '
       - '&e------------------------------------'
   '2':
     Permission: OnJoin.welcomemessage.example
+    Enabled: true
+    ChatClear: false
     Text:
       - '&e------------------------------------'
       - '&e|  Message with permission OnJoin.welcomemessage.example'
@@ -108,7 +111,7 @@ WelcomeMessage:
       - '&e|  2'
       - '&e|  &eOnJoin &8- &7Your Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Your Network @CC-SW'
+      - '&e|  &7Your Network'
       - '&e|  '
       - '&e------------------------------------'
 
@@ -145,6 +148,7 @@ Messages:
       Message: '%player% left the first time'
     '1':
       Permission: OnJoin.QuitMessage.1
+      Enabled: true
       Message: '%player% pro left'
 
 
@@ -153,20 +157,39 @@ Messages:
 ######################
 
 
+#Don´t forget to structure your order logical - that means you need to order it in this sequence default, firstjoin, permission with lowest power, ..., permission with highest power
+#and for the actionbars the smallest RunTaskLater value at first. For example RunTaskLater 10 is above RunTaskLater 50
+
 #Message on the actionbar
 Actionbar:
   'default':
     Enabled: true
-    Actionbar1: '&7Welcome %player%!'
-    Actionbar2: '&7 CC-SW Network'
+    Actionbars:
+      'defaultactionbar':
+        Actionbar: '&7Welcome %player%!'
+        RunTaskLater: 10
+      'defaultactionbar2':
+        Actionbar: '&7Edit in Config ;)'
+        RunTaskLater: 50
   'firstjoin':
     Enabled: true
-    Actionbar1: '&7Welcome firstjoin %player%!'
-    Actionbar2: '&7 CC-SW Network'
+    Actionbars:
+      'defaultactionbar':
+        Actionbar: '&7Welcome %player%!'
+        RunTaskLater: 10
+      'defaultactionbar2':
+        Actionbar: '&7It your first join ;)'
+        RunTaskLater: 50
   '1':
     Permission: OnJoin.Actionbar.1
-    Actionbar1: '&7Welcome %player%!'
-    Actionbar2: '&7 CC-SW Network'
+    Enabled: true
+    Actionbars:
+      'defaultactionbar':
+        Actionbar: '&7Welcome %player%!'
+        RunTaskLater: 10
+      'defaultactionbar2':
+        Actionbar: '&7You have the permission to see this ;)'
+        RunTaskLater: 50
 
 
 ##################
@@ -174,23 +197,87 @@ Actionbar:
 ##################
 
 
+#Don´t forget to structure your order logical - that means you need to order it in this sequence default, firstjoin, permission with lowest power, ..., permission with highest power
+#and for the titles the smallest RunTaskLater value at first. For example RunTaskLater 2 is above RunTaskLater 10
+
 #Titel in the middle of the screen
 Title:
   'default':
     Enabled: true
-    Title1: '&bCC&3SW'
-    SubTitle1: '&eOnJoin'
-    SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
+    Titles:
+      'defaulttitle':
+        Title: '&bOnJoin'
+        SubTitle: '&eOnJoin'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 2
+      'defaulttitle2':
+        Title: '&bOnJoin'
+        SubTitle: '&aTitle&8 - &7Edit it in &8onjoin.yml'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 10
   'firstjoin':
     Enabled: true
-    Title1: '&bCC&3SW'
-    SubTitle1: '&eOnJoin firstjoin'
-    SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
+    Titles:
+      'defaulttitle':
+        Title: '&bOnJoin - FirstJoin'
+        SubTitle: '&eOnJoin'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 2
+      'defaulttitle2':
+        Title: '&bOnJoin - FirstJoin'
+        SubTitle: '&aTitle&8 - &7Edit it in &8onjoin.yml'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 10
   '1':
     Permission: OnJoin.Title.1
-    Title1: '&bCC&3SW'
-    SubTitle1: '&eOnJoin'
-    SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
+    Enabled: true
+    Titles:
+      'defaulttitle':
+        Title: '&bOnJoin - PermissionJoin'
+        SubTitle: '&eOnJoin'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 2
+      'defaulttitle2':
+        Title: '&bOnJoin - PermissionJoin'
+        SubTitle: '&aTitle&8 - &7Edit it in &8onjoin.yml'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 10
 
 
 
@@ -201,4 +288,4 @@ Title:
 
 # Don't edit it. But who's stopping you? It's your server!
 # Really, don't edit ;p
-File-Version-Do-Not-Edit: 9999999
+File-Version-Do-Not-Edit: 230

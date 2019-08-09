@@ -16,6 +16,7 @@ import at.tigerpanzer.onjoin.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.util.List;
@@ -41,15 +42,30 @@ public class LanguageManager {
         return getLocaleFile().getBoolean(message, false);
     }
 
+    public static boolean getLanguageBoolean(String message, boolean def) {
+        return getLocaleFile().getBoolean(message, def);
+    }
+
     public static ConfigurationSection getLanguageSection(String section) {
         return getLocaleFile().getConfigurationSection(section);
     }
 
+    public static Integer getLanguageInt(String integer) {
+        return getLocaleFile().getInt(integer);
+    }
+
+    public static Integer getLanguageInt(String integer, Integer def) {
+        return getLocaleFile().getInt(integer, def);
+    }
 
     private static FileConfiguration getLocaleFile() {
         if(!plugin.getConfig().get("locale").toString().equalsIgnoreCase("de") && !plugin.getConfig().get("locale").toString().equalsIgnoreCase("default") && !plugin.getConfig().get("locale").toString().equalsIgnoreCase("hu")) {
             try {
-                return Utils.getConfig(plugin, "language_" + plugin.getConfig().get("locale").toString());
+                String filename = "language_" + plugin.getConfig().get("locale").toString();
+                File file = new File(plugin.getDataFolder(), filename + ".yml");
+                YamlConfiguration config = new YamlConfiguration();
+                config.load(file);
+                return config;
             } catch(Exception ex) {
                 MessageUtils.errorOccurred();
                 ex.printStackTrace();
