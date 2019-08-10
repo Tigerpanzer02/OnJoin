@@ -44,7 +44,9 @@ public class Main extends JavaPlugin {
         }
         //after a pre/beta and no config changes, they can use there config anyway
         if(Utils.getConfig(this, "config").getInt("Version", 0) == 9999997) {
-            Utils.getConfig(this, "config").set("Version", 230);
+            LanguageMigrator.updateLanguageVersionControl(9999997);
+            LanguageMigrator.updateConfigVersionControl(9999997);
+            Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] You used a supported pre version. We don´t migrate your files!"));
         }
         saveDefaultConfig();
         new LanguageManager(this);

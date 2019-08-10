@@ -28,8 +28,8 @@ import java.util.List;
 public class LanguageMigrator {
 
 
-    private static final int LANGUAGE_FILE_VERSION = 7;
-    private static final int CONFIG_FILE_VERSION = 7;
+    private static final int LANGUAGE_FILE_VERSION = 230;
+    private static final int CONFIG_FILE_VERSION = 230;
     private static Main plugin = JavaPlugin.getPlugin(Main.class);
     private static List<String> migratable = Arrays.asList("config", "language");
 
@@ -46,7 +46,7 @@ public class LanguageMigrator {
 
         for(int i = version; i < CONFIG_FILE_VERSION; i++) {
             switch(version) {
-                case 6:
+                case 0:
                     break;
             }
 
@@ -74,7 +74,7 @@ public class LanguageMigrator {
 
         for(int i = version; i < LANGUAGE_FILE_VERSION; i++) {
             switch(version) {
-                case 6:
+                case 0:
                     break;
             }
             version++;
@@ -100,7 +100,7 @@ public class LanguageMigrator {
         Bukkit.getConsoleSender().sendMessage(Utils.color("§7[§eOnJoin§7] =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="));
     }
 
-    private static void updateLanguageVersionControl(int oldVersion) {
+    public static void updateLanguageVersionControl(int oldVersion) {
         File file = new File(plugin.getDataFolder() + "/language.yml");
         Utils.removeLineFromFile(file, "# Don't edit it. But who's stopping you? It's your server!");
         Utils.removeLineFromFile(file, "# Really, don't edit ;p");
@@ -108,12 +108,12 @@ public class LanguageMigrator {
         Utils.addNewLines(file, "# Don't edit it. But who's stopping you? It's your server!\r\n# Really, don't edit ;p\r\nFile-Version-Do-Not-Edit: " + LANGUAGE_FILE_VERSION + "\r\n");
     }
 
-    private static void updateConfigVersionControl(int oldVersion) {
+    public static void updateConfigVersionControl(int oldVersion) {
         File file = new File(plugin.getDataFolder() + "/config.yml");
         Utils.removeLineFromFile(file, "# Don't modify.");
         Utils.removeLineFromFile(file, "Version: " + oldVersion);
         Utils.removeLineFromFile(file, "# No way! You've reached the end! Let us join!?");
-        Utils.addNewLines(file, "# Don't modify.\r\nVersion: " + CONFIG_FILE_VERSION + "\r\n\r\n# No way! You've reached the end! Let us join!?");
+        Utils.addNewLines(file, "# Don't modify.\r\nVersion: " + CONFIG_FILE_VERSION + "\r\n# No way! You've reached the end! Let us join!?");
     }
 
 }
