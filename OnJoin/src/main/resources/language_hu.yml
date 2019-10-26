@@ -177,17 +177,17 @@ Actionbar:
 Title:
   'default':
     Enabled: true
-    Title1: '&bCC&3SW'
+    Title1: '&bNET'
     SubTitle1: '&eOnJoin'
     SubTitle2: '&aCím&8 - &7Szerkeszthető az &8onjoin.yml &7fájlban'
   'firstjoin':
     Enabled: true
-    Title1: '&bCC&3SW'
+    Title1: '&bNET'
     SubTitle1: '&eOnJoin firstjoin'
     SubTitle2: '&aCím&8 - &7Szerkeszthető az &8onjoin.yml &7fájlban'
   '1':
     Permission: OnJoin.Title.1
-    Title1: '&bCC&3SW'
+    Title1: '&bNET'
     SubTitle1: '&eOnJoin'
     SubTitle2: '&aCím&8 - &7Szerkeszthető az &8onjoin.yml &7fájlban'
 

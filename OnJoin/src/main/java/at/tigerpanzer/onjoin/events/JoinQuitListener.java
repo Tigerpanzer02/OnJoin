@@ -262,7 +262,6 @@ public class JoinQuitListener implements Listener {
                         }
                     }
                 }*/
-
                 if(!key.equals("default")) {
                     if(key.equals("firstjoin")) {
                         if(plugin.firstJoin() && Storage.getFirstJoin(player)) {

@@ -47,7 +47,6 @@ public class JoinCommand implements CommandExecutor {
             return true;
         } else if(args.length == 2) {
             if(args[0].equalsIgnoreCase("setspawn")) {
-                player.sendMessage(Utils.setPlaceholders(player, Utils.colorMessage("SpawnLocation.Help")));
                 plugin.getConfig().set("SpawnLocation." + args[1] + ".World", player.getLocation().getWorld().getName());
                 plugin.getConfig().set("SpawnLocation." + args[1] + ".XCoord", player.getLocation().getX());
                 plugin.getConfig().set("SpawnLocation." + args[1] + ".YCoord", player.getLocation().getY());
@@ -73,6 +72,9 @@ public class JoinCommand implements CommandExecutor {
             }
             return true;
         } else if(args.length == 1) {
+            if(args[0].equalsIgnoreCase("setspawn")) {
+                player.sendMessage(Utils.setPlaceholders(player, Utils.colorMessage("SpawnLocation.Help")));
+            }
             if(args[0].equalsIgnoreCase("reloadconfig")) {
                 plugin.reloadConfig();
                 player.sendMessage(Utils.setPlaceholders(player, Utils.colorMessage("Prefix") + Utils.colorMessage("Help.OutConfigLoad")));

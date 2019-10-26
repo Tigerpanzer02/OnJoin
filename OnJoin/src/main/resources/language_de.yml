@@ -3,86 +3,59 @@
 ##########################
 
 
-#All Consolen-Messages
+#Alle Consolen-Nachrichten
 Console:
   PrefixConsole: '&7[&eOnJoin&7]'
 
 
-#Messages - Command Onjoin
+#Nachrichten - Command Onjoin
 Help:
   HelpText:
     - ''
-    - '&e--------- &7[&aHELP &7| &eOnJoin&7]&e ---------'
+    - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
     - '&e|  '
     - '&e|  &7/&eonjoin'
-    - '&e|    &c->  &7Overview'
+    - '&e|    &c->  &7Übersicht'
     - '&e|  '
     - '&e|  &7/&eonjoin &areloadconfig'
-    - '&e|    &c->  &7Reload your config'
+    - '&e|    &c->  &7Lade deine Config neu'
     - '&e|  '
     - '&e|  &7/&eonjoin &asetspawn'
-    - '&e|    &c->  &7Set the Spawnlocation'
+    - '&e|    &c->  &7Setze die Spawnposition'
     - '&e|  '
     - '&e|  &7/&eonjoin &alocale <de/default>'
-    - '&e|    &c->  &7Switch the locale'
+    - '&e|    &c->  &7Ändere die Sprache'
     - '&e|  '
-    - '&e--------- &7[&aHELP &7| &eOnJoin&7]&e ---------'
+    - '&e--------- &7[&aHILFE &7| &eOnJoin&7]&e ---------'
     - ''
-  LanguageSwitch: 'Your Config is saved!'
-  OutConfigLoad: 'All settings from configuration loaded successfully!'
+  LanguageSwitch: 'Config gespeichert!'
+  OutConfigLoad: 'Alle Einträge aus der Config wurden geladen!'
 
 
 #General Messages
 Prefix: '&7[&eOnJoin&7] &7»&e '
-Permissionfail: "&cYou don't have permission to do this!"
-TargetFalse: "&cPlayer is not online or doesn't exist"
-NoPlayer: 'Only players can do that!'
+Permissionfail: "&cDu hast keine Permission!"
+TargetFalse: "&cKonnte den Spieler nicht finden (Nicht online)"
+NoPlayer: 'Nur Spieler können das!'
 
 
-########################
-##     First Join     ##
-########################
-
-
-FirstJoin:
-  Title:
-    Title1: '&bCC&3SW'
-    SubTitle1: '&eFirstJoin'
-    SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
-  Actionbar:
-    Actionbar1: '&7Welcome %player%!'
-    Actionbar2: '&7Another bar'
-
-
-########################
-##    Normal Join     ##
-########################
-
-
-Title:
-  Title1: '&bCC&3SW'
-  SubTitle1: '&eOnJoin'
-  SubTitle2: '&aTitle&8 - &7Edit it in &8onjoin.yml'
-
-
-Actionbar:
-  Actionbar1: '&7Welcome %player%!'
-  Actionbar2: '&7Another bar'
-
-
+#Should Players that join be teleported to a location
 SpawnLocation:
-  SetSpawnMessageSetTo: '&aSpawn set to&7: '
+  SetSpawnMessageSetTo: '&aSpawn gesetzt zu&7: '
   SetSpawnMessageYaw: '&2Yaw&7: '
   SetSpawnMessagePitch: '&2Pitch&7: '
+  Help: '%prefix% Benutze /onjoin setspawn <default, firstjoin, oder dein definiertes Beispiel 1>'
+
 
 ############################
 ##    Welcome Message     ##
 ############################
 
+
 #If you don´t understand this parts of config have a look on the config.yml under section Additional Informations
-#Willkommens Nachrichten
+#Welcome Message in the Chat
 WelcomeMessage:
-  #Du kannst so viele Zeilen hinzufügen, wie du möchtest
+  #You can add and remove as many lines as you like!
   'default':
     Enabled: true
     ChatClear: true
@@ -90,11 +63,11 @@ WelcomeMessage:
       - '&e------------------------------------'
       - '&e|  '
       - '&e|  Heey, &a%player%&7!'
-      - '&e|  &eWillkommen auf unseren Server!'
-      - '&e|  '
+      - '&e|  &eWillkommen!'
+      - '&e|  Default'
       - '&e|  &eOnJoin &8- &7Dein Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Dein Netzwerk'
+      - '&e|  &7Dein Network'
       - '&e|  '
       - '&e------------------------------------'
   'firstjoin':
@@ -104,38 +77,41 @@ WelcomeMessage:
       - '&e------------------------------------'
       - '&e|  '
       - '&e|  Heey, &a%player%&7!'
-      - '&e|  &eWillkommen auf unseren Server!'
-      - '&e|  '
+      - '&e|  &eWillkommen!'
+      - '&e|  Firstjoin'
       - '&e|  &eOnJoin &8- &7Dein Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Dein Netzwerk'
+      - '&e|  &7Dein Network'
       - '&e|  '
       - '&e------------------------------------'
   '1':
     Permission: OnJoin.welcomemessage.first
+    Enabled: true
     ChatClear: true
     Text:
       - '&e------------------------------------'
-      - '&e|  Permission OnJoin.welcomemessage.first'
-      - '&e|  Heey, &a%player%&7!'
-      - '&e|  &eWillkommen auf unseren Server!'
       - '&e|  '
+      - '&e|  Heey, &a%player%&7!'
+      - '&e|  &eWillkommen!'
+      - '&e|  Test 1'
       - '&e|  &eOnJoin &8- &7Dein Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Dein Netzwerk'
+      - '&e|  &7Dein Network'
       - '&e|  '
       - '&e------------------------------------'
   '2':
     Permission: OnJoin.welcomemessage.example
+    Enabled: true
+    ChatClear: false
     Text:
       - '&e------------------------------------'
-      - '&e|  Permission OnJoin.welcomemessage.example'
+      - '&e|  Nachricht nur mit permission OnJoin.welcomemessage.example'
       - '&e|  Heey, &a%player%&7!'
-      - '&e|  &eWillkommen auf unseren Server!'
-      - '&e|  '
+      - '&e|  &eWillkommen!'
+      - '&e|  Test 2'
       - '&e|  &eOnJoin &8- &7Dein Join Plugin'
       - '&e|  &7Plugin by &bTigerpanzer_02/Tigerkatze'
-      - '&e|  &7Dein Netzwerk'
+      - '&e|  &7Dein Network'
       - '&e|  '
       - '&e------------------------------------'
 
@@ -145,35 +121,163 @@ WelcomeMessage:
 #####################
 
 
-#Soll an alle eine Nachricht gesendet werden wenn jemand joint/quitet
+#Should there be a message to all players when a player enters the server
 Messages:
   UpdateMessageText:
     - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
-    - '&c|  Neues Update verfügbar! Du kannst es'
-    - '&c|  auf SpigotMC herunterladen!'
+    - '&c|  Neues Update verfügbar! Downloade es'
+    - '&c|  auf SpigotMC!'
     - '&c|  https://www.spigotmc.org/resources/56907/'
     - '&e--------- &7[&aUPDATE &7| &eOnJoin&7]&e ---------'
   Join:
     'default':
       Enabled: true
-      Message: '%player% ist dem Server beigetreten'
+      Message: '%player% hat den Server betreten'
     'firstjoin':
       Enabled: true
-      Message: '%player% joint dem Server zum ersten mal'
+      Message: '%player% ist zum ersten mal hier'
     '1':
       Permission: OnJoin.JoinMessage.1
-      Message: '%player% der Inhaber ist beigetreten'
+      Message: '%player% der Inhaber ist gejoint'
   Quit:
     'default':
       Enabled: true
       Message: '%player% hat den Server verlassen'
     'firstjoin':
       Enabled: true
-      Message: '%player% hat den Server zum ersten mal verlassen'
+      Message: '%player% hat zum ersten mal den Server verlassen'
     '1':
       Permission: OnJoin.QuitMessage.1
-      Message: '%player% pro hat den Server verlassen'
+      Enabled: true
+      Message: '%player% der Inhaber hat den Server verlassen'
 
+
+######################
+##    Actionbar     ##
+######################
+
+
+#Don´t forget to structure your order logical - that means you need to order it in this sequence default, firstjoin, permission with lowest power, ..., permission with highest power
+#and for the actionbars the smallest RunTaskLater value at first. For example RunTaskLater 10 is above RunTaskLater 50
+
+#Message on the actionbar
+Actionbar:
+  'default':
+    Enabled: true
+    Actionbars:
+      'defaultactionbar':
+        Actionbar: '&7Willkommen %player%!'
+        RunTaskLater: 10
+      'defaultactionbar2':
+        Actionbar: '&7Editiere die language Datei ;)'
+        RunTaskLater: 50
+  'firstjoin':
+    Enabled: true
+    Actionbars:
+      'defaultactionbar':
+        Actionbar: '&7Willkommen %player%!'
+        RunTaskLater: 10
+      'defaultactionbar2':
+        Actionbar: '&7Dein erster join;)'
+        RunTaskLater: 50
+  '1':
+    Permission: OnJoin.Actionbar.1
+    Enabled: true
+    Actionbars:
+      'defaultactionbar':
+        Actionbar: '&7Willkommen %player%!'
+        RunTaskLater: 10
+      'defaultactionbar2':
+        Actionbar: '&7Du hast wohl mehr Permissions als andere ;)'
+        RunTaskLater: 50
+
+
+##################
+##    Title     ##
+##################
+
+
+#Don´t forget to structure your order logical - that means you need to order it in this sequence default, firstjoin, permission with lowest power, ..., permission with highest power
+#and for the titles the smallest RunTaskLater value at first. For example RunTaskLater 2 is above RunTaskLater 10
+
+#Titel in the middle of the screen
+Title:
+  'default':
+    Enabled: true
+    Titles:
+      'defaulttitle':
+        Title: '&bOnJoin'
+        SubTitle: '&eOnJoin'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 2
+      'defaulttitle2':
+        Title: '&bOnJoin'
+        SubTitle: '&aTitle&8 - &7Editiere es!'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 10
+  'firstjoin':
+    Enabled: true
+    Titles:
+      'defaulttitle':
+        Title: '&bOnJoin - FirstJoin'
+        SubTitle: '&eOnJoin'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 2
+      'defaulttitle2':
+        Title: '&bOnJoin - FirstJoin'
+        SubTitle: '&aTitle&8 - &7Editiere es'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 10
+  '1':
+    Permission: OnJoin.Title.1
+    Enabled: true
+    Titles:
+      'defaulttitle':
+        Title: '&bOnJoin - PermissionJoin'
+        SubTitle: '&eOnJoin'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 2
+      'defaulttitle2':
+        Title: '&bOnJoin - PermissionJoin'
+        SubTitle: '&aTitle&8 - &7Editiere es'
+        Timings:
+          TitleFadeInTime: 25
+          TitleShowTime: 90
+          TitleFadeOutTime: 5
+          SubTitleFadeInTime: 25
+          SubTitleShowTime: 90
+          SubTitleFadeOutTime: 5
+          RunTaskLater: 10
 
 
 
@@ -184,4 +288,4 @@ Messages:
 
 # Don't edit it. But who's stopping you? It's your server!
 # Really, don't edit ;p
-File-Version-Do-Not-Edit: 6
+File-Version-Do-Not-Edit: 230

@@ -114,7 +114,15 @@ SpawnLocation:
     ZCoord: 0
     Yaw: 0
     Pitch: 0
-
+  'w:world':
+    Permission: OnJoin.Spawn.1
+    Enabled: false
+    World: world
+    XCoord: 0
+    YCoord: 0
+    ZCoord: 0
+    Yaw: 0
+    Pitch: 0
 
 
 ######################
